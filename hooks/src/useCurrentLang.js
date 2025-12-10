@@ -1,5 +1,5 @@
 import React from "react";
-import langs from "@ezycore/i18n/langs.json";
+import langs from "@ezycore/i18n/src/langs.json";
 
 const useCurrentLang = () => {
   const [currentLang, setCurrentLang] = React.useState(null);

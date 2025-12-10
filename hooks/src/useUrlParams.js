@@ -1,8 +1,7 @@
 import React from "react";
-import routes from "@ezycore/frontend/routes";
 import { matchPath } from "react-router";
 
-const useUrlParams = () => {
+const useUrlParams = (routes) => {
   const [params, setParams] = React.useState(null);
   React.useEffect(() => {
     const path = window.location.pathname;

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import getGlobalData from "@ezycore/utils/getGlobalData";
+import getGlobalData from "@ezycore/utils/src/getGlobalData";
 import makeApp from "./makeApp";
 import path from "path";
 

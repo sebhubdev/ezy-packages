@@ -1,6 +1,6 @@
 import React from "react";
-import Btn from "@ezycore/ui/components/atoms/Btn";
-import Avatar from "@ezycore/ui/components/molecules/Avatar";
+import Btn from "@ezycore/ui/src/components/atoms/Btn";
+import Avatar from "@ezycore/ui/src/components/molecules/Avatar";
 
 const ListCard = ({
   image,

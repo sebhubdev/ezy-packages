@@ -1,6 +1,6 @@
 import React from "react";
-import Icon from "@ezycore/ui/components/atoms/Icon";
-import { IconProps } from "@ezycore/ui/components/atoms/Icon";
+import Icon from "@ezycore/ui/src/components/atoms/Icon";
+import { IconProps } from "@ezycore/ui/src/components/atoms/Icon";
 
 export interface InputProps {
   placeholder: string | null;

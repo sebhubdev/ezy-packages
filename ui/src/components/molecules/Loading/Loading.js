@@ -1,5 +1,5 @@
 import React from "react";
-import LoadingIcon from "@ezycore/ui/components/atoms/LoadingIcon";
+import LoadingIcon from "@ezycore/ui/src/components/atoms/LoadingIcon";
 
 const Loading = () => {
   return (

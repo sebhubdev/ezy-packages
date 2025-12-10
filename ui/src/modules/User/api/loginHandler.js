@@ -1,4 +1,4 @@
-import httpApi from "@ezycore/utils/http/httpApi";
+import httpApi from "@ezycore/utils/src/http/httpApi";
 
 const loginHandler = (e) => {
   e.preventDefault();

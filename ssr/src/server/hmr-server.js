@@ -8,13 +8,15 @@ const Dotenv = require("dotenv-webpack");
 require("dotenv").config({
   path: path.resolve(process.cwd(), ".env"),
 });
-const alias = require("@root/configs/webpack/aliases");
-const { root } = require("@root/configs/webpack/paths");
+const alias = require("@root/configs/aliases");
+const { root } = require("@root/configs/paths");
 
 const hmrServer = (port, appName) => {
   const app = express();
   app.use(cors());
   app.use(express.json());
+
+  console.log("holaaaa", `${root}/apps/${appName}/src/client/index.js`);
 
   const webpackCompiler = webpack({
     entry: [

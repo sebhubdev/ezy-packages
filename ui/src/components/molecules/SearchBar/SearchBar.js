@@ -1,6 +1,6 @@
 import React from "react";
-import { InputText } from "@ezycore/ui/components/atoms/Form/Input";
-import Icon from "@ezycore/ui/components/atoms/Icon";
+import { InputText } from "@ezycore/ui/src/components/atoms/Form/Input";
+import Icon from "@ezycore/ui/src/components/atoms/Icon";
 import classNames from "classnames";
 
 const SearchBar = ({ isOpen, onBlur }) => {

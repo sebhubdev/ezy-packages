@@ -1,5 +1,5 @@
 import React from "react";
-import Icon from "@ezycore/ui/components/atoms/Icon";
+import Icon from "@ezycore/ui/src/components/atoms/Icon";
 
 const IconsNav = ({ items }) => {
   return (

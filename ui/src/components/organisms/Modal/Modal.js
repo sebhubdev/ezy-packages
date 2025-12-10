@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import Icon from "@ezycore/ui/components/atoms/Icon";
+import Icon from "@ezycore/ui/src/components/atoms/Icon";
 
 const Modal = ({
   children,

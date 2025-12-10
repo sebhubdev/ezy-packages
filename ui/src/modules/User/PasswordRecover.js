@@ -1,8 +1,8 @@
 import React from "react";
-import Heading from "@ezycore/ui/components/atoms/Typo/Heading";
-import { InputText } from "@ezycore/ui/components/atoms/Form/Input";
-import Btn from "@ezycore/ui/components/atoms/Btn";
-import Link from "@ezycore/ui/components/atoms/Link";
+import Heading from "@ezycore/ui/src/components/atoms/Typo/Heading";
+import { InputText } from "@ezycore/ui/src/components/atoms/Form/Input";
+import Btn from "@ezycore/ui/src/components/atoms/Btn";
+import Link from "@ezycore/ui/src/components/atoms/Link";
 
 const PasswordRecover = ({ fieldToFocus, onSend = () => {}, setStep }) => {
   const recoverHanlder = () => {

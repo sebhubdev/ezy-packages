@@ -1,6 +1,5 @@
 import React from "react";
-import routes from "@ezycore/frontend/routes";
-const useLinkResolver = (type, params) => {
+const useLinkResolver = (type, params, routes) => {
   // routes.map((route) => {
   //   console.log(route, type);
   //   return route.type == type;

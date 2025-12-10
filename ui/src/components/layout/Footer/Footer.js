@@ -1,7 +1,7 @@
 import React from "react";
 import { memo } from "react";
-import FullLogo from "@ezycore/ui/components/molecules/FullLogo/FullLogo";
-import Navigator from "@ezycore/ui/components/organisms/Navigator";
+import FullLogo from "@ezycore/ui/src/components/molecules/FullLogo/FullLogo";
+import Navigator from "@ezycore/ui/src/components/organisms/Navigator";
 
 const Footer = ({ nav }) => {
   return (

@@ -1,6 +1,6 @@
-import menu from "@ezycore/api/fixtures/global/menu";
-import custom from "@ezycore/api/fixtures/global/custom";
-import local from "@ezycore/api/fixtures/global/local";
+import menu from "./fixtures/global/menu";
+import custom from "./fixtures/global/custom";
+import local from "./fixtures/global/local";
 
 const getGlobalData = async (currentLang) => {
   const globalData = { menu, custom, local };

@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { Link } from "react-router-dom";
-import LabeledImageCard from "@ezycore/ui/components/molecules/LabeledImageCard";
-import resolveUrl from "@ezycore/ui/components/helpers/resolveUrl";
-import { LayoutContext } from "@ezycore/frontend/components/layout/GenericLayout";
+import LabeledImageCard from "@ezycore/ui/src/components/molecules/LabeledImageCard";
+import resolveUrl from "@ezycore/ui/src/components/helpers/resolveUrl";
+import { LayoutContext } from "@ezycore/ui/src/components/layout/GenericLayout";
 
 const LabeledImageCardsGrid = ({ cards }) => {
   const { routes } = useContext(LayoutContext);

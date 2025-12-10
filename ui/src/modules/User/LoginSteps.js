@@ -3,8 +3,8 @@ import {
   LoginForm,
   PasswordRecover,
   CreateAccountForm,
-} from "@ezycore/ui/modules/User";
-import Btn from "@ezycore/ui/components/atoms/Btn";
+} from "@ezycore/ui/src/modules/User";
+import Btn from "@ezycore/ui/src/components/atoms/Btn";
 
 const LoginSteps = ({ resetSteps, http, userService, onLogin }) => {
   const [step, setStep] = React.useState("LOGIN");

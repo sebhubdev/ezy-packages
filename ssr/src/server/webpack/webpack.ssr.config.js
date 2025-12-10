@@ -4,7 +4,7 @@ const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const alias = require("@root/configs/webpack/aliases");
+const alias = require("@root/configs/aliases");
 
 const serverConf = (mode) => {
   return {

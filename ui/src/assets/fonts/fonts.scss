@@ -3,7 +3,7 @@
   font-family: "Amatic";
   font-style: normal;
   font-weight: normal;
-  src: url("@ezycore/ui/assets/fonts/Amatic/AmaticSC-Regular.ttf")
+  src: url("@ezycore/ui/src/assets/fonts/Amatic/AmaticSC-Regular.ttf")
     format("truetype");
 }
 @font-face {
@@ -11,7 +11,7 @@
   font-family: "Amatic";
   font-style: normal;
   font-weight: 700;
-  src: url("@ezycore/ui/assets/fonts/Amatic/AmaticSC-Bold.ttf")
+  src: url("@ezycore/ui/src/assets/fonts/Amatic/AmaticSC-Bold.ttf")
     format("truetype");
 }
 
@@ -20,7 +20,7 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: 100;
-  src: url("@ezycore/ui/assets/fonts/Poppins/Poppins-Thin.ttf")
+  src: url("@ezycore/ui/src/assets/fonts/Poppins/Poppins-Thin.ttf")
     format("truetype");
 }
 @font-face {
@@ -28,7 +28,7 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: normal;
-  src: url("@ezycore/ui/assets/fonts/Poppins/Poppins-Regular.ttf")
+  src: url("@ezycore/ui/src/assets/fonts/Poppins/Poppins-Regular.ttf")
     format("truetype");
 }
 @font-face {
@@ -36,7 +36,7 @@
   font-family: "Poppins";
   font-style: normal;
   font-weight: 700;
-  src: url("@ezycore/ui/assets/fonts/Poppins/Poppins-Bold.ttf")
+  src: url("@ezycore/ui/src/assets/fonts/Poppins/Poppins-Bold.ttf")
     format("truetype");
 }
 
@@ -45,7 +45,7 @@
   font-family: "Gilroy";
   font-style: normal;
   font-weight: normal;
-  src: url("@ezycore/ui/assets/fonts/gilroy/Gilroy-Light.otf");
+  src: url("@ezycore/ui/src/assets/fonts/gilroy/Gilroy-Light.otf");
 }
 
 @font-face {
@@ -53,5 +53,5 @@
   font-family: "Gilroy";
   font-style: normal;
   font-weight: 500;
-  src: url("@ezycore/ui/assets/fonts/gilroy/Gilroy-ExtraBold.otf");
+  src: url("@ezycore/ui/src/assets/fonts/gilroy/Gilroy-ExtraBold.otf");
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useLinkResolver } from "@ezycore/hooks";
+import { useLinkResolver } from "@ezycore/hooks/src";
 import { useLocation } from "react-router-dom";
 import classNames from "classnames";
 

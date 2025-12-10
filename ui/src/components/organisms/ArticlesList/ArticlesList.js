@@ -1,13 +1,13 @@
 import React from "react";
-import Heading from "@ezycore/ui/components/atoms/Typo/Heading";
-import ArticleCard from "@ezycore/ui/components/molecules/ArticleCard";
+import Heading from "@ezycore/ui/src/components/atoms/Typo/Heading";
+import ArticleCard from "@ezycore/ui/src/components/molecules/ArticleCard";
 import SliderOne from "../SliderOne/SliderOne";
 import sliderConf from "./sliderConf";
 import classNames from "classnames";
 import {
   isMobile,
   isTablet,
-} from "@ezycore/ui/components/helpers/mediaQueries/mediaQueries";
+} from "@ezycore/ui/src/components/helpers/mediaQueries/mediaQueries";
 
 const TestAr = () => {
   return "hola";

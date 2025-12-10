@@ -1,6 +1,6 @@
 import React from "react";
-import Icon from "@ezycore/ui/components/atoms/Icon";
-import Btn from "@ezycore/ui/components/atoms/Btn/Btn";
+import Icon from "@ezycore/ui/src/components/atoms/Icon";
+import Btn from "@ezycore/ui/src/components/atoms/Btn/Btn";
 
 const UserNav = ({ user, setUser, setIsOpen }) => {
   console.log(user);

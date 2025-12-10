@@ -1,8 +1,8 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import sampleConf from "./sliderConf.sample";
-import sliderImgSample from "@ezycore/frontend/assets/img/slider-sample.jpg";
-import sliderImgSample2 from "@ezycore/frontend/assets/img/slider-sample-2.jpg";
+import sliderImgSample from "@ezycore/ui/src/assets/img/slider-sample.jpg";
+import sliderImgSample2 from "@ezycore/ui/src/assets/img/slider-sample-2.jpg";
 import { Pagination, Navigation, Autoplay } from "swiper";
 
 const ItemComponentSample = ({ image }) => {

@@ -1,5 +1,5 @@
 import React, { use } from "react";
-import Icon from "@ezycore/ui/components/atoms/Icon";
+import Icon from "@ezycore/ui/src/components/atoms/Icon";
 import { Link } from "react-router-dom";
 
 export interface PageActionsProps {}

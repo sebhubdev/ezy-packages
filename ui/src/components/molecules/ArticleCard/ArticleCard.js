@@ -1,9 +1,9 @@
 import React from "react";
-import RichText from "@ezycore/ui/components/atoms/RichText/RichText";
-import Heading from "@ezycore/ui/components/atoms/Typo/Heading";
-import Btn from "@ezycore/ui/components/atoms/Btn";
+import RichText from "@ezycore/ui/src/components/atoms/RichText/RichText";
+import Heading from "@ezycore/ui/src/components/atoms/Typo/Heading";
+import Btn from "@ezycore/ui/src/components/atoms/Btn";
 import { Link } from "react-router-dom";
-import { useLinkResolver } from "@ezycore/hooks";
+import { useLinkResolver } from "@ezycore/hooks/src";
 import { t } from "@ezycore/i18n";
 
 const ArticleCard = ({ data }) => {

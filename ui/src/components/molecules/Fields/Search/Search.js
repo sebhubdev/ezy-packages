@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "@ezycore/ui/components/molecules/Fields/Input";
+import Input from "@ezycore/ui/src/components/molecules/Fields/Input";
 
 function Search({
   arrayToSearch = [],

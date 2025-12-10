@@ -1,5 +1,5 @@
 import React from "react";
-import { LogoIcon, LogoTitle } from "@ezycore/ui/components/atoms/Logo";
+import { LogoIcon, LogoTitle } from "@ezycore/ui/src/components/atoms/Logo";
 const FullLogo = () => {
   return (
     <>

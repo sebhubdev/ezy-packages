@@ -1,9 +1,9 @@
 import React, { createContext, useState, useEffect } from "react";
-import BackToTop from "@ezycore/ui/components/molecules/BackToTop";
-import CookiesBanner from "@ezycore/ui/components/organisms/CookiesBanner";
-import Header from "@ezycore/ui/components/layout/Header/Header";
-import Footer from "@ezycore/ui/components/layout/Footer/Footer";
-import Loading from "@ezycore/ui/components/molecules/Loading";
+import BackToTop from "@ezycore/ui/src/components/molecules/BackToTop";
+import CookiesBanner from "@ezycore/ui/src/components/organisms/CookiesBanner";
+import Header from "@ezycore/ui/src/components/layout/Header/Header";
+import Footer from "@ezycore/ui/src/components/layout/Footer/Footer";
+import Loading from "@ezycore/ui/src/components/molecules/Loading";
 
 const LayoutContext = createContext();
 

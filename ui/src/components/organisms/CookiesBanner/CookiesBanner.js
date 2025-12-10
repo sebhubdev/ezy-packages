@@ -1,7 +1,7 @@
 import React from "react";
-import Heading from "@ezycore/ui/components/atoms/Typo/Heading";
-import { t } from "@ezycore/i18n";
-import Btn from "@ezycore/ui/components/atoms/Btn";
+import Heading from "@ezycore/ui/src/components/atoms/Typo/Heading";
+import { t } from "@ezycore/i18n/src";
+import Btn from "@ezycore/ui/src/components/atoms/Btn";
 import classNames from "classnames";
 
 const CookiesBanner = () => {

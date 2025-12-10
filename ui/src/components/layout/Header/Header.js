@@ -1,19 +1,17 @@
 import React, { useContext } from "react";
-import FullLogo from "@ezycore/ui/components/molecules/FullLogo/FullLogo";
-import Icon from "@ezycore/ui/components/atoms/Icon";
-import Modal from "@ezycore/ui/components/organisms/Modal";
+import FullLogo from "@ezycore/ui/src/components/molecules/FullLogo/FullLogo";
+import Icon from "@ezycore/ui/src/components/atoms/Icon";
+import Modal from "@ezycore/ui/src/components/organisms/Modal";
 import { Link } from "react-router-dom";
-import Navigator from "@ezycore/ui/components/organisms/Navigator";
-import LangSelector from "@ezycore/ui/components/molecules/LangSelector";
-import langs from "@ezycore/i18n/langs.json";
-import SearchBar from "@ezycore/ui/components/molecules/SearchBar";
-import LoginSteps from "@ezycore/ui/modules/User/LoginSteps";
-import { ShortCart } from "@ezycore/frontend/modules/CheckOut";
-import { ShortWishList } from "@ezycore/frontend/modules/WishList";
-import { UserNav } from "@ezycore/ui/modules/User";
-import Image from "@ezycore/ui/components/atoms/Image";
-import logo from "@ezycore/frontend/assets/img/logo-laterre.png";
-import { UserContext } from "@ezycore/ui/modules/User/UserProvider";
+import Navigator from "@ezycore/ui/src/components/organisms/Navigator";
+import LangSelector from "@ezycore/ui/src/components/molecules/LangSelector";
+import langs from "@ezycore/i18n/src/langs.json";
+import SearchBar from "@ezycore/ui/src/components/molecules/SearchBar";
+import LoginSteps from "@ezycore/ui/src/modules/User/LoginSteps";
+import { UserNav } from "@ezycore/ui/src/modules/User";
+import Image from "@ezycore/ui/src/components/atoms/Image";
+// import logo from "@ezycore/ui/src/assets/img/logo-laterre.png";
+import { UserContext } from "@ezycore/ui/src/modules/User/UserProvider";
 
 const Header = ({ nav, userData, setUserData }) => {
   const [isNavOpen, setisNavOpen] = React.useState(false);
@@ -67,12 +65,12 @@ const Header = ({ nav, userData, setUserData }) => {
               to={`/`}
               onClick={closeMobileNav}
             >
-              <Image
+              {/* <Image
                 image={{
                   url: logo,
                   alt: "Logo",
                 }}
-              />
+              /> */}
             </Link>
             <div className="main-header__top__desktop-nav">
               <Navigator items={nav.items} />
@@ -99,14 +97,6 @@ const Header = ({ nav, userData, setUserData }) => {
                 </div>
 
                 {/* <ShortAccount /> */}
-
-                <div className="right-nav__item">
-                  <ShortWishList />
-                </div>
-
-                <div className="right-nav__item">
-                  <ShortCart />
-                </div>
 
                 <div className="right-nav__item">
                   <LangSelector currentLang={langs.fr} />

@@ -1,5 +1,5 @@
 import React from "react";
-import NavItem from "@ezycore/ui/components/molecules/NavItem";
+import NavItem from "@ezycore/ui/src/components/molecules/NavItem";
 
 const Navigator = ({ items }) => {
   return (

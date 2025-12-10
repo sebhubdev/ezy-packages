@@ -1,10 +1,12 @@
 import React from "react";
-import Heading from "@ezycore/ui/components/atoms/Typo/Heading";
-import { InputText, Password } from "@ezycore/ui/components/atoms/Form/Input";
-import Btn from "@ezycore/ui/components/atoms/Btn";
-import services from "@ezycore/frontend/services";
-import AlertMsg from "@ezycore/ui/components/atoms/AlertMsg/AlertMsg";
-import Link from "@ezycore/ui/components/atoms/Link";
+import Heading from "@ezycore/ui/src/components/atoms/Typo/Heading";
+import {
+  InputText,
+  Password,
+} from "@ezycore/ui/src/components/atoms/Form/Input";
+import Btn from "@ezycore/ui/src/components/atoms/Btn";
+import AlertMsg from "@ezycore/ui/src/components/atoms/AlertMsg/AlertMsg";
+import Link from "@ezycore/ui/src/components/atoms/Link";
 
 const LoginForm = ({ setStep, onLogin, http, userService }) => {
   const [loading, setLoading] = React.useState(false);

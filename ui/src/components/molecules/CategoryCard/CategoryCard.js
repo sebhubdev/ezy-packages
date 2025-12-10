@@ -1,6 +1,6 @@
 import React from "react";
-import Heading from "@ezycore/ui/components/atoms/Typo/Heading";
-import { useLinkResolver } from "@ezycore/hooks";
+import Heading from "@ezycore/ui/src/components/atoms/Typo/Heading";
+import { useLinkResolver } from "@ezycore/hooks/src";
 import { Link } from "react-router-dom";
 
 const CategoryCard = ({ category }) => {

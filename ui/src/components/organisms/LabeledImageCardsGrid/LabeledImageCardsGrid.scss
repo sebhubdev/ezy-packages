@@ -1,4 +1,4 @@
-@use "@ezycore/ui/assets/styles/tokens" as *;
+@use "@ezycore/ui/src/assets/styles/tokens" as *;
 .labeled-image-cards-grid {
   display: grid;
   grid-template-columns: repeat(1, 1fr);

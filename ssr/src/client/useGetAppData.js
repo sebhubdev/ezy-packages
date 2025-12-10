@@ -1,8 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import resolveRequest from "@ezycore/utils/resolveRequest";
-import langs from "@ezycore/i18n/langs.json";
-import getGlobalData from "@ezycore/utils/getGlobalData";
+import resolveRequest from "@ezycore/utils/src/resolveRequest";
+import langs from "@ezycore/i18n/src/langs.json";
+import getGlobalData from "@ezycore/utils/src/getGlobalData";
 
 const useGetAppData = ({ initialData, routes, isSSR }) => {
   const [pageData, setPageData] = useState(isSSR ? initialData.pageData : null);

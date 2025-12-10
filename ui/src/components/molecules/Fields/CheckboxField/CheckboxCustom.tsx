@@ -1,6 +1,6 @@
 import React, { useMemo } from "react";
-import Checkbox from "@ezycore/ui/components/atoms/Form/Checkbox";
-import Icon, { type IconProps } from "@ezycore/ui/components/atoms/Icon";
+import Checkbox from "@ezycore/ui/src/components/atoms/Form/Checkbox";
+import Icon, { type IconProps } from "@ezycore/ui/src/components/atoms/Icon";
 
 export interface CheckboxCustomProps {
   checked: boolean;

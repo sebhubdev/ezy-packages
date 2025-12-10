@@ -1,7 +1,7 @@
 import React from "react";
-import arrow from "@ezycore/frontend/assets/img/arrow.png";
-import brushStrokes from "@ezycore/frontend/assets/img/brush-strokes.png";
-import AlertMsg from "@ezycore/ui/components/atoms/AlertMsg/AlertMsg";
+import arrow from "@ezycore/ui/src/assets/img/arrow.png";
+import brushStrokes from "@ezycore/ui/src/assets/img/brush-strokes.png";
+import AlertMsg from "@ezycore/ui/src/components/atoms/AlertMsg/AlertMsg";
 import newsletterDataService from "services/newsletter";
 
 const NewsletterBlock = () => {
