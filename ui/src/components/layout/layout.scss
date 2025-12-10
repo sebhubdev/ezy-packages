@@ -1,0 +1,36 @@
+@use "@ezycore/ui/assets/styles/tokens" as *;
+@forward "./Header/Header";
+@forward "./Footer/Footer";
+
+.generic-layout {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  &__content {
+    position: relative;
+    margin: auto;
+    min-height: 100vh;
+  }
+}
+
+.ctn {
+  width: 100%;
+  margin: auto;
+  padding: 0 2rem;
+  &-full {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  &-large {
+    max-width: $lg;
+  }
+
+  &-medium {
+    max-width: $md;
+  }
+  &-small {
+    max-width: $sm;
+  }
+}

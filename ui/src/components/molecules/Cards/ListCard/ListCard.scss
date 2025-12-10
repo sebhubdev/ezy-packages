@@ -1,0 +1,89 @@
+@use "@ezycore/ui/assets/styles/tokens/" as *;
+.list-card {
+  background-color: var(--color-quaternary);
+  border-radius: 5px;
+  padding: 1rem 2rem;
+  &__inner {
+    display: flex;
+    gap: 1rem;
+    flex-direction: column;
+    @media (min-width: $md) {
+      gap: 3rem;
+      flex-direction: row;
+    }
+  }
+
+  &__title {
+    width: 240px;
+  }
+
+  &__info {
+    flex: 1;
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+
+    @media (min-width: $lg) {
+      gap: 1rem;
+      flex-direction: row;
+    }
+
+    .info-block {
+      height: 100%;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      flex-direction: column;
+      border-bottom: 1px solid var(--color-tertiary);
+      padding: 0.5rem 0;
+      width: 100%;
+
+      @media (min-width: $md) {
+        width: auto;
+      }
+
+      @media (min-width: $lg) {
+        border-left: 1px solid var(--color-tertiary);
+        border-bottom: none;
+        width: 240px;
+      }
+
+      &:last-child {
+        border: none;
+
+        @media (min-width: $lg) {
+          border-left: 1px solid var(--color-tertiary);
+        }
+      }
+    }
+
+    .info-item,
+    .info-item a {
+      font-size: 1rem;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+
+      @media (min-width: $lg) {
+        padding-left: 3rem;
+      }
+
+      span {
+        font-weight: 600;
+      }
+    }
+  }
+
+  &__actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+
+    .btn {
+      flex: 1;
+      white-space: nowrap;
+    }
+  }
+}

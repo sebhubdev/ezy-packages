@@ -1,0 +1,40 @@
+@use "@ezycore/ui/assets/styles/tokens" as *;
+.progress {
+  background-color: var(--color-white);
+  box-shadow: 3px 0 10px $bg-grey;
+  width: 100%;
+  padding: 0.5rem 1rem 1rem;
+
+  @media (min-width: $sm) {
+    padding: 1rem;
+  }
+  &__info {
+    white-space: nowrap;
+    margin-right: 2rem;
+    font-size: 1.2rem;
+
+    span {
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--color-secondary);
+    }
+  }
+  &__inner {
+    @media (min-width: $sm) {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .progress-bar {
+      width: 100%;
+      height: 0.5rem;
+      background-color: $bg-grey;
+      border-radius: 1rem;
+      overflow: hidden;
+      &__inner {
+        height: 100%;
+        background-color: var(--color-primary);
+      }
+    }
+  }
+}

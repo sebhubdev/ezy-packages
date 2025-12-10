@@ -1,0 +1,25 @@
+@use "@ezycore/ui/assets/styles/tokens/breakpoints" as *;
+@use "@ezycore/ui/assets/styles/tools/media" as *;
+
+// Displays soportados
+$displays: (none, block, inline, inline-block, flex, grid);
+
+// 1) Clases base: .d-none, .d-block, .d-flex...
+@each $d in $displays {
+  .d-#{$d} {
+    display: $d !important;
+  }
+}
+
+// 2) Clases responsivas: .d-md-block, .d-lg-flex...
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $d in $displays {
+        .d-#{$bp-name}-#{$d} {
+          display: $d !important;
+        }
+      }
+    }
+  }
+}

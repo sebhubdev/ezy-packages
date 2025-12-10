@@ -1,0 +1,14 @@
+@use "@ezycore/ui/assets/styles/tokens" as *;
+.alert-message {
+  &__content {
+    padding: 0.5rem;
+    text-align: center;
+    border: 2px solid var(--color-primary);
+    border-left: none;
+    border-right: none;
+    color: var(--color-primary);
+    font-weight: 600;
+    background-color: var(--color-quaternary);
+    font-size: 1.2rem;
+  }
+}

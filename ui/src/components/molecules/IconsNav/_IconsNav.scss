@@ -1,0 +1,25 @@
+@use "@ezycore/ui/assets/styles/tokens" as *;
+.icons-nav {
+  display: inline-block;
+
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  &__item {
+    margin: 0 0.5rem;
+    cursor: pointer;
+
+    .icon {
+      fill: var(--color-primary-light);
+      transition: fill 0.3s ease;
+    }
+
+    &:hover {
+      .icon {
+        fill: var(--color-secondary-light);
+      }
+    }
+  }
+}

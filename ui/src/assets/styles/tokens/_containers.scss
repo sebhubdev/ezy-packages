@@ -1,0 +1,23 @@
+@use "@ezycore/ui/assets/styles/tokens/breakpoints" as *;
+
+.ctn {
+  width: 100%;
+  margin: auto;
+  max-width: $lg;
+  padding: 0 2rem;
+  &-full {
+    max-width: 100%;
+    padding: 0;
+  }
+
+  &-lg {
+    max-width: $xl;
+  }
+
+  &-md {
+    max-width: $md;
+  }
+  &-sm {
+    max-width: $sm;
+  }
+}

@@ -1,0 +1,49 @@
+@use "@ezycore/frontend/assets/styles/variables" as *;
+.main-footer {
+  background: var(--color-primary);
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 0;
+
+  .full-logo__inner {
+    justify-content: center;
+  }
+
+  p {
+    color: var(--color-primary-light);
+    font-weight: 900;
+    font-size: 1.2rem;
+  }
+
+  &__copyright {
+    text-align: center;
+  }
+
+  .navigator {
+    margin-top: 2rem;
+    &__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .nav-item {
+        margin: 0 0.5rem;
+        &__link {
+          text-decoration: none;
+          transition: opacity 0.3s ease;
+
+          &:hover {
+            opacity: 0.5;
+          }
+          &__label {
+            color: var(--color-primary-light);
+            font-weight: 900;
+            font-size: 1.2rem;
+          }
+        }
+      }
+    }
+  }
+}

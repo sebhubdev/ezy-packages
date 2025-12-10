@@ -1,0 +1,118 @@
+@use "sass:map";
+@use "@ezycore/ui/assets/styles/tokens/space" as *;
+@use "@ezycore/ui/assets/styles/tokens/breakpoints" as *;
+@use "@ezycore/ui/assets/styles/tools/media" as *;
+
+$space-keys: map.keys($spaces);
+
+// =========================
+// Margin utilities
+// =========================
+
+$margin-utilities: (
+  "": (
+    margin,
+  ),
+  "t": (
+    margin-top,
+  ),
+  "r": (
+    margin-right,
+  ),
+  "b": (
+    margin-bottom,
+  ),
+  "l": (
+    margin-left,
+  ),
+  "x": (
+    margin-left,
+    margin-right,
+  ),
+  "y": (
+    margin-top,
+    margin-bottom,
+  ), // .my-4
+);
+
+@each $short, $properties in $margin-utilities {
+  @each $key in $space-keys {
+    .m#{$short}-#{$key} {
+      @each $prop in $properties {
+        #{$prop}: space($key) !important;
+      }
+    }
+  }
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $short, $properties in $margin-utilities {
+        @each $key in $space-keys {
+          .m#{$short}-#{$bp-name}-#{$key} {
+            @each $prop in $properties {
+              #{$prop}: space($key) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+// =========================
+// Padding utilities
+// =========================
+
+$padding-utilities: (
+  "": (
+    padding,
+  ),
+  "t": (
+    padding-top,
+  ),
+  "r": (
+    padding-right,
+  ),
+  "b": (
+    padding-bottom,
+  ),
+  "l": (
+    padding-left,
+  ),
+  "x": (
+    padding-left,
+    padding-right,
+  ),
+  "y": (
+    padding-top,
+    padding-bottom,
+  ),
+);
+
+@each $short, $properties in $padding-utilities {
+  @each $key in $space-keys {
+    .p#{$short}-#{$key} {
+      @each $prop in $properties {
+        #{$prop}: space($key) !important;
+      }
+    }
+  }
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $short, $properties in $padding-utilities {
+        @each $key in $space-keys {
+          .p#{$short}-#{$bp-name}-#{$key} {
+            @each $prop in $properties {
+              #{$prop}: space($key) !important;
+            }
+          }
+        }
+      }
+    }
+  }
+}

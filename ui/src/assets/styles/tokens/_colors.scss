@@ -1,0 +1,140 @@
+// =============================
+// Base palette
+// =============================
+$color-white: #ffffff !default;
+$color-black: #000000 !default;
+$white: #ffffff !default;
+$black: #000000 !default;
+
+// =============================
+// Neutral scale (grayscale)
+// =============================
+$color-gray-50: #f9fafb !default;
+$color-gray-100: #f3f4f6 !default;
+$color-gray-200: #e5e7eb !default;
+$color-gray-300: #d1d5db !default;
+$color-gray-400: #9ca3af !default;
+$color-gray-500: #6b7280 !default;
+$color-gray-600: #4b5563 !default;
+$color-gray-700: #374151 !default;
+$color-gray-800: #1f2937 !default;
+$color-gray-900: #111827 !default;
+
+// =============================
+// Brand / Semantic
+// =============================
+$color-primary: #386c85 !default;
+$color-primary-dark: #386c85 !default;
+$color-primary-light: #386c85 !default;
+
+$color-secondary: #abdefa !default;
+$color-secondary-dark: #abdefa !default;
+$color-secondary-light: #abdefa !default;
+
+$color-tertiary: #ef972c !default;
+$color-tertiary-dark: #ef972c !default;
+$color-tertiary-light: #ef972c !default;
+
+$color-quaternary: #e6f4f1 !default;
+$color-quaternary-dark: #e6f4f1 !default;
+$color-quaternary-light: #e6f4f1 !default;
+
+$color-success: #27ae60 !default;
+$color-success-dark: #1e874b !default;
+$color-success-light: #52d892 !default;
+
+$color-danger: #e74c3c !default;
+$color-danger-dark: #c0392b !default;
+$color-danger-light: #f1948a !default;
+
+$color-warning: #f1c40f !default;
+$color-warning-dark: #d4ac0d !default;
+$color-warning-light: #f8e287 !default;
+
+$color-info: #3498db !default;
+$color-info-dark: #2c80b4 !default;
+$color-info-light: #6ab0e5 !default;
+
+$color-text: #111827;
+
+// =============================
+// Background
+// =============================
+
+$bg-primary: "red" !default;
+$bg-grey: grey !default;
+$bg-body: $color-white !default;
+$bg-muted: $color-gray-50 !default;
+$bg-inverse: $color-black !default;
+
+// =============================
+// CSS Vars export
+// =============================
+:root {
+  // Base
+  --color-white: #{$color-white};
+  --color-black: #{$color-black};
+
+  // Grayscale
+  --color-gray-50: #{$color-gray-50};
+  --color-gray-100: #{$color-gray-100};
+  --color-gray-200: #{$color-gray-200};
+  --color-gray-300: #{$color-gray-300};
+  --color-gray-400: #{$color-gray-400};
+  --color-gray-500: #{$color-gray-500};
+  --color-gray-600: #{$color-gray-600};
+  --color-gray-700: #{$color-gray-700};
+  --color-gray-800: #{$color-gray-800};
+  --color-gray-900: #{$color-gray-900};
+
+  // Brand / Semantic
+  --color-primary: #{$color-primary};
+  --color-primary-dark: #{$color-primary-dark};
+  --color-primary-light: #{$color-primary-light};
+
+  --color-secondary: #{$color-secondary};
+  --color-secondary-dark: #{$color-secondary-dark};
+  --color-secondary-light: #{$color-secondary-light};
+
+  --color-tertiary: #{$color-tertiary};
+  --color-tertiary-dark: #{$color-tertiary-dark};
+  --color-tertiary-light: #{$color-tertiary-light};
+
+  --color-quaternary: #{$color-quaternary};
+  --color-quaternary-dark: #{$color-quaternary-dark};
+  --color-quaternary-light: #{$color-quaternary-light};
+
+  --color-success: #{$color-success};
+  --color-success-dark: #{$color-success-dark};
+  --color-success-light: #{$color-success-light};
+
+  --color-danger: #{$color-danger};
+  --color-danger-dark: #{$color-danger-dark};
+  --color-danger-light: #{$color-danger-light};
+
+  --color-warning: #{$color-warning};
+  --color-warning-dark: #{$color-warning-dark};
+  --color-warning-light: #{$color-warning-light};
+
+  --color-info: #{$color-info};
+  --color-info-dark: #{$color-info-dark};
+  --color-info-light: #{$color-info-light};
+
+  // Backgrounds
+  --bg-body: #{$bg-body};
+  --bg-muted: #{$bg-muted};
+  --bg-inverse: #{$bg-inverse};
+}
+
+$colors: (
+  primary: var(--color-primary),
+  secondary: var(--color-secondary),
+  tertiary: var(--color-tertiary),
+  quaternary: var(--color-quaternary),
+  success: var(--color-success),
+  warning: var(--color-warning),
+  danger: var(--color-danger),
+  info: var(--color-info),
+  light: var(--color-white),
+  dark: var(--color-black),
+) !default;

@@ -1,0 +1,40 @@
+@use "sass:map";
+@use "@ezycore/ui/assets/styles/tokens/space" as *;
+@use "@ezycore/ui/assets/styles/tokens/breakpoints" as *;
+@use "@ezycore/ui/assets/styles/tools/media" as *;
+
+$gap-keys: map.keys($spaces);
+
+@each $key in $gap-keys {
+  .gap-#{$key} {
+    gap: space($key) !important;
+  }
+
+  .gap-x-#{$key} {
+    column-gap: space($key) !important;
+  }
+
+  .gap-y-#{$key} {
+    row-gap: space($key) !important;
+  }
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $key in $gap-keys {
+        .gap-#{$bp-name}-#{$key} {
+          gap: space($key) !important;
+        }
+
+        .gap-#{$bp-name}-x-#{$key} {
+          column-gap: space($key) !important;
+        }
+
+        .gap-#{$bp-name}-y-#{$key} {
+          row-gap: space($key) !important;
+        }
+      }
+    }
+  }
+}

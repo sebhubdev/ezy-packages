@@ -1,0 +1,14 @@
+@use "sass:map";
+@use "@ezycore/ui/assets/styles/tokens/breakpoints" as *;
+
+@mixin up($bp-name) {
+  @media (min-width: map.get($breakpoints, $bp-name)) {
+    @content;
+  }
+}
+
+@mixin down($bp-name) {
+  @media (max-width: map.get($breakpoints, $bp-name)) {
+    @content;
+  }
+}

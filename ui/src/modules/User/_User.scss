@@ -1,0 +1,79 @@
+@use "@ezycore/ui/assets/styles/tokens" as *;
+
+.login-form {
+  text-align: center;
+  .input-wrapper {
+  }
+
+  &__fields {
+    width: 80%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+  }
+
+  &__info-line {
+    font-size: 1.2rem;
+    line-height: 1.2rem;
+    text-align: left;
+  }
+
+  &__actions {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    font-size: 1.2rem;
+  }
+}
+.user-modal {
+  .modal {
+    &__inner {
+      z-index: 10050 !important;
+    }
+  }
+}
+
+.user-nav {
+  position: relative;
+  z-index: 10010;
+  &__inner {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--color-text);
+    flex-direction: column;
+  }
+
+  &__logo {
+    margin-bottom: 3rem;
+    .icon {
+      width: 7rem;
+      color: var(--color-tertiary);
+    }
+  }
+
+  &__title {
+    font-family: $font-family-secondary;
+    color: var(--color-primary);
+
+    strong {
+      color: var(--color-tertiary);
+      text-transform: capitalize;
+    }
+  }
+
+  &__items {
+    width: 100%;
+    padding: 0 3rem;
+    margin-top: 4rem;
+  }
+
+  &__item {
+    font-size: 2rem;
+    font-weight: 300;
+    padding: 01rem;
+    text-align: center;
+  }
+}

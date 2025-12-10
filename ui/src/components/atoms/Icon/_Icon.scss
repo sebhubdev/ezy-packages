@@ -1,0 +1,15 @@
+.icon {
+  display: flex;
+  color: inherit;
+  width: 2rem;
+  height: inherit;
+
+  svg {
+    width: inherit;
+    height: inherit;
+  }
+  svg,
+  path {
+    color: inherit;
+  }
+}

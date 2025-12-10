@@ -1,0 +1,19 @@
+@use "@ezycore/ui/assets/styles/tokens" as *;
+.loading {
+  width: 100%;
+  text-align: center;
+  height: 100%;
+  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  &__msg {
+    color: var(--color-primary);
+    margin-top: 1rem;
+  }
+}

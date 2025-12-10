@@ -1,0 +1,72 @@
+// =============================
+// Font families
+// =============================
+$font-family-primary: "Gilroy", "Helvetica Neue", Arial, sans-serif !default;
+$font-family-secondary: "Poppins", Georgia, serif !default;
+$font-family-tertiary: "Amatic", "Courier New", monospace !default;
+
+// =============================
+// Font sizes
+// =============================
+$font-size-xxs: 10px !default;
+$font-size-xs: 12px !default;
+$font-size-sm: 14px !default;
+$font-size-md: 16px !default;
+$font-size-lg: 20px !default;
+$font-size-xl: 24px !default;
+$font-size-2xl: 30px !default;
+$font-size-3xl: 36px !default;
+$font-size-4xl: 48px !default;
+
+// =============================
+// Line heights
+// =============================
+$line-height-tight: 1.2 !default;
+$line-height-normal: 1.5 !default;
+$line-height-relaxed: 1.7 !default;
+
+// =============================
+// Font weights
+// =============================
+$font-weight-thin: 100 !default;
+$font-weight-light: 300 !default;
+$font-weight-normal: 400 !default;
+$font-weight-medium: 500 !default;
+$font-weight-semibold: 600 !default;
+$font-weight-bold: 700 !default;
+$font-weight-black: 900 !default;
+
+// =============================
+// CSS Vars export
+// =============================
+:root {
+  // Families
+  --font-family-primary: #{$font-family-primary};
+  --font-family-secondary: #{$font-family-secondary};
+  --font-family-tertiary: #{$font-family-tertiary};
+
+  // Sizes
+  --font-size-xxs: #{$font-size-xxs};
+  --font-size-xs: #{$font-size-xs};
+  --font-size-sm: #{$font-size-sm};
+  --font-size-md: #{$font-size-md};
+  --font-size-lg: #{$font-size-lg};
+  --font-size-xl: #{$font-size-xl};
+  --font-size-2xl: #{$font-size-2xl};
+  --font-size-3xl: #{$font-size-3xl};
+  --font-size-4xl: #{$font-size-4xl};
+
+  // Line heights
+  --line-height-tight: #{$line-height-tight};
+  --line-height-normal: #{$line-height-normal};
+  --line-height-relaxed: #{$line-height-relaxed};
+
+  // Weights
+  --font-weight-thin: #{$font-weight-thin};
+  --font-weight-light: #{$font-weight-light};
+  --font-weight-normal: #{$font-weight-normal};
+  --font-weight-medium: #{$font-weight-medium};
+  --font-weight-semibold: #{$font-weight-semibold};
+  --font-weight-bold: #{$font-weight-bold};
+  --font-weight-black: #{$font-weight-black};
+}

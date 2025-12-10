@@ -1,0 +1,18 @@
+@use "@ezycore/ui/assets/styles/tokens" as *;
+
+.ui-input {
+  input {
+    width: 100%;
+    border: 1px solid var(--color-queternary);
+    padding: 0.5rem 1rem;
+    color: var(--color-black);
+    font-weight: 500;
+
+    outline: none;
+
+    &:focus {
+      outline: none;
+      box-shadow: 1px 1px 5px var(--color-primary);
+    }
+  }
+}

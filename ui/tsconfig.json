@@ -1,0 +1,18 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "moduleResolution": "node16",
+    "module": "NodeNext", // o "CommonJS" si no usas ESM
+    "esModuleInterop": true,
+    "strict": true,
+    "noEmit": true
+  },
+
+  "jsx": "react-jsx",
+  "strict": true,
+  "skipLibCheck": true,
+  "declaration": true, // si quieres generar .d.ts para otras apps
+  "emitDeclarationOnly": true,
+  "include": ["src", "server", "../../types"],
+  "exclude": ["node_modules", "build", "dist"]
+}

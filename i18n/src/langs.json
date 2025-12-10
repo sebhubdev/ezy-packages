@@ -1,0 +1,21 @@
+{
+  "en": {
+    "lang": "English",
+    "code": "en-eu",
+    "icon": "ukFlag",
+    "path": "en"
+  },
+  "fr": {
+    "lang": "French",
+    "code": "fr-fr",
+    "icon": "franceFlag",
+    "path": "fr",
+    "default": true
+  },
+  "es": {
+    "lang": "Spanish",
+    "code": "es-es",
+    "icon": "spainFlag",
+    "path": "es"
+  }
+}

@@ -1,0 +1,18 @@
+.field-message {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-light);
+  font-size: var(--font-size-xs);
+
+  &--error {
+    color: var(--color-danger);
+  }
+  &--success {
+    color: var(--color-success);
+  }
+  &--warning {
+    color: var(--color-warning);
+  }
+  &--info {
+    color: var(--color-info);
+  }
+}

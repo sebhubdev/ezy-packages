@@ -1,0 +1,46 @@
+@use "sass:map";
+@use "@ezycore/ui/assets/styles/tokens/colors" as *;
+@use "@ezycore/ui/assets/styles/tokens/breakpoints" as *;
+@use "@ezycore/ui/assets/styles/tools/media" as *;
+
+// ===============================
+// Text Color Utilities
+// ===============================
+@each $name, $value in $colors {
+  .color-#{$name} {
+    color: $value !important;
+  }
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $name, $value in $colors {
+        .color-#{$bp-name}-#{$name} {
+          color: $value !important;
+        }
+      }
+    }
+  }
+}
+
+// ===============================
+// Background Color Utilities
+// ===============================
+@each $name, $value in $colors {
+  .bg-#{$name} {
+    background-color: $value !important;
+  }
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $name, $value in $colors {
+        .bg-#{$bp-name}-#{$name} {
+          background-color: $value !important;
+        }
+      }
+    }
+  }
+}

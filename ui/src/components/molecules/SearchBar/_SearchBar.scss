@@ -1,0 +1,19 @@
+@use "@ezycore/ui/assets/styles/tokens" as *;
+.search-bar {
+  background-color: $bg-grey;
+  width: 100%;
+  padding: 2rem;
+
+  &__button {
+    position: absolute;
+    right: 4rem;
+    top: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+
+    .icon {
+      fill: var(--color-secondary-light);
+    }
+  }
+}

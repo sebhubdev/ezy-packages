@@ -1,0 +1,53 @@
+@use "@ezycore/ui/assets/styles/tokens" as *;
+@use "swiper/css";
+@use "swiper/css/grid";
+@use "swiper/css/effect-fade";
+@use "swiper/css/navigation";
+@use "swiper/css/pagination";
+
+.slider {
+  position: relative;
+  .swiper {
+    height: 150vw;
+
+    @media (min-width: $sm) {
+      height: 30vw;
+    }
+    &-slide {
+      img {
+        display: flex;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+
+    &-button-prev,
+    &-button-next {
+      color: var(--color-secondary);
+
+      &::after {
+        font-size: 3rem;
+      }
+    }
+  }
+
+  .swiper-pagination-bullet {
+    background-color: var(--color-secondary);
+    opacity: 0.5;
+
+    &-active {
+      opacity: 1;
+    }
+  }
+
+  &__actions {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    width: 100%;
+    top: calc(50% - 1.5rem);
+    z-index: 10000;
+    padding: 0 2rem;
+  }
+}

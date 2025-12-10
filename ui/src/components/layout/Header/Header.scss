@@ -1,0 +1,299 @@
+@use "@ezycore/frontend/assets/styles/variables" as *;
+.main-header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  padding: 0 0;
+  background: var(--color-primary);
+  text-align: center;
+  display: flex;
+  align-items: center;
+  z-index: 999999;
+
+  &__inner {
+    max-width: $lg;
+    margin: auto;
+    width: 100%;
+    padding: 1rem;
+  }
+
+  &__top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__logo {
+      text-decoration: none;
+      z-index: 1001;
+      height: 70px;
+
+      img {
+        height: 100%;
+        // margin-left: -30px;
+      }
+    }
+
+    &__mobile-nav {
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+
+      @media (min-width: $md) {
+        display: none;
+      }
+
+      .mobile-nav {
+        &__close {
+          display: none;
+        }
+
+        &__close,
+        &__open {
+          z-index: 1002222;
+          position: relative;
+        }
+        &.open {
+          .mobile-nav {
+            &__close {
+              display: block;
+            }
+
+            &__open {
+              display: none;
+            }
+            &__content {
+              left: 0;
+            }
+          }
+        }
+        .navigator {
+          margin-top: 7rem;
+
+          &__inner {
+            text-align: left;
+            padding: 0 2rem;
+
+            .nav-item {
+              &__link {
+                padding: 1.5rem 0;
+                display: block;
+                text-decoration: none;
+                border-bottom: 1px solid var(--color-white);
+
+                &__label {
+                  color: var(--color-white);
+                }
+              }
+
+              &.active {
+                .nav-item {
+                  &__link {
+                    pointer-events: none;
+                    &__label {
+                      opacity: 0.5;
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .icon {
+          fill: var(--color-primary-light);
+          width: 3rem;
+          cursor: pointer;
+        }
+
+        .modal {
+          &__inner {
+            background-color: var(--color-primary);
+            padding: 0;
+          }
+
+          &__close {
+            display: none;
+          }
+        }
+      }
+    }
+
+    &__desktop-nav {
+      display: none;
+
+      @media (min-width: $md) {
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .navigator {
+        display: none;
+
+        @media (min-width: $sm) {
+          display: inline-block;
+        }
+
+        &__inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+
+        .nav-item {
+          &.active {
+            .main-nav__item__link__label {
+              color: var(--color-secondary);
+            }
+          }
+          &__link {
+            padding: 1rem;
+            text-decoration: none;
+
+            &__label {
+              color: var(--color-white);
+              font-family: $font-family-primary;
+              transition: all 0.3s ease;
+              position: relative;
+
+              &::before {
+                content: " ";
+                width: 0;
+                height: 0.3rem;
+                background-color: var(--color-tertiary);
+                display: block;
+                position: absolute;
+                left: 50%;
+                bottom: -0.5rem;
+                transition: all 0.3s ease;
+                border-radius: 10px;
+              }
+            }
+          }
+
+          &:hover {
+            .nav-item {
+              &__link {
+                &__label {
+                  &::before {
+                    width: 100%;
+                    left: 0;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    .right-nav {
+      display: inline-block;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      z-index: 1000;
+
+      @media (min-width: $md) {
+        margin-top: 0.2rem;
+        align-items: flex-start;
+      }
+
+      &__inner {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+      &__item {
+        margin: 0 0.5rem;
+        cursor: pointer;
+
+        .search {
+          &.disabled {
+            pointer-events: none;
+          }
+        }
+
+        .icon {
+          fill: var(--color-primary-light);
+          transition: fill 0.3s ease;
+
+          &.logged {
+            fill: var(--color-secondary);
+          }
+        }
+
+        &:hover {
+          .icon {
+            fill: var(--color-secondary-light);
+          }
+        }
+      }
+    }
+  }
+
+  &__bottom {
+    display: none;
+
+    @media (min-width: $md) {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+    }
+  }
+
+  &__mobile-separator {
+    height: 5.5rem;
+    display: none;
+
+    @media (min-width: $md) {
+      display: none;
+    }
+  }
+
+  &__desktop-separator {
+    height: 5.5rem;
+    display: none;
+
+    @media (min-width: $md) {
+      display: block;
+      display: none;
+    }
+  }
+
+  .search-bar {
+    position: absolute;
+    top: 5.5rem;
+    left: 0;
+    overflow: hidden;
+    padding: 0 2rem;
+    transition: all 0.3s ease;
+
+    &__inner {
+      padding: 2rem 0;
+      opacity: 0;
+      max-width: 1200px;
+      position: relative;
+      margin: auto;
+    }
+
+    &__form {
+      opacity: 0;
+      transition: all 0.2s ease;
+
+      &.in {
+        opacity: 1;
+      }
+      &.out {
+        opacity: 0;
+      }
+    }
+
+    &.open {
+      .search-bar__inner {
+        opacity: 1;
+      }
+    }
+  }
+}

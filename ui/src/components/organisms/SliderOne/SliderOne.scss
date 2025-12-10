@@ -1,0 +1,46 @@
+@import "swiper/css";
+
+@import "swiper/css/grid";
+
+@import "swiper/css/effect-fade";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
+
+.slider-one {
+  .swiper-button-prev,
+  .swiper-button-next {
+    color: var(--color-primary);
+    margin-top: 4rem;
+
+    &:after {
+      content: "\e918";
+      font-size: 5rem;
+      font-family: "icomoon";
+    }
+  }
+
+  .swiper-button-prev {
+    transform: rotate(180deg);
+  }
+  .swiper-pagination-bullet {
+    background-color: var(--color-primary);
+  }
+
+  &__actions {
+    &__prev,
+    &__next {
+      position: absolute;
+      top: calc(50% - 1.5rem);
+      z-index: 10;
+    }
+
+    &__prev {
+      left: -4.5rem;
+      transform: rotate(180deg);
+    }
+
+    &__next {
+      right: -4.5rem;
+    }
+  }
+}

@@ -1,0 +1,40 @@
+.link {
+  position: relative;
+  font-size: 1rem;
+
+  color: inherit;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  color: var(--color-primary);
+
+  a {
+    color: inherit;
+    transition: inherit;
+  }
+
+  &:hover,
+  &:active,
+  &:focus {
+    a {
+      color: var(--color-tertiary);
+    }
+  }
+
+  &::after {
+    background-color: var(--color-tertiary);
+    bottom: -0.2rem;
+    content: "";
+    height: 0.2rem;
+    left: 0;
+    position: absolute;
+    transition: all 0.2s ease;
+    width: 0;
+    border-radius: 1rem;
+  }
+
+  &:hover {
+    &::after {
+      width: 100%;
+    }
+  }
+}

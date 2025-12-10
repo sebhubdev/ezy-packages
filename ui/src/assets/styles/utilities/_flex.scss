@@ -1,0 +1,107 @@
+@use "@ezycore/ui/assets/styles/tokens/breakpoints" as *;
+@use "@ezycore/ui/assets/styles/tools/media" as *;
+
+/* =========================
+   Flex Direction
+========================= */
+$flex-direction: (row, column, row-reverse, column-reverse);
+
+@each $d in $flex-direction {
+  .flex-#{$d} {
+    flex-direction: $d !important;
+  }
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $d in $flex-direction {
+        .flex-#{$bp-name}-#{$d} {
+          flex-direction: $d !important;
+        }
+      }
+    }
+  }
+}
+
+/* =========================
+   Justify Content
+========================= */
+$justify: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  between: space-between,
+  around: space-around,
+  evenly: space-evenly,
+);
+
+@each $name, $value in $justify {
+  .justify-#{$name} {
+    justify-content: $value !important;
+  }
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $name, $value in $justify {
+        .justify-#{$bp-name}-#{$name} {
+          justify-content: $value !important;
+        }
+      }
+    }
+  }
+}
+
+/* =========================
+   Align Items
+========================= */
+$align: (
+  start: flex-start,
+  center: center,
+  end: flex-end,
+  baseline: baseline,
+  stretch: stretch,
+);
+
+@each $name, $value in $align {
+  .items-#{$name} {
+    align-items: $value !important;
+  }
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $name, $value in $align {
+        .items-#{$bp-name}-#{$name} {
+          align-items: $value !important;
+        }
+      }
+    }
+  }
+}
+
+/* =========================
+   Flex Wrap
+========================= */
+$wraps: (wrap, nowrap, wrap-reverse);
+
+@each $w in $wraps {
+  .flex-#{$w} {
+    flex-wrap: $w !important;
+  }
+}
+
+@each $bp-name, $bp-value in $breakpoints {
+  @if $bp-value != 0 {
+    @include up($bp-name) {
+      @each $w in $wraps {
+        .flex-#{$bp-name}-#{$w} {
+          flex-wrap: $w !important;
+        }
+      }
+    }
+  }
+}

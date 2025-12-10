@@ -1,0 +1,57 @@
+@use "@ezycore/ui/assets/styles/tokens/" as *;
+@use "@ezycore/ui/assets/styles/tools/media" as *;
+
+.avatar {
+  background-color: var(--color-primary);
+  color: $white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+  border: 0.5rem solid var(--color-quaternary);
+
+  &-sm {
+    width: 3rem;
+    height: 3rem;
+    min-width: 3rem;
+    min-height: 3rem;
+    border-radius: 10rem;
+    border-width: 0.3rem;
+    @include up(md) {
+      width: 4rem;
+      height: 4rem;
+      min-width: 4rem;
+      min-height: 4rem;
+    }
+  }
+  &-md {
+    width: 5rem;
+    height: 5rem;
+    min-width: 5rem;
+    min-height: 5rem;
+    border-radius: 10rem;
+    border-width: 0.3rem;
+    @include up(md) {
+      width: 6rem;
+      height: 6rem;
+      min-width: 6rem;
+      min-height: 6rem;
+    }
+  }
+  &-lg {
+    width: 8rem;
+    height: 8rem;
+    min-width: 8rem;
+    min-height: 8rem;
+    border-radius: 10rem;
+    font-size: 3rem;
+    @include up(md) {
+      width: 10rem;
+      height: 10rem;
+      min-width: 10rem;
+      min-height: 10rem;
+      border-radius: 10rem;
+      font-size: 4rem;
+    }
+  }
+}
