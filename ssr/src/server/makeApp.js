@@ -29,16 +29,11 @@ const doc = (initialData, appString, helmet, scriptTags) => {
   </body>
   </html>`;
 };
-const suma = (a, b) => a + b;
-
-// coment
 
 const statsFile = path.resolve(
   process.cwd(),
   "build/statics/loadable-stats.json"
 );
-
-console.log("statsFile", statsFile);
 
 const extractor = new ChunkExtractor({ statsFile });
 

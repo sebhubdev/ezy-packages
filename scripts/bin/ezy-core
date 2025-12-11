@@ -1,0 +1,35 @@
+#!/usr/bin/env node
+
+require("dotenv").config({ silent: true });
+
+const script = process.argv.length > 2 ? process.argv[2] : null;
+const args = process.argv.slice(3);
+
+console.log(__dirname);
+
+switch (script) {
+  case "start":
+    require("../start");
+    break;
+  case "dev":
+    require("../dev");
+    break;
+  case "dev-ezy":
+    require("../dev-ezy");
+    break;
+  case "dev-laterre":
+    require("../dev-laterre");
+    break;
+  case "build":
+    require("../build");
+    break;
+  case "update":
+    require("../update");
+    break;
+  case "create-component":
+    require("../component-creator");
+    break;
+
+  default:
+    console.log("the script doesn't exists");
+}
