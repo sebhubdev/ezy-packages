@@ -1,29 +1,26 @@
-import React from "react";
+import React, { useContext } from "react";
 import Icon from "@ezycore/ui/src/components/atoms/Icon";
 import Btn from "@ezycore/ui/src/components/atoms/Btn/Btn";
+import { UserContext } from "./UserProvider";
 
-const UserNav = ({ user, setUser, setIsOpen }) => {
+const UserNav = ({ setIsOpen }) => {
+  const { userData: user, logout } = useContext(UserContext);
+
   console.log(user);
 
-  const logout = (e) => {
-    e && e.preventDefault();
-    localStorage.removeItem("token");
-    setUser(null);
-  };
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  console.log(user);
 
   return (
     <div className="user-nav">
       <div className="user-nav__inner">
         <div className="user-nav__logo">
           <Icon icon="user" />
+          ddd
         </div>
         <h3 className="user-nav__title color-primary mb-4 h1">
-          Bonjour <strong>{user.firstName}</strong>
+          Bonjour <strong>{user.username}</strong>
         </h3>
         <nav className="user-nav__items">
           <ul>

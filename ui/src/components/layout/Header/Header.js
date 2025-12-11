@@ -17,7 +17,6 @@ import ShortAccount from "@ezycore/ui/src/modules/User/ShortAccount";
 const Header = ({ nav, userData, setUserData, loginHandler }) => {
   const [isNavOpen, setisNavOpen] = React.useState(false);
   const [showSearch, setShowSearch] = React.useState(false);
-  const [showLoginSteps, setShowLoginSteps] = React.useState(false);
   const [isSmall, setIsSmall] = React.useState(false);
 
   const logoutHandler = () => {
@@ -57,10 +56,6 @@ const Header = ({ nav, userData, setUserData, loginHandler }) => {
   const openSearch = (e) => {
     e.stopPropagation();
     setShowSearch(!showSearch);
-  };
-
-  const handleUser = () => {
-    setShowLoginSteps(true);
   };
 
   const onLogin = (data) => {
@@ -135,41 +130,12 @@ const Header = ({ nav, userData, setUserData, loginHandler }) => {
             <div className="right-nav">
               <div className="right-nav__inner">
                 <div className="right-nav__item">
-                  <Icon
-                    icon="user"
-                    classes={userData ? " logged" : ""}
-                    onClick={handleUser}
-                  />
+                  <ShortAccount />
                 </div>
               </div>
             </div>
           </div>
         </div>
-
-        {userData ? (
-          <Modal
-            isOpen={showLoginSteps}
-            setIsOpen={setShowLoginSteps}
-            appearance="right"
-            size="small"
-            className="user-modal"
-          >
-            <UserNav
-              setIsOpen={setShowLoginSteps}
-              user={userData}
-              setUser={setUserData}
-            />
-          </Modal>
-        ) : (
-          <Modal
-            isOpen={showLoginSteps}
-            setIsOpen={setShowLoginSteps}
-            appearance="float-middle"
-            size="small"
-          >
-            <LoginSteps onLogin={onLogin} />
-          </Modal>
-        )}
       </header>
     </>
   );
