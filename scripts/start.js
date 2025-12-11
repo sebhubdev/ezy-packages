@@ -7,8 +7,8 @@ import("boxen").then((res) => {
     
       ${chalk.bold("Local:")}            ${chalk.cyan("http://localhost:6006/")}
       ${chalk.bold("On your network:")}  ${chalk.cyan(
-    "http://192.168.1.3:6006/"
-  )}
+        "http://192.168.1.3:6006/"
+      )}
     `;
 
   console.log(
@@ -29,4 +29,4 @@ import("boxen").then((res) => {
   console.log("in the creator");
 });
 
-require("@ezycore/frontend/server/dev-server.js");
+require("@frontend/server/dev-server.js");

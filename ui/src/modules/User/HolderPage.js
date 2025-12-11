@@ -3,22 +3,13 @@ import LoginSteps from "./LoginSteps";
 import Modal from "@ezycore/ui/src/components/organisms/Modal";
 import Btn from "@ezycore/ui/src/components/atoms/Btn";
 import Image from "@ezycore/ui/src/components/atoms/Image";
-// import logo from "@ezycore/ui/src/assets/img/logo-laterre.png";
+import logo from "@ezycore/ui/src/assets/img/logo.png";
 
 const HolderPage = ({ setUserData, loginHandler }) => {
   const [showLogin, setShowLogin] = React.useState(false);
 
   const handleLogin = () => {
     setShowLogin(true);
-  };
-
-  const onLogin = (data) => {
-    console.log(data);
-
-    setShowLogin(false);
-    setTimeout(() => {
-      setUserData(data);
-    }, 300);
   };
 
   const image = {
@@ -30,7 +21,7 @@ const HolderPage = ({ setUserData, loginHandler }) => {
     <div className="holder-page">
       <div className="holder-page__inner">
         <div className="holder-page__image">
-          {/* <Image image={image} /> */}
+          <Image image={image} />
         </div>
         <div className="holder-page__info">Nous travaillons pour vous :)</div>
         <div className="holder-page__actions">
@@ -47,7 +38,7 @@ const HolderPage = ({ setUserData, loginHandler }) => {
         appearance="float-middle"
         size="small"
       >
-        <LoginSteps loginHandler={loginHandler} />
+        <LoginSteps />
       </Modal>
     </div>
   );

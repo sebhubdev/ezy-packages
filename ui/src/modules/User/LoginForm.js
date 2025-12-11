@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Heading from "@ezycore/ui/src/components/atoms/Typo/Heading";
 import {
   InputText,
@@ -7,32 +7,19 @@ import {
 import Btn from "@ezycore/ui/src/components/atoms/Btn";
 import AlertMsg from "@ezycore/ui/src/components/atoms/AlertMsg/AlertMsg";
 import Link from "@ezycore/ui/src/components/atoms/Link";
+import { UserContext } from "./UserProvider";
 
 const LoginForm = ({ setStep, onLogin, http, userService }) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
-  console.log(userService);
+
+  const { login } = useContext(UserContext);
 
   const form = React.useRef(null);
 
   const loginHandler = () => {
     const data = new FormData(form.current);
-    userService
-      .login(data)
-      .then((res) => {
-        const { user: userData, token } = res.data;
-        if (!userData || !token) return;
-        http.defaults.headers.common["Authorization"] = `${token}`;
-
-        if (typeof document != "undefined") {
-          localStorage?.setItem("token", JSON.stringify(token));
-        }
-        onLogin && onLogin(userData);
-      })
-      .catch((err) => {
-        console.log(err);
-        // setLoading(false);
-      });
+    login(data);
   };
 
   return (

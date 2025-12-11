@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useMatch } from "react-router-dom";
 import resolveRequest from "@ezycore/utils/src/resolveRequest";
 import langs from "@ezycore/i18n/src/langs.json";
 import getGlobalData from "@ezycore/utils/src/getGlobalData";
@@ -22,11 +22,15 @@ const useGetAppData = ({ initialData, routes, isSSR }) => {
 
   const route = resolveRequest(pathname, routes);
 
+  const match = useMatch(route.path);
+
+  const params = match?.params;
+
   const getPageData = async () => {
     if (route.needRequest) {
       if (route.request) {
         await route
-          .request()
+          .request(params)
           .then((data) => {
             setPageData(data);
           })

@@ -1,4 +1,5 @@
 @use "@ezycore/ui/src/assets/styles/tokens" as *;
+@use "@ezycore/ui/src/assets/styles/tools/media" as *;
 .main-header {
   position: sticky;
   top: 0;
@@ -9,11 +10,22 @@
   display: flex;
   align-items: center;
   z-index: 999999;
+  color: $white;
+
+  &.small {
+    .main-header {
+      &__top {
+        &__logo {
+          height: 30px;
+          @include up(md) {
+            height: 40px;
+          }
+        }
+      }
+    }
+  }
 
   &__inner {
-    max-width: $lg;
-    margin: auto;
-    width: 100%;
     padding: 1rem;
   }
 
@@ -24,8 +36,12 @@
 
     &__logo {
       text-decoration: none;
-      z-index: 1001;
-      height: 70px;
+      height: 40px;
+      transition: height 0.3s ease;
+
+      @include up(md) {
+        height: 70px;
+      }
 
       img {
         height: 100%;
@@ -193,11 +209,11 @@
       display: flex;
       align-items: center;
       justify-content: flex-end;
-      z-index: 1000;
 
-      @media (min-width: $md) {
+      @include up(md) {
         margin-top: 0.2rem;
         align-items: flex-start;
+        width: 120px;
       }
 
       &__inner {

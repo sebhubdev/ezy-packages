@@ -6,18 +6,13 @@ import {
 } from "@ezycore/ui/src/modules/User";
 import Btn from "@ezycore/ui/src/components/atoms/Btn";
 
-const LoginSteps = ({ resetSteps, http, userService, onLogin }) => {
+const LoginSteps = ({}) => {
   const [step, setStep] = React.useState("LOGIN");
 
   return (
     <>
       {step && step === "LOGIN" ? (
-        <LoginForm
-          setStep={setStep}
-          onLogin={onLogin}
-          http={http}
-          userService={userService}
-        />
+        <LoginForm setStep={setStep} />
       ) : step === "PASSWORD_RECOVERY" ? (
         <>
           <PasswordRecover setStep={setStep} />

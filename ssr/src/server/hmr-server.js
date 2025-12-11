@@ -16,8 +16,6 @@ const hmrServer = (port, appName) => {
   app.use(cors());
   app.use(express.json());
 
-  console.log("holaaaa", `${root}/apps/${appName}/src/client/index.js`);
-
   const webpackCompiler = webpack({
     entry: [
       "webpack-hot-middleware/client",
@@ -80,6 +78,14 @@ const hmrServer = (port, appName) => {
         {
           test: /\.svg$/,
           loader: "svg-inline-loader",
+        },
+        {
+          test: /\.(woff2?|eot|ttf|otf|txt)$/i,
+          type: "asset/resource",
+          generator: {
+            filename: "fonts/[name][hash][ext][query]",
+            publicPath: "/",
+          },
         },
       ],
     },
