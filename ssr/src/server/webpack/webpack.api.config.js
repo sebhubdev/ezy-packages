@@ -1,7 +1,7 @@
 require("module-alias/register");
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
-const alias = require("@root/configs/webpack/aliases");
+const alias = require("@root/configs/aliases");
 
 const serverConf = (mode) => {
   return {
