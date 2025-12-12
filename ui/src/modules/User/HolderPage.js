@@ -3,7 +3,7 @@ import LoginSteps from "./LoginSteps";
 import Modal from "@ezycore/ui/src/components/organisms/Modal";
 import Btn from "@ezycore/ui/src/components/atoms/Btn";
 import Image from "@ezycore/ui/src/components/atoms/Image";
-import logo from "@ezycore/ui/src/assets/img/logo.png";
+import logo from "@ezycore/ui/src/assets/img/logo-sample.png";
 
 const HolderPage = ({ setUserData, loginHandler }) => {
   const [showLogin, setShowLogin] = React.useState(false);

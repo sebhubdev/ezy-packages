@@ -10,7 +10,7 @@ import SearchBar from "@ezycore/ui/src/components/molecules/SearchBar";
 import LoginSteps from "@ezycore/ui/src/modules/User/LoginSteps";
 import { UserNav } from "@ezycore/ui/src/modules/User";
 import Image from "@ezycore/ui/src/components/atoms/Image";
-import logo from "@ezycore/ui/src/assets/img/logo.png";
+import logo from "@ezycore/ui/src/assets/img/logo-sample.png";
 import { UserContext } from "@ezycore/ui/src/modules/User/UserProvider";
 import ShortAccount from "@ezycore/ui/src/modules/User/ShortAccount";
 
