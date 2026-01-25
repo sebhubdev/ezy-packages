@@ -1,32 +1,90 @@
+const concurrently = require("concurrently");
 const chalk = require("chalk");
-import("boxen").then((res) => {
-  const boxen = res.default;
-  const msg = `
-      ${chalk.bold("Storybook 9.1.6 for react-webpack5 started")}
-      ${chalk.gray("146 ms for manager and 3.36 s for preview")}
-    
-      ${chalk.bold("Local:")}            ${chalk.cyan("http://localhost:6006/")}
-      ${chalk.bold("On your network:")}  ${chalk.cyan(
-        "http://192.168.1.3:6006/"
-      )}
+const fs = require("fs");
+const fsPromises = require("fs/promises");
+const dotenv = require("dotenv");
+const path = require("path");
+
+const appsDir = path.resolve(process.cwd(), "apps");
+const args = process.argv.slice(3);
+
+const execute = async () => {
+  let projects = args.length
+    ? args
+    : await fsPromises.readdir(appsDir, { withFileTypes: false });
+
+  if (!projects.length) {
+    console.log(chalk.bold.red("No project to start"));
+    return;
+  }
+
+  const projectsToLaunch = [];
+
+  projects.map(async (project) => {
+    if (fs.existsSync(`./apps/${project}`)) {
+      dotenv.config({
+        path: path.resolve(process.cwd(), `apps/${project}/.env`),
+        override: true,
+      });
+
+      const projectName = process.env.PROJECT_NAME ?? "no-name-project";
+      const projectType = process.env.PROJECT_TYPE ?? "spa";
+      const projectColor = process.env.PROJECT_COLOR ?? "orange";
+
+      const command = {
+        api: `cd apps/${project} && node build/server.js`,
+        spa: `cd apps/${project} && npx serve build`,
+        ssr: `cd apps/${project} && node server/dev-server.js --env production`,
+      }[projectType];
+
+      projectsToLaunch.push({
+        command: command,
+        name: projectName,
+        prefixColor: projectColor,
+      });
+    } else {
+      await import("boxen").then((res) => {
+        const boxen = res.default;
+        const msg = `
+      ${chalk.bold.red(`No project found for ${project}`)}
     `;
 
-  console.log(
-    boxen(msg, {
-      padding: 1,
-      margin: 1,
-      borderStyle: "double", // opciones: single, double, round, bold, etc.
-      borderColor: "whiteBright",
-      title: "holaaaaa",
-      textAlign: "left",
-      textAlignment: "left",
-    })
-  );
+        console.log(
+          boxen(msg, {
+            padding: 1,
+            margin: 1,
+            borderStyle: "double",
+            borderColor: "red",
+            title: "Ezy Core [ERROR]",
+            textAlign: "left",
+            textAlignment: "left",
+          }),
+        );
+      });
+    }
+  });
 
-  console.log(chalk.bold.red("in the creator"));
-  console.log(chalk.blue("in the creator"));
-  console.log(chalk.green("in the creator"));
-  console.log("in the creator");
-});
+  if (projectsToLaunch.length) {
+    await import("boxen").then((res) => {
+      const boxen = res.default;
+      const msg = `
+      ${chalk.bold.green(`Starting project${projects.length > 1 ? "s" : ""} ${projects}`)}
+    `;
 
-require("@frontend/server/dev-server.js");
+      console.log(
+        boxen(msg, {
+          padding: 1,
+          margin: 1,
+          borderStyle: "double",
+          borderColor: "greenBright",
+          title: "Ezy Core",
+          textAlign: "left",
+          textAlignment: "left",
+        }),
+      );
+    });
+    concurrently(projectsToLaunch);
+  }
+};
+
+execute();

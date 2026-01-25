@@ -14,12 +14,6 @@ switch (script) {
   case "dev":
     require("../dev");
     break;
-  case "dev-ezy":
-    require("../dev-ezy");
-    break;
-  case "dev-laterre":
-    require("../dev-laterre");
-    break;
   case "build":
     require("../build");
     break;

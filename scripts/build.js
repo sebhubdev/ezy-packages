@@ -31,14 +31,8 @@ const execute = async () => {
       const projectType = process.env.PROJECT_TYPE ?? "spa";
       const projectColor = process.env.PROJECT_COLOR ?? "orange";
 
-      const command = {
-        api: `cd apps/${project} && nodemon server.js`,
-        spa: `cd apps/${project} && node server/dev-server.js --env production`,
-        ssr: `cd apps/${project} && node server/dev-server.js --env production`,
-      }[projectType];
-
       projectsToLaunch.push({
-        command: command,
+        command: `cd apps/${project} && webpack --config webpack.config.js --env production`,
         name: projectName,
         prefixColor: projectColor,
       });
@@ -68,7 +62,7 @@ const execute = async () => {
     await import("boxen").then((res) => {
       const boxen = res.default;
       const msg = `
-      ${chalk.bold.green(`Launching project${projects.length > 1 ? "s" : ""} ${projects}`)}
+      ${chalk.bold.green(`Building project${projects.length > 1 ? "s" : ""} ${projects}`)}
     `;
 
       console.log(

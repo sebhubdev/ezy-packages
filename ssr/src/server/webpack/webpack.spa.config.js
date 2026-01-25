@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-const alias = require("@root/configs/webpack/aliases");
+const alias = require("@root/configs/aliases");
+const webpack = require("webpack");
 
 const clientConf = (mode) => {
   return {
@@ -66,7 +67,7 @@ const clientConf = (mode) => {
           },
         },
         {
-          test: /\.(woff2?|eot|ttf|otf)$/i,
+          test: /\.(woff2?|eot|ttf|otf|txt)$/i,
           type: "asset/resource",
           generator: {
             filename: "fonts/[name][hash][ext][query]",
@@ -77,7 +78,7 @@ const clientConf = (mode) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: "./public/index.html",
+        template: "./server/index.html",
       }),
       new MiniCssExtractPlugin({
         filename: "css/[name].[contenthash].css",
@@ -86,6 +87,9 @@ const clientConf = (mode) => {
       new LoadablePlugin(),
       new Dotenv({
         path: path.resolve(process.cwd(), ".env"),
+      }),
+      new webpack.DefinePlugin({
+        SSR_APP: false,
       }),
     ],
     resolve: {

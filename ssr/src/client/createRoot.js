@@ -5,13 +5,11 @@ import { loadableReady } from "@loadable/component";
 
 const createRoot = (App, isSsr) => {
   if (!isSsr) {
-    console.log("aquii", process.env.NODE_ENV);
-
     const root = ReactDom.createRoot(document.getElementById("root"));
     root.render(
       <BrowserRouter>
         <App />
-      </BrowserRouter>
+      </BrowserRouter>,
     );
   } else {
     const initialData = window.__INITIAL_DATA__;
@@ -23,7 +21,7 @@ const createRoot = (App, isSsr) => {
         document.getElementById("root"),
         <BrowserRouter>
           <App initialData={initialData} />
-        </BrowserRouter>
+        </BrowserRouter>,
       );
     });
   }

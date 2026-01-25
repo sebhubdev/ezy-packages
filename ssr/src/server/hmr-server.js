@@ -10,6 +10,8 @@ require("dotenv").config({
 });
 const alias = require("@root/configs/aliases");
 const { root } = require("@root/configs/paths");
+const launchProjectInNavigator =
+  process.env.LAUNCH_PROJECT_IN_NAVIGATOR === "true" ?? false;
 
 const hmrServer = (port, appName) => {
   const app = express();
@@ -128,10 +130,12 @@ const hmrServer = (port, appName) => {
 
   app.listen(port, async () => {
     console.log(`Started server on port "${port}".`);
-    import("open").then((res) => {
-      const open = res.default;
-      open(`http://localhost:${port}/`);
-    });
+    if (launchProjectInNavigator) {
+      import("open").then((res) => {
+        const open = res.default;
+        open(`http://localhost:${port}/`);
+      });
+    }
   });
 };
 
