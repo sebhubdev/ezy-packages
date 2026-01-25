@@ -9,7 +9,7 @@ import AlertMsg from "@ezycore/ui/src/components/atoms/AlertMsg/AlertMsg";
 import Link from "@ezycore/ui/src/components/atoms/Link";
 import { UserContext } from "./UserProvider";
 
-const LoginForm = ({ setStep, onLogin, http, userService }) => {
+const LoginForm = ({ setStep, onLogin }) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 
@@ -19,7 +19,9 @@ const LoginForm = ({ setStep, onLogin, http, userService }) => {
 
   const loginHandler = () => {
     const data = new FormData(form.current);
-    login(data);
+    login(data, () => {
+      onLogin();
+    });
   };
 
   return (

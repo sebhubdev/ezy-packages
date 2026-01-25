@@ -29,7 +29,7 @@ const UserProvider = ({ children, userService, http }) => {
     setUserData(null);
   };
 
-  const login = (data) => {
+  const login = (data, cb = () => {}) => {
     userService
       .login(data)
       .then((res) => {
@@ -41,6 +41,7 @@ const UserProvider = ({ children, userService, http }) => {
           localStorage?.setItem("token", JSON.stringify(token));
         }
         setUserData(userData);
+        cb();
       })
       .catch((err) => {
         console.log(err);
