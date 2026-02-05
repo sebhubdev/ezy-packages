@@ -78,7 +78,7 @@ const clientConf = (mode) => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: "./server/index.html",
+        template: "./public/index.html",
       }),
       new MiniCssExtractPlugin({
         filename: "css/[name].[contenthash].css",

@@ -33,7 +33,7 @@ const execute = async () => {
 
       const command = {
         api: `cd apps/${project} && node build/server.js`,
-        spa: `cd apps/${project} && npx serve build`,
+        spa: `cd apps/${project} && npx serve -s build`,
         ssr: `cd apps/${project} && node server/dev-server.js --env production`,
       }[projectType];
 

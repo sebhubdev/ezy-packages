@@ -1,10 +1,11 @@
 @use "@ezycore/ui/src/assets/styles/tokens" as *;
 .btn {
-  display: flex;
+  display: inline-flex;
   text-decoration: none;
   cursor: pointer;
   align-items: center;
   gap: 1rem;
+  width: auto;
 
   &-primary {
     font-family: $font-family-primary;

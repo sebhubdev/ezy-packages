@@ -62,7 +62,7 @@ async function createFiles() {
     await fsPromises.writeFile(`${dest}/${componentName}.js`, componentContent);
     await fsPromises.writeFile(
       `${dest}/${componentName}.stories.js`,
-      storiesContent
+      storiesContent,
     );
     await fsPromises.writeFile(`${dest}/${componentName}.scss`, sassContent);
   } catch (err) {
@@ -78,9 +78,9 @@ createFiles().then(() => {
       
       ${chalk.gray("Files created : ")}
     
-      ${chalk.green(`index.tsx`)}
-      ${chalk.green(`${componentName}.tsx`)}
-      ${chalk.green(`${componentName}.stories.tsx`)}
+      ${chalk.green(`index.js`)}
+      ${chalk.green(`${componentName}.js`)}
+      ${chalk.green(`${componentName}.stories.js`)}
       ${chalk.green(`${componentName.toLowerCase()}.scss`)}
     `;
 
@@ -93,7 +93,7 @@ createFiles().then(() => {
         title: "Component creator",
         textAlign: "left",
         textAlignment: "left",
-      })
+      }),
     );
   });
 });

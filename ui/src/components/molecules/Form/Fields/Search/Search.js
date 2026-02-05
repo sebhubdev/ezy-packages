@@ -1,5 +1,5 @@
 import React from "react";
-import Input from "@ezycore/ui/src/components/molecules/Fields/Input";
+import Input from "@ezycore/ui/src/components/molecules/Form/Fields/Input";
 
 function Search({
   arrayToSearch = [],
@@ -17,7 +17,7 @@ function Search({
 
     if (typeof obj === "object" && obj !== null) {
       return Object.values(obj).some((value) =>
-        deepMatchFiltered(value, regex)
+        deepMatchFiltered(value, regex),
       );
     }
 
@@ -28,7 +28,7 @@ function Search({
     const regex = new RegExp(query, "i");
 
     const newArr = arrayToSearch.filter((item) =>
-      props.some((prop) => deepMatchFiltered(item[prop], regex))
+      props.some((prop) => deepMatchFiltered(item[prop], regex)),
     );
     onSearch(newArr, query);
   };
