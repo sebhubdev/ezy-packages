@@ -1,7 +1,7 @@
 import React from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import sampleConf from "./sliderConf.sample";
-import Btn from "@ezycore/ui/src/components/atoms/Btn";
+import { Btn } from "@ezycore/ui/src/components/atoms/Btn";
 import Icon from "@ezycore/ui/src/components/atoms/Icon";
 
 const SliderOne = ({

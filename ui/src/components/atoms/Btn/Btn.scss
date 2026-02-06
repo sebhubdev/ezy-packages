@@ -7,7 +7,7 @@
   gap: 1rem;
   width: auto;
 
-  &-primary {
+  &--primary {
     font-family: $font-family-primary;
     background-color: var(--color-primary);
     border: 2px solid var(--color-primary);
@@ -33,7 +33,7 @@
     }
   }
 
-  &-secondary {
+  &--secondary {
     border: 1px solid var(--color-primary);
     color: var(--color-primary);
     font-family: $font-family-primary;
@@ -70,33 +70,58 @@
     }
   }
 
-  &-link {
-    color: var(--color-primary);
+  &--tertiary {
     position: relative;
 
-    &::before {
-      content: " ";
-      width: 0rem;
-      height: 0.3rem;
-      background-color: var(--color-secondary);
-      display: block;
-      position: absolute;
-      left: 0;
-      bottom: -0.5rem;
-      transition: all 0.3s ease;
-    }
-    &:hover,
-    &:focus,
-    &:active {
-      color: var(--color-secondary);
+    color: inherit;
+    cursor: pointer;
+    transition: color 0.3s ease;
+    color: var(--color-primary);
 
-      &::before {
+    a {
+      color: inherit;
+      transition: inherit;
+    }
+
+    &:hover,
+    &:active,
+    &:focus {
+      a {
+        color: var(--color-tertiary);
+      }
+    }
+
+    &::after {
+      background-color: var(--color-tertiary);
+      bottom: -0.2rem;
+      content: "";
+      height: 0.2rem;
+      left: 0;
+      position: absolute;
+      transition: all 0.2s ease;
+      width: 0;
+      border-radius: 1rem;
+    }
+
+    &:hover {
+      &::after {
         width: 100%;
       }
     }
   }
 
-  &-arrow {
+  &--link {
+    color: var(--color-primary);
+    position: relative;
+    text-decoration: underline;
+
+    &:hover {
+      text-decoration: none;
+      color: var(--color-secondary);
+    }
+  }
+
+  &--arrow {
     background-color: var(--color-secondary);
     width: 3rem;
     height: 3rem;

@@ -1,11 +1,10 @@
 import React from "react";
-import Input from "@ezycore/ui/src/components/molecules/Form/Fields/Input";
+import BaseField from "./BaseField";
 
-function Search({
-  arrayToSearch = [],
-  propsToSearch = [],
-  onSearch = () => {},
-}) {
+const SearchField = (
+  { arrayToSearch = [], propsToSearch = [], onSearch = () => {} },
+  ...props
+) => {
   const deepMatchFiltered = (obj, regex) => {
     if (typeof obj === "string" || typeof obj === "number") {
       return regex.test(String(obj));
@@ -41,15 +40,17 @@ function Search({
 
   return (
     <div className="search mb-8">
-      <Input
+      <BaseField
+        type="text"
         type="text"
         label="Recherche..."
         icon="search"
         placeholder="Nom, Prenom..."
         onChange={handleSearch}
+        {...props}
       />
     </div>
   );
-}
+};
 
-export default Search;
+export default SearchField;

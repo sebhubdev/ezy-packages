@@ -89,7 +89,7 @@ const Header = ({ nav, userData, setUserData, loginHandler }) => {
         id="mainHeader"
         className={`main-header${isSmall ? " small" : ""}`}
       >
-        <div className="main-header__inner ctn ctn-lg">
+        <div className="main-header__inner ctn ctn--lg">
           <div className="main-header__top">
             <div className="main-header__top__mobile-nav">
               <div className={`mobile-nav${isNavOpen ? " open" : ""}`}>

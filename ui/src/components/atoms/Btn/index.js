@@ -1,3 +1,4 @@
 import Btn from "./Btn";
+import Link from "./Link";
 
-export default Btn;
+export { Btn, Link };

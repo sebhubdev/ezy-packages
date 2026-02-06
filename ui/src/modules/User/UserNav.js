@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import Icon from "@ezycore/ui/src/components/atoms/Icon";
-import Btn from "@ezycore/ui/src/components/atoms/Btn/Btn";
+import { Btn } from "@ezycore/ui/src/components/atoms/Btn/";
 import { UserContext } from "./UserProvider";
 
 const UserNav = ({ setIsOpen }) => {

@@ -9,7 +9,7 @@ const LayoutContext = createContext();
 
 const LayoutProvider = LayoutContext.Provider;
 
-const GenericLayout = ({
+const BaseLayout = ({
   userData,
   setUserData,
   globalData,
@@ -38,13 +38,13 @@ const GenericLayout = ({
   return (
     <>
       <LayoutProvider value={layoutData}>
-        <div className="generic-layout" ref={layoutRef} onScroll={handleScroll}>
+        <div className="base-layout" ref={layoutRef} onScroll={handleScroll}>
           <Header
             userData={userData}
             setUserData={setUserData}
             nav={globalData?.menu?.main}
           />
-          <div className={`generic-layout__content`}>
+          <div className={`base-layout__content`}>
             {loading ? <Loading /> : children}
             <BackToTop container={layoutRef} isVisible={isBackToTopVisible} />
           </div>
@@ -56,6 +56,6 @@ const GenericLayout = ({
   );
 };
 
-export default GenericLayout;
+export default BaseLayout;
 
 export { LayoutContext };

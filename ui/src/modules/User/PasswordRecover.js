@@ -1,8 +1,7 @@
 import React from "react";
 import Heading from "@ezycore/ui/src/components/atoms/Typo/Heading";
 import { InputText } from "@ezycore/ui/src/components/atoms/Form/Input";
-import Btn from "@ezycore/ui/src/components/atoms/Btn";
-import Link from "@ezycore/ui/src/components/atoms/Link";
+import { Btn } from "@ezycore/ui/src/components/atoms/Btn";
 
 const PasswordRecover = ({ fieldToFocus, onSend = () => {}, setStep }) => {
   const recoverHanlder = () => {
@@ -20,7 +19,9 @@ const PasswordRecover = ({ fieldToFocus, onSend = () => {}, setStep }) => {
           <div className="login-form__fields">
             <InputText inputRef={fieldToFocus} placeholder="Email" />
             <div className="login-form__actions">
-              <Link onClick={() => setStep("LOGIN")}>Me connecter</Link>
+              <Btn variant="link" onClick={() => setStep("LOGIN")}>
+                Me connecter
+              </Btn>
             </div>
             <Btn onClick={recoverHanlder}>Ré-initialiser</Btn>
           </div>

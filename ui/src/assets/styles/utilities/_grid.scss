@@ -2,37 +2,33 @@
 @use "@ezycore/ui/src/assets/styles/tokens/breakpoints" as *;
 @use "@ezycore/ui/src/assets/styles/tools/media" as *;
 
-// Número de columnas del sistema
+// ===============================
+// Variables
+// ===============================
 $cols-count: 12;
 
 // ===============================
 // .row
 // ===============================
 .row {
-  display: flex;
-  flex-wrap: wrap;
-  // SIN padding para que uses gap-* como gutter
-  // Ejemplo: <div class="row gap-4">...</div>
+  display: grid;
+  grid-template-columns: repeat($cols-count, minmax(0, 1fr));
 }
 
 // ===============================
-// .col (auto) → se reparte el espacio
+// .col (auto / flexible)
 // ===============================
 .col {
-  flex: 1 0 0; // columnas flexibles que se reparten el ancho disponible
+  grid-column: span 1;
   min-width: 0;
 }
 
 // ===============================
 // .col-1 ... .col-12
 // ===============================
-// Sin padding, solo width. Los gutters vienen de gap-*
 @for $i from 1 through $cols-count {
   .col-#{$i} {
-    // flex-basis + width para evitar bugs raros
-    flex: 0 0 auto;
-    width: math.div(100% * $i, $cols-count);
-    max-width: math.div(100% * $i, $cols-count);
+    grid-column: span $i;
   }
 }
 
@@ -40,8 +36,7 @@ $cols-count: 12;
 // .col-auto → tamaño según contenido
 // ===============================
 .col-auto {
-  flex: 0 0 auto;
-  width: auto;
+  grid-column: auto;
 }
 
 // ===============================
@@ -50,25 +45,22 @@ $cols-count: 12;
 @each $bp-name, $bp-value in $breakpoints {
   @if $bp-value != 0 {
     @include up($bp-name) {
-      // col-{bp} → auto
+      // col-{bp}
       .col-#{$bp-name} {
-        flex: 1 0 0;
+        grid-column: span 1;
         min-width: 0;
       }
 
       // col-{bp}-1 ... col-{bp}-12
       @for $i from 1 through $cols-count {
         .col-#{$bp-name}-#{$i} {
-          flex: 0 0 auto;
-          width: math.div(100% * $i, $cols-count);
-          max-width: math.div(100% * $i, $cols-count);
+          grid-column: span $i;
         }
       }
 
       // col-{bp}-auto
       .col-#{$bp-name}-auto {
-        flex: 0 0 auto;
-        width: auto;
+        grid-column: auto;
       }
     }
   }

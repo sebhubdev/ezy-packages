@@ -4,24 +4,26 @@ const UserContext = createContext();
 
 const UserProvider = ({ children, userService, http }) => {
   const [userData, setUserData] = React.useState(null);
-  const getCurrentUSer = async () => {
-    let token;
-    token = localStorage?.token && JSON.parse(localStorage?.token);
+  const [loadingUser, setLoadingUser] = React.useState(true);
+
+  const getCurrentUser = async () => {
+    const token = localStorage?.token && JSON.parse(localStorage?.token);
 
     if (token) {
-      await userService
-        .me()
-        .then((res) => {
-          setUserData(res.data);
-        })
-        .catch((err) => {
-          if (err.response) console.log(err.response.data.error);
-        });
+      try {
+        const res = await userService.me();
+        setUserData(res.data);
+      } catch (err) {
+        console.log(err.response?.data?.error);
+        setUserData(null);
+      }
     }
+
+    setLoadingUser(false);
   };
 
   React.useEffect(() => {
-    getCurrentUSer();
+    getCurrentUser();
   }, []);
 
   const logout = () => {
@@ -29,27 +31,23 @@ const UserProvider = ({ children, userService, http }) => {
     setUserData(null);
   };
 
-  const login = (data, cb = () => {}) => {
-    userService
-      .login(data)
-      .then((res) => {
-        const { user: userData, token } = res.data;
-        if (!userData || !token) return;
-        http.defaults.headers.common["Authorization"] = `${token}`;
+  const login = async (data, cb = () => {}) => {
+    try {
+      const res = await userService.login(data);
+      const { user: loggedUser, token } = res.data;
+      if (!loggedUser || !token) return;
 
-        if (typeof document != "undefined") {
-          localStorage?.setItem("token", JSON.stringify(token));
-        }
-        setUserData(userData);
-        cb();
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+      http.defaults.headers.common["Authorization"] = `${token}`;
+      localStorage?.setItem("token", JSON.stringify(token));
+      setUserData(loggedUser);
+      cb();
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
-    <UserContext.Provider value={{ userData, login, logout }}>
+    <UserContext.Provider value={{ userData, login, logout, loadingUser }}>
       {children}
     </UserContext.Provider>
   );

@@ -4,9 +4,8 @@ import {
   InputText,
   Password,
 } from "@ezycore/ui/src/components/atoms/Form/Input";
-import Btn from "@ezycore/ui/src/components/atoms/Btn";
+import { Btn } from "@ezycore/ui/src/components/atoms/Btn";
 import AlertMsg from "@ezycore/ui/src/components/atoms/AlertMsg/AlertMsg";
-import Link from "@ezycore/ui/src/components/atoms/Link";
 import { UserContext } from "./UserProvider";
 
 const LoginForm = ({ setStep, onLogin }) => {
@@ -43,11 +42,13 @@ const LoginForm = ({ setStep, onLogin }) => {
             <InputText name="userName" placeholder={"User or email"} />
             <Password name="userPassword" placeholder="*******" />
             <div className="login-form__actions">
-              <Link onClick={() => setStep("PASSWORD_RECOVERY")}>
+              <Btn variant="link" onClick={() => setStep("PASSWORD_RECOVERY")}>
                 Mot de passe oublié
-              </Link>
+              </Btn>
 
-              <Link onClick={() => setStep("SING_UP")}>Créer un compte</Link>
+              <Btn variant="link" onClick={() => setStep("SING_UP")}>
+                Créer un compte
+              </Btn>
             </div>
             <Btn onClick={loginHandler}>{"Connect"}</Btn>
           </div>

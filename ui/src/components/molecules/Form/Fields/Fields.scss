@@ -1,1 +1,61 @@
-@forward "@ezycore/ui/src/components/molecules/Form/Fields/Input/Input";
+@use "@ezycore/ui/src/assets/styles/tokens" as *;
+.input {
+  position: relative;
+  margin-bottom: 1rem;
+
+  &__inner {
+    color: var(--color-primary);
+    padding-top: 1rem;
+  }
+  &__label {
+    position: absolute;
+    z-index: 2;
+    background-color: var(--color-white);
+    display: flex;
+    align-items: center;
+    top: 0rem;
+    left: 2rem;
+    font-size: 1rem;
+    padding: 0 0.5rem;
+  }
+  &__field {
+    position: relative;
+  }
+  &__icon {
+    position: absolute;
+    right: 2rem;
+    height: 100%;
+    top: 0;
+
+    .icon {
+      color: var(--color-primary);
+    }
+  }
+
+  &__required {
+    color: var(--color-danger);
+    padding-right: 2px;
+  }
+
+  &__error {
+    font-size: 1rem;
+    margin-top: 5px;
+    margin-left: 20px;
+    color: var(--color-danger);
+  }
+}
+
+input {
+  border: 2px solid var(--color-quaternary);
+  display: block;
+  width: 100%;
+  border-radius: 10rem;
+  outline: none;
+  height: 4rem;
+  padding: 0 2rem;
+
+  &:focus {
+    outline: none;
+    box-shadow: $shadow-sm;
+  }
+}

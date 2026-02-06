@@ -1,0 +1,11 @@
+.base-layout {
+  height: 100vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  &__content {
+    position: relative;
+    margin: auto;
+    min-height: 100vh;
+  }
+}

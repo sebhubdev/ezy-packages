@@ -1,5 +1,5 @@
 import React from "react";
-import Btn from "@ezycore/ui/src/components/atoms/Btn";
+import { Btn } from "@ezycore/ui/src/components/atoms/Btn";
 import Avatar from "@ezycore/ui/src/components/molecules/Avatar";
 
 const ListCard = ({

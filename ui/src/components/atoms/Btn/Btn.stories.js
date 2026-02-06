@@ -1,4 +1,4 @@
-import Btn from "./Btn";
+import { Btn } from "./Btn";
 
 const btnLabel = "Ezy UI button";
 

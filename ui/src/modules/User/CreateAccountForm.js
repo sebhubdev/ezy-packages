@@ -5,8 +5,7 @@ import {
   Password,
 } from "@ezycore/ui/src/components/atoms/Form/Input";
 import PasswordForm from "./PasswordForm";
-import Btn from "@ezycore/ui/src/components/atoms/Btn";
-import Link from "@ezycore/ui/src/components/atoms/Link";
+import { Btn } from "@ezycore/ui/src/components/atoms/Btn";
 
 const CreateAccountForm = ({ setStep, onLogin }) => {
   const [loading, setLoading] = React.useState(false);
@@ -48,7 +47,9 @@ const CreateAccountForm = ({ setStep, onLogin }) => {
             <InputText name="email" placeholder="Email" />
             <PasswordForm />
             <div className="login-form__actions">
-              <Link onClick={() => setStep("LOGIN")}>Me connecter</Link>
+              <Btn variant="link" onClick={() => setStep("LOGIN")}>
+                Me connecter
+              </Btn>
             </div>
             <p className="login-form__info-line">
               Les champs marqués d'une * sont obligatoires.
