@@ -17,6 +17,8 @@ import arrow from "@ezycore/ui/src/assets/icons/arrow.svg";
 import heart from "@ezycore/ui/src/assets/icons/heart.svg";
 import back from "@ezycore/ui/src/assets/icons/back.svg";
 import edit from "@ezycore/ui/src/assets/icons/edit.svg";
+import eye from "@ezycore/ui/src/assets/icons/eye.svg";
+import eyeclose from "@ezycore/ui/src/assets/icons/eye-close.svg";
 
 const ICONS = {
   facebook,
@@ -38,6 +40,8 @@ const ICONS = {
   heart,
   back,
   edit,
+  eye,
+  eyeclose,
 } as const;
 
 export { ICONS };

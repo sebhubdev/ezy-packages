@@ -18,14 +18,14 @@ const PasswordField = (props) => {
     },
     {
       validate: (v) => /[0-9]/.test(v),
-      message: "Debe tener una numero",
+      message: "Debe tener un numero",
     },
   ];
 
   return (
     <BaseField
       type={showPassword ? "text" : "password"}
-      icon={showPassword ? "starfull" : "star"}
+      icon={showPassword ? "eye" : "eyeclose"}
       onIconClick={togglePassword}
       validations={validations}
       {...props}

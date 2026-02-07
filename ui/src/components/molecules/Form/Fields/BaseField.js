@@ -16,13 +16,15 @@ const BaseField = ({
   validateOnChange,
   autoComplete = "off",
   spellCheck = false,
+  requireDefaultMessage = "This field is required",
 }) => {
-  const [error, setError] = useState("");
+  const [error, setError] = useState(null);
   const ref = React.useRef(null);
 
   const runValidation = () => {
-    if (required && !ref.current.value) {
-      setError("This field is required");
+    if (!required) return true;
+    if (!ref.current.value) {
+      setError(requireDefaultMessage);
       return false;
     }
 
@@ -32,49 +34,56 @@ const BaseField = ({
         return false;
       }
     }
-    setError("");
+
+    setError(null);
     return true;
   };
 
   useEffect(() => {
-    if (register) register(runValidation);
-  }, [register]);
+    if (!register) return;
+
+    const unregister = register(runValidation); // registra la validación actual
+    return unregister; // se limpia si vuelve a registrarse o desmonta
+  }, [register, validations]);
 
   const handleChange = (e) => {
-    if (onChange) onChange(e);
-    if (validateOnChange) runValidation(); // valida en cada cambio
+    console.log(onChange);
+
+    if (onChange) onChange(ref.current.value);
+    if (validateOnChange) runValidation();
   };
 
   return (
-    <div className="input">
+    <div className={`input input--${type}`}>
       <div className="input__inner">
         {label && (
-          <label className="input__label" htmlFor={name}>
-            {required && <span className="input__required">*</span>}
-            {label}
+          <label className="input__label">
+            <span className="input__label-text">
+              {label} {required && <span className="input__required">*</span>}
+            </span>
+            <div className="input__field">
+              <input
+                ref={ref}
+                type={type}
+                name={name}
+                placeholder={placeholder || "Im an input text"}
+                defaultValue={defaultValue}
+                onChange={handleChange}
+                autoComplete={autoComplete}
+                spellCheck={spellCheck}
+              />
+              {icon && (
+                <div
+                  className="input__icon"
+                  onClick={onIconClick}
+                  style={{ cursor: onIconClick ? "pointer" : "default" }}
+                >
+                  <Icon icon={icon} />
+                </div>
+              )}
+            </div>
           </label>
         )}
-        <div className="input__field">
-          <input
-            ref={ref}
-            type={type}
-            name={name}
-            placeholder={placeholder || "Im an input text"}
-            defaultValue={defaultValue}
-            onChange={handleChange}
-            autoComplete={autoComplete}
-            spellCheck={spellCheck}
-          />
-          {icon && (
-            <div
-              className="input__icon"
-              onClick={onIconClick}
-              style={{ cursor: onIconClick ? "pointer" : "default" }}
-            >
-              <Icon icon={icon} />
-            </div>
-          )}
-        </div>
         {error && <div className="input__error">{error}</div>}
       </div>
     </div>

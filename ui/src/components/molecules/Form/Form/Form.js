@@ -16,6 +16,8 @@ const Form = ({ onSubmit, children, ...rest }) => {
     const formData = new FormData(formRef.current);
 
     const results = validators.current.map((v) => v());
+    console.log(results);
+
     const hasErrors = results.some((r) => r === false);
 
     onSubmit(hasErrors ? { error: "error" } : formData);

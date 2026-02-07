@@ -60,10 +60,10 @@ async function createFiles() {
     console.log(chalk.green.bold("Folder created!"));
     await fsPromises.writeFile(`${dest}/index.js`, indexContent);
     await fsPromises.writeFile(`${dest}/${componentName}.js`, componentContent);
-    await fsPromises.writeFile(
-      `${dest}/${componentName}.stories.js`,
-      storiesContent,
-    );
+    // await fsPromises.writeFile(
+    //   `${dest}/${componentName}.stories.js`,
+    //   storiesContent,
+    // );
     await fsPromises.writeFile(`${dest}/${componentName}.scss`, sassContent);
   } catch (err) {
     console.log(err);

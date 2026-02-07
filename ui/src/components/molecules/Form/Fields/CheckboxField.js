@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import BaseCheckbox from "./BaseCheckbox";
 
-function CheckboxField({}) {
-  return <div className="checkboxfield">CheckboxField</div>;
-}
+const CheckboxField = (props) => {
+  return <BaseCheckbox type="checkbox" {...props} />;
+};
 
 export default CheckboxField;

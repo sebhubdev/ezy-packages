@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import BaseField from "./BaseField";
 
 const TextField = (props) => {
-  const [error, setError] = useState("");
+  console.log(props);
+
   const validations = [
     {
       validate: (value) => value.length > 4,
