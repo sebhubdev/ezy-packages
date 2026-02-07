@@ -32,9 +32,7 @@ const SearchField = (
     onSearch(newArr, query);
   };
 
-  const handleSearch = (e) => {
-    const query = e.target.value;
-
+  const handleSearch = (query) => {
     search(query, propsToSearch);
   };
 

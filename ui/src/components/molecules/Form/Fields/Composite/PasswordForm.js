@@ -17,7 +17,7 @@ const PasswordForm = ({
   const [password, setPassword] = useState(defaultValues.password);
 
   return (
-    <div className="password-form">
+    <div className="password-form row gap-4">
       <div className="col-12">
         <PasswordField
           label={labels.password}
@@ -30,16 +30,18 @@ const PasswordForm = ({
           autoComplete="new-password"
         />
       </div>
-      <PasswordConfirmField
-        label={labels.confirm}
-        name={names.confirm}
-        defaultValue={defaultValues.confirm}
-        placeholder={placeholders.confirm}
-        passwordValue={password}
-        register={register}
-        required={true}
-        autoComplete="new-password"
-      />
+      <div className="col-12">
+        <PasswordConfirmField
+          label={labels.confirm}
+          name={names.confirm}
+          defaultValue={defaultValues.confirm}
+          placeholder={placeholders.confirm}
+          passwordValue={password}
+          register={register}
+          required={true}
+          autoComplete="new-password"
+        />
+      </div>
     </div>
   );
 };

@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import BaseField from "./BaseField";
 
 const TextField = (props) => {
-  console.log(props);
-
   const validations = [
     {
       validate: (value) => value.length > 4,

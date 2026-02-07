@@ -56,34 +56,34 @@ const BaseField = ({
   return (
     <div className={`input input--${type}`}>
       <div className="input__inner">
-        {label && (
-          <label className="input__label">
+        <label className="input__label">
+          {label && (
             <span className="input__label-text">
               {label} {required && <span className="input__required">*</span>}
             </span>
-            <div className="input__field">
-              <input
-                ref={ref}
-                type={type}
-                name={name}
-                placeholder={placeholder || "Im an input text"}
-                defaultValue={defaultValue}
-                onChange={handleChange}
-                autoComplete={autoComplete}
-                spellCheck={spellCheck}
-              />
-              {icon && (
-                <div
-                  className="input__icon"
-                  onClick={onIconClick}
-                  style={{ cursor: onIconClick ? "pointer" : "default" }}
-                >
-                  <Icon icon={icon} />
-                </div>
-              )}
-            </div>
-          </label>
-        )}
+          )}
+          <div className="input__field">
+            <input
+              ref={ref}
+              type={type}
+              name={name}
+              placeholder={placeholder || "Im an input text"}
+              defaultValue={defaultValue}
+              onChange={handleChange}
+              autoComplete={autoComplete}
+              spellCheck={spellCheck}
+            />
+            {icon && (
+              <div
+                className="input__icon"
+                onClick={onIconClick}
+                style={{ cursor: onIconClick ? "pointer" : "default" }}
+              >
+                <Icon icon={icon} />
+              </div>
+            )}
+          </div>
+        </label>
         {error && <div className="input__error">{error}</div>}
       </div>
     </div>
