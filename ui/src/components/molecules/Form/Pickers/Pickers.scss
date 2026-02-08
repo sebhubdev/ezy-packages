@@ -1,0 +1,208 @@
+@use "@ezycore/ui/src/assets/styles/tokens" as *;
+
+.color-picker {
+  position: relative;
+  &__watch {
+    width: 3rem;
+    height: 2rem;
+    border: 2px solid var(--color-quaternary);
+    border-radius: 10rem;
+    cursor: pointer;
+  }
+
+  &__picker {
+    position: absolute;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  &.open {
+    .color-picker {
+      &__picker {
+        opacity: 1;
+        visibility: visible;
+      }
+    }
+  }
+}
+
+.date-picker {
+  .react-datepicker-wrapper {
+    width: 100%;
+  }
+  .react-datepicker {
+    border: 2px solid var(--color-quaternary);
+    border-radius: 1rem;
+
+    * {
+      font-family: $font-family-primary !important;
+      color: var(--color-primary);
+    }
+
+    &__triangle {
+      stroke: var(--color-quaternary);
+      fill: var(--color-quaternary);
+
+      path {
+        fill: var(--color-quaternary);
+      }
+    }
+
+    &__header {
+      background-color: var(--color-quaternary);
+      border-bottom: 2px solid var(--color-primary);
+    }
+
+    &__year-dropdown {
+      background-color: var(--color-quaternary);
+      border: 2px solid var(--color-quaternary);
+      box-shadow: 1px 1px 5px var(--color-primary);
+    }
+    &__year-read-view {
+      &--selected-year {
+        font-weight: 600;
+      }
+
+      &--down-arrow {
+        border: none;
+        transform: none;
+        &::before {
+          content: ">";
+          position: relative;
+          display: block;
+          margin: auto;
+          color: var(--color-primary);
+          font-size: 2rem;
+          line-height: 1.6rem;
+          font-weight: 600;
+          transform: rotate(90deg);
+        }
+      }
+    }
+
+    &__year-option {
+      font-size: 1rem;
+      font-weight: 600;
+      height: 3rem;
+      transition: 0.3s ease;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &--selected {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4rem;
+        color: $white;
+
+        &_year {
+          background-color: var(--color-primary);
+          color: $white;
+        }
+      }
+
+      &:hover {
+        background-color: var(--color-primary);
+        color: $white;
+
+        span {
+          color: $white;
+        }
+
+        .react-datepicker__navigation {
+          &--years {
+            &::before {
+              color: $white;
+            }
+          }
+        }
+      }
+
+      .react-datepicker__navigation {
+        &--years {
+          text-indent: 0;
+          width: 100%;
+          height: 100%;
+          display: block;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          top: 0;
+
+          &:hover {
+            &::before {
+              color: $white;
+            }
+          }
+
+          &::before {
+            content: ">";
+            position: relative;
+            display: block;
+            margin: auto;
+            color: var(--color-primary);
+            font-size: 2rem;
+            line-height: 1.6rem;
+            font-weight: 600;
+          }
+
+          &-upcoming {
+            &::before {
+              transform: rotate(-90deg);
+            }
+          }
+          &-previous {
+            &::before {
+              transform: rotate(90deg);
+            }
+          }
+        }
+      }
+    }
+
+    &__navigation {
+      &-icon {
+        &::before {
+          border-color: var(--color-primary);
+        }
+      }
+    }
+
+    &__current-month {
+      line-height: 1.4rem;
+      font-size: 1rem;
+      margin-bottom: 1rem;
+      font-family: $font-family-primary;
+      color: var(--color-primary);
+    }
+
+    &__day-names {
+      background-color: var(--color-quaternary);
+    }
+
+    &__day-name {
+    }
+
+    &__day-name,
+    &__day {
+      padding: 0.5rem;
+      font-size: 1.2rem;
+      font-weight: 700 !important;
+      span {
+        font-size: 1.2rem;
+        font-weight: 700 !important;
+      }
+    }
+
+    &__day {
+      &--selected,
+      &--selected:hover {
+        background-color: var(--color-quaternary);
+      }
+    }
+  }
+}

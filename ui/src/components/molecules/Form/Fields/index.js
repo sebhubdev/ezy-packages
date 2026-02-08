@@ -7,6 +7,8 @@ import CheckboxField from "./CheckboxField";
 import BaseCheckbox from "./BaseCheckbox";
 import RadioField from "./RadioField";
 import SwitchField from "./SwitchField";
+import ColorField from "./ColorField";
+import DateField from "./DateField";
 
 export {
   TextField,
@@ -18,4 +20,6 @@ export {
   BaseCheckbox,
   RadioField,
   SwitchField,
+  ColorField,
+  DateField,
 };

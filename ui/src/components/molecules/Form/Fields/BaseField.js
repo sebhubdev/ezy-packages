@@ -1,5 +1,6 @@
 import React, { useState, useEffect, forwardRef } from "react";
 import Icon from "../../../atoms/Icon";
+import { ColorPicker, DatePicker } from "../Pickers";
 
 const BaseField = ({
   type = "text",
@@ -22,6 +23,8 @@ const BaseField = ({
   const ref = React.useRef(null);
 
   const runValidation = () => {
+    console.log(ref.current.value);
+
     if (!required) return true;
     if (!ref.current.value) {
       setError(requireDefaultMessage);
@@ -42,14 +45,12 @@ const BaseField = ({
   useEffect(() => {
     if (!register) return;
 
-    const unregister = register(runValidation); // registra la validación actual
-    return unregister; // se limpia si vuelve a registrarse o desmonta
+    const unregister = register(runValidation);
+    return unregister;
   }, [register, validations]);
 
-  const handleChange = (e) => {
-    console.log(onChange);
-
-    if (onChange) onChange(ref.current.value);
+  const handleChange = (value) => {
+    if (onChange) onChange(type == "color" ? value : ref.current.value);
     if (validateOnChange) runValidation();
   };
 
@@ -63,24 +64,41 @@ const BaseField = ({
             </span>
           )}
           <div className="input__field">
-            <input
-              ref={ref}
-              type={type}
-              name={name}
-              placeholder={placeholder || "Im an input text"}
-              defaultValue={defaultValue}
-              onChange={handleChange}
-              autoComplete={autoComplete}
-              spellCheck={spellCheck}
-            />
-            {icon && (
-              <div
-                className="input__icon"
-                onClick={onIconClick}
-                style={{ cursor: onIconClick ? "pointer" : "default" }}
-              >
-                <Icon icon={icon} />
-              </div>
+            {type == "color" ? (
+              <ColorPicker
+                defaultValue={defaultValue}
+                onChange={handleChange}
+                name={name}
+              />
+            ) : type == "date" ? (
+              <DatePicker
+                defaultValue={defaultValue}
+                name={name}
+                onChange={handleChange}
+                ref={ref}
+              />
+            ) : (
+              <>
+                <input
+                  ref={ref}
+                  type={type}
+                  name={name}
+                  placeholder={placeholder || "Im an input text"}
+                  defaultValue={defaultValue}
+                  onChange={handleChange}
+                  autoComplete={autoComplete}
+                  spellCheck={spellCheck}
+                />
+                {icon && (
+                  <div
+                    className="input__icon"
+                    onClick={onIconClick}
+                    style={{ cursor: onIconClick ? "pointer" : "default" }}
+                  >
+                    <Icon icon={icon} />
+                  </div>
+                )}
+              </>
             )}
           </div>
         </label>
