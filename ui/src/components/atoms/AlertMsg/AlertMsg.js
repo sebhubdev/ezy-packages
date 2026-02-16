@@ -1,3 +1,5 @@
+import "./AlertMsg.scss";
+
 import React from "react";
 
 const AlertMsg = ({ message, appareance }) => {

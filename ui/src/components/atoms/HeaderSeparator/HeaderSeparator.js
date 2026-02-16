@@ -1,3 +1,5 @@
+import "./HeaderSeparator.scss";
+
 import React from "react";
 
 const HeaderSeparator = () => {

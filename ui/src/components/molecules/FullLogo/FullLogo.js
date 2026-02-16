@@ -1,3 +1,5 @@
+import "./FullLogo.scss";
+
 import React from "react";
 import { LogoIcon, LogoTitle } from "@ezycore/ui/src/components/atoms/Logo";
 const FullLogo = () => {

@@ -1,3 +1,5 @@
+import "./Fields.scss";
+
 import TextField from "./TextField";
 import SearchField from "./SearchField";
 import PasswordField from "./PasswordField";

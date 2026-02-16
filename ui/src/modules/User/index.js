@@ -1,3 +1,5 @@
+import "./User.scss";
+
 import LoginForm from "./LoginForm";
 import PasswordRecover from "./PasswordRecover";
 import CreateAccountForm from "./CreateAccountForm";

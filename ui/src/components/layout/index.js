@@ -1,3 +1,5 @@
+import "./Layout.scss";
+
 import BaseLayout from "./BaseLayout/BaseLayout";
 import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
