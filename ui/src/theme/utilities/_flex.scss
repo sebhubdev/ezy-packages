@@ -1,5 +1,5 @@
-@use "@ezycore/ui/src/assets/styles/tokens/breakpoints" as *;
-@use "@ezycore/ui/src/assets/styles/tools/media" as *;
+@use "@ezycore/ui/src/theme/tokens/breakpoints" as *;
+@use "@ezycore/ui/src/theme/mixins/media" as *;
 
 /* =========================
    Flex Direction

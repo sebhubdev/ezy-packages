@@ -1,11 +1,11 @@
-@forward "@ezycore/ui/src/assets/styles/utilities/display";
-@forward "@ezycore/ui/src/assets/styles/utilities/flex";
-@forward "@ezycore/ui/src/assets/styles/utilities/gap";
-@forward "@ezycore/ui/src/assets/styles/utilities/spacing";
-@forward "@ezycore/ui/src/assets/styles/utilities/colors";
-@forward "@ezycore/ui/src/assets/styles/utilities/grid";
+@forward "./display";
+@forward "./flex";
+@forward "./gap";
+@forward "./spacing";
+@forward "./colors";
+@forward "./grid";
 
-@use "@ezycore/ui/src/assets/styles/tokens" as *;
+@use "@ezycore/ui/src/theme/tokens" as *;
 .header-separator {
   height: 6rem;
 }
