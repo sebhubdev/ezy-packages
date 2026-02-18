@@ -2,6 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import loadable from "@loadable/component";
 import Loading from "@ezycore/ui/src/components/molecules/Loading";
+import StatusLayout from "@ezycore/ui/src/layouts/errors/StatusLayout";
 
 const cache = new Map();
 
@@ -12,19 +13,29 @@ const getLoadable = (loader) => {
   return cache.get(loader);
 };
 
-const RouterCreator = ({ routes, pageData }) => (
-  <Routes>
-    {routes.map(({ path, component: loader }, key) => {
-      const Component = getLoadable(loader);
-      return (
-        <Route
-          key={key}
-          path={path}
-          element={<Component pageData={pageData} />}
-        />
-      );
-    })}
-  </Routes>
-);
+const RouterCreator = ({ routes, pageResponse }) => {
+  console.log("RouterCreator", pageResponse);
+  return (
+    <Routes>
+      {routes.map(({ path, component: loader }, key) => {
+        const Component = getLoadable(loader);
+        return (
+          <Route
+            key={key}
+            path={path}
+            element={
+              <StatusLayout
+                status={pageResponse.status}
+                error={pageResponse.error}
+              >
+                <Component data={pageResponse.data} />
+              </StatusLayout>
+            }
+          />
+        );
+      })}
+    </Routes>
+  );
+};
 
 export default RouterCreator;

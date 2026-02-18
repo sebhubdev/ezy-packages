@@ -1,6 +1,6 @@
-import menu from "@ezycore/runtime/src/fixtures/global/menu";
-import custom from "@ezycore/runtime/src/fixtures/global/custom";
-import local from "@ezycore/runtime/src/fixtures/global/local";
+import menu from "@ezycore/runtime/src/data/fakeData/global/menu";
+import custom from "@ezycore/runtime/src/data/fakeData/global/custom";
+import local from "@ezycore/runtime/src/data/fakeData/global/local";
 
 const getGlobalData = async (currentLang) => {
   const globalData = { menu, custom, local };

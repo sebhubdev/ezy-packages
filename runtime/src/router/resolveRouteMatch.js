@@ -1,6 +1,6 @@
 import { matchPath } from "react-router-dom";
 
-export default function resolveRequest(pathname, routes) {
+const resolveRouteMatch = (pathname, routes) => {
   if (!pathname || !Array.isArray(routes)) return null;
 
   const cleanPath = pathname !== "/" ? pathname.replace(/\/+$/, "") : "/";
@@ -14,4 +14,6 @@ export default function resolveRequest(pathname, routes) {
   }
 
   return null;
-}
+};
+
+export default resolveRouteMatch;
