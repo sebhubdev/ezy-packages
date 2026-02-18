@@ -145,4 +145,4 @@ const devServer = () => {
   });
 };
 
-module.exports = devServer;
+devServer();

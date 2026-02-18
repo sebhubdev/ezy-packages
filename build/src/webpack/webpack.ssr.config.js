@@ -7,13 +7,14 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const nodeExternals = require("webpack-node-externals");
 const alias = require("@root/configs/aliases");
 
+const isDev = process.env.NODE_ENV == "development";
+
 const serverConf = (mode) => {
-  console.log("the paaaaath", process.env.APP_PATH);
   return {
-    mode: "development",
+    mode: isDev ? "development" : "production",
     target: "node",
     devtool: "source-map",
-    entry: path.resolve(process.env.APP_PATH, "server", "ssr-server.js"),
+    entry: path.resolve(process.env.APP_PATH, "server", "server.js"),
     output: {
       filename: "server.js",
       path: path.resolve(process.env.APP_PATH, "build/server"),
@@ -88,7 +89,7 @@ const serverConf = (mode) => {
 
 const clientConf = (mode) => {
   return {
-    mode: "development",
+    mode: isDev ? "development" : "production",
     target: "web",
     devtool: "cheap-module-source-map",
     entry: path.resolve(process.env.APP_PATH, "src/client", "index.js"),
