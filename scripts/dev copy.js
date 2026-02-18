@@ -1,11 +1,9 @@
-require("module-alias/register");
 const concurrently = require("concurrently");
 const chalk = require("chalk");
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const dotenv = require("dotenv");
 const path = require("path");
-const highlightMessage = require("@ezycore/utils/src/highlightMessage");
 
 const appsDir = path.resolve(process.cwd(), "apps");
 const args = process.argv.slice(3);
@@ -24,25 +22,17 @@ const execute = async () => {
 
   projects.map(async (project) => {
     const appPath = path.resolve(process.cwd(), `apps/${project}`);
-    process.env.APP_PATH = appPath;
 
     if (fs.existsSync(`./apps/${project}`)) {
-      const configPath = path.join(appPath, "app.config.js");
+      const configPath = path.join(appPath, "src/app.config.js");
       if (!fs.existsSync(configPath)) {
-        highlightMessage("error", "No config file found");
+        console.log(chalk.bold.red("No config file found"));
         return;
       }
       const appConfig = require(configPath).default;
-      const appEnvPath = path.join(appPath, ".env");
-      const disableSSR = process.env.DISABLE_SSR === "true";
-
-      if (!fs.existsSync(appEnvPath)) {
-        highlightMessage("error", "No env file found");
-        return;
-      }
 
       dotenv.config({
-        path: appEnvPath,
+        path: path.join(appPath, ".env"),
         override: true,
       });
 
@@ -52,11 +42,9 @@ const execute = async () => {
 
       const command = {
         api: `cd apps/${project} && nodemon server.js`,
-        spa: `cd apps/${project} && NODE_ENV=development node server/hmr-server.js`,
-        ssr: `cross-env NODE_ENV=development node packages/runtime/src/commons/launch-ssr.js`,
+        spa: `cd apps/${project} && node server/dev-server.js --env production`,
+        ssr: `PROJECT=${project} node packages/runtime/src/ssr/createDevServer.js --env production`,
       }[projectType];
-
-      console.log(command);
 
       projectsToLaunch.push({
         command: command,
@@ -64,15 +52,46 @@ const execute = async () => {
         prefixColor: projectColor,
       });
     } else {
-      highlightMessage("error", `No project found for ${project}`);
+      await import("boxen").then((res) => {
+        const boxen = res.default;
+        const msg = `
+      ${chalk.bold.red(`No project found for ${project}`)}
+    `;
+
+        console.log(
+          boxen(msg, {
+            padding: 1,
+            margin: 1,
+            borderStyle: "double",
+            borderColor: "red",
+            title: "Ezy Core [ERROR]",
+            textAlign: "left",
+            textAlignment: "left",
+          }),
+        );
+      });
     }
   });
 
   if (projectsToLaunch.length) {
-    highlightMessage(
-      "success",
-      `Launching project${projects.length > 1 ? "s" : ""} ${projects}`,
-    );
+    await import("boxen").then((res) => {
+      const boxen = res.default;
+      const msg = `
+      ${chalk.bold.green(`Launching project${projects.length > 1 ? "s" : ""} ${projects}`)}
+    `;
+
+      console.log(
+        boxen(msg, {
+          padding: 1,
+          margin: 1,
+          borderStyle: "double",
+          borderColor: "greenBright",
+          title: "Ezy Core",
+          textAlign: "left",
+          textAlignment: "left",
+        }),
+      );
+    });
     concurrently(projectsToLaunch);
   }
 };

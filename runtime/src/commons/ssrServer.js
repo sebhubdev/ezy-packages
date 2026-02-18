@@ -2,17 +2,17 @@ import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import getGlobalData from "@ezycore/utils/src/getGlobalData";
-import makeApp from "./makeApp";
+import renderSsrApp from "./renderSsrApp";
 import path from "path";
 
-const prodServer = (App, port, routes) => {
+const ssrServer = (App, port, routes) => {
   dotenv.config();
   const app = express();
   app.use(cors());
   app.use(express.json());
   app.use(
     "/statics",
-    express.static(path.resolve(process.cwd(), "build/statics"))
+    express.static(path.resolve(process.env.APP_PATH, "build/client/statics")),
   );
 
   routes.map((route) => {
@@ -26,11 +26,15 @@ const prodServer = (App, port, routes) => {
       if (route.needRequest) {
         if (route.request) {
           await route
-            .request()
+            .request(params)
             .then((data) => {
-              initialData.pageData = data;
+              console.log(data);
+
+              // initialData.pageData = data;
             })
             .catch((err) => {
+              console.log(err);
+
               isError = true;
             });
         } else {
@@ -39,9 +43,10 @@ const prodServer = (App, port, routes) => {
         }
       }
 
-      if (isError) return;
-
-      const app = makeApp(App, initialData, req.url);
+      if (isError) {
+        return res.status(500).send("SSR error");
+      }
+      const app = renderSsrApp(App, initialData, req.url);
       res.send(app);
     });
   });
@@ -51,4 +56,4 @@ const prodServer = (App, port, routes) => {
   });
 };
 
-export default prodServer;
+export default ssrServer;

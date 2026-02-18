@@ -18,7 +18,7 @@ const doc = (initialData, appString, helmet, scriptTags) => {
       <meta name="theme-color" content="#f3c161">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <link rel="shortcut icon" href="/statics/img/favicon.png">
-      <link href="/statics/main.css" rel="stylesheet">
+      <link href="/statics/css/main.css" rel="stylesheet">
       ${helmet?.title.toString() || ""}
       ${helmet?.meta.toString() || ""}  
   </head>  
@@ -31,19 +31,19 @@ const doc = (initialData, appString, helmet, scriptTags) => {
 };
 
 const statsFile = path.resolve(
-  process.cwd(),
-  "build/statics/loadable-stats.json"
+  process.env.APP_PATH,
+  "build/client/loadable-stats.json",
 );
 
 const extractor = new ChunkExtractor({ statsFile });
 
-const makeApp = (App, initialData, location) => {
+const renderSsrApp = (App, initialData, location) => {
   const appString = renderToString(
     extractor.collectChunks(
       <StaticRouter location={location} context={initialData}>
         <App initialData={initialData} />
-      </StaticRouter>
-    )
+      </StaticRouter>,
+    ),
   );
 
   const scriptTags = extractor.getScriptTags();
@@ -53,4 +53,4 @@ const makeApp = (App, initialData, location) => {
   return html;
 };
 
-export default makeApp;
+export default renderSsrApp;

@@ -5,6 +5,8 @@ import { loadableReady } from "@loadable/component";
 
 const createRoot = (App, isSsr) => {
   if (!isSsr) {
+    console.log("aquii");
+
     const root = ReactDom.createRoot(document.getElementById("root"));
     root.render(
       <BrowserRouter>
@@ -12,6 +14,7 @@ const createRoot = (App, isSsr) => {
       </BrowserRouter>,
     );
   } else {
+    console.log("CLIENT ENTRY RUNNING", !!document.getElementById("root"));
     const initialData = window.__INITIAL_DATA__;
 
     delete window.__INITIAL_DATA__;

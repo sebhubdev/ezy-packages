@@ -1,3 +1,4 @@
+require("module-alias/register");
 const path = require("path");
 const express = require("express");
 const webpack = require("webpack");
@@ -5,24 +6,23 @@ const cors = require("cors");
 const HotModuleReplacementPlugin =
   require("webpack").HotModuleReplacementPlugin;
 const Dotenv = require("dotenv-webpack");
-require("dotenv").config({
-  path: path.resolve(process.cwd(), ".env"),
-});
 const alias = require("@root/configs/aliases");
 const { root } = require("@root/configs/paths");
+const appPath = process.env.APP_PATH;
+require("dotenv").config({
+  path: path.join(appPath, `.env`),
+});
 const launchProjectInNavigator =
   process.env.LAUNCH_PROJECT_IN_NAVIGATOR === "true" ?? false;
+const port = process.env.PORT ?? 3000;
 
-const hmrServer = (port, appName) => {
+const devServer = () => {
   const app = express();
   app.use(cors());
   app.use(express.json());
 
   const webpackCompiler = webpack({
-    entry: [
-      "webpack-hot-middleware/client",
-      `${root}/apps/${appName}/src/client/index.js`,
-    ],
+    entry: ["webpack-hot-middleware/client", `${appPath}/src/client/index.js`],
     mode: "development",
     devtool: "source-map",
     module: {
@@ -41,7 +41,7 @@ const hmrServer = (port, appName) => {
           ],
         },
         {
-          // exclude: /node_modules/,
+          exclude: "/packages/",
           test: /.js$/,
           use: {
             loader: "babel-loader",
@@ -94,7 +94,7 @@ const hmrServer = (port, appName) => {
     plugins: [
       new HotModuleReplacementPlugin(),
       new Dotenv({
-        path: path.resolve(process.cwd(), `.env`),
+        path: path.resolve(`${appPath}/.env`),
       }),
       new webpack.DefinePlugin({
         SSR_APP: false,
@@ -126,7 +126,13 @@ const hmrServer = (port, appName) => {
   app.use(webpackDevMiddleware(webpackCompiler));
   app.use(webpackHotMiddleware(webpackCompiler));
 
-  app.use("*", express.static(`${root}/apps/${appName}/server`));
+  app.use(express.static(`${appPath}/public`));
+
+  app.get("*", (req, res) => {
+    res.sendFile(
+      path.resolve(`${root}/packages/runtime/src/commons/index.html`),
+    );
+  });
 
   app.listen(port, async () => {
     console.log(`Started server on port "${port}".`);
@@ -139,4 +145,4 @@ const hmrServer = (port, appName) => {
   });
 };
 
-module.exports = hmrServer;
+module.exports = devServer;

@@ -7,13 +7,13 @@ import getGlobalData from "@ezycore/utils/src/getGlobalData";
 const useGetAppData = ({ initialData, routes, isSSR }) => {
   const [pageData, setPageData] = useState(isSSR ? initialData.pageData : null);
   const [globalData, setGlobalData] = useState(
-    isSSR ? initialData.globalData : null
+    isSSR ? initialData.globalData : null,
   );
 
   const [loading, setLoading] = useState(false);
   const [actualPath, setActualPath] = useState(null);
   const [currentLang, setCurrentLang] = useState(
-    isSSR ? initialData.lang : null
+    isSSR ? initialData.lang : null,
   );
 
   const { pathname } = useLocation();

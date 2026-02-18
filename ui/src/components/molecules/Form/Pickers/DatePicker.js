@@ -1,7 +1,7 @@
 import React, { useState, forwardRef } from "react";
 import ReactDatePicker, { registerLocale } from "react-datepicker";
 import fr from "date-fns/locale/fr";
-import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker.min.css";
 
 const DatePicker = forwardRef(
   (

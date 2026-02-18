@@ -4,18 +4,21 @@ const webpack = require("webpack");
 const Dotenv = require("dotenv-webpack");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const nodeExternals = require("webpack-node-externals");
 const alias = require("@root/configs/aliases");
 
 const serverConf = (mode) => {
+  console.log("the paaaaath", process.env.APP_PATH);
   return {
-    mode: mode,
+    mode: "development",
     target: "node",
-    entry: path.resolve(process.cwd(), "server", "prod-server.js"),
+    devtool: "source-map",
+    entry: path.resolve(process.env.APP_PATH, "server", "ssr-server.js"),
     output: {
       filename: "server.js",
-      path: path.resolve(process.cwd(), "build/"),
+      path: path.resolve(process.env.APP_PATH, "build/server"),
       publicPath: "/",
-      chunkFilename: "statics/[chunkhash].chunk.js",
+      chunkFilename: "statics/js/[chunkhash].chunk.js",
       clean: true,
     },
     optimization: { minimize: false },
@@ -39,22 +42,21 @@ const serverConf = (mode) => {
         { test: /\.(css|s[ac]ss)$/, loader: "null-loader" },
         {
           test: /\.(png|jpe?g|gif)$/i,
-          loader: "file-loader",
-          options: {
-            name: "img/[name].[ext]",
-            outputPath: "/statics/",
-            publicPath: "/statics/",
-          },
+          loader: "null-loader",
         },
         {
           test: /\.svg$/,
-          loader: "svg-inline-loader",
+          loader: "null-loader",
+        },
+        {
+          test: /\.(woff2?|eot|ttf|otf|txt)$/i,
+          loader: "null-loader",
         },
       ],
     },
     plugins: [
       new Dotenv({
-        path: path.resolve(process.cwd(), ".env"),
+        path: path.resolve(process.env.APP_PATH, ".env"),
       }),
       new webpack.DefinePlugin({
         SSR_APP: true,
@@ -86,14 +88,16 @@ const serverConf = (mode) => {
 
 const clientConf = (mode) => {
   return {
-    mode: mode,
+    mode: "development",
     target: "web",
-    entry: path.resolve(process.cwd(), "src/client", "index.js"),
+    devtool: "cheap-module-source-map",
+    entry: path.resolve(process.env.APP_PATH, "src/client", "index.js"),
     output: {
-      path: path.resolve(process.cwd(), "build/statics/"),
-      publicPath: "/statics/",
-      filename: "js/[name].[contenthash].js",
-      chunkFilename: "js/[name].[contenthash].chunk.js",
+      path: path.resolve(process.env.APP_PATH, "build/client"),
+      publicPath: "/",
+      filename: "statics/js/[name].[contenthash].js",
+      chunkFilename: "statics/js/[name].[contenthash].chunk.js",
+      clean: true,
     },
     optimization: {
       splitChunks: { chunks: "all" },
@@ -137,27 +141,29 @@ const clientConf = (mode) => {
           test: /\.(png|jpe?g|gif)$/i,
           loader: "file-loader",
           options: {
-            name: "img/[name].[ext]",
-            outputPath: "/statics/",
-            publicPath: "/statics/",
+            name: "statics/img/[name].[ext]",
+            publicPath: "/",
           },
         },
         {
-          test: /\.(woff2?|eot|ttf|otf)$/i,
+          test: /\.(woff2?|eot|ttf|otf|txt)$/i,
           type: "asset/resource",
-          generator: { filename: "fonts/[name][hash][ext][query]" },
+          generator: { filename: "statics/fonts/[name][hash][ext][query]" },
         },
       ],
     },
 
     plugins: [
       new Dotenv({
-        path: path.resolve(process.cwd(), ".env"),
+        path: path.resolve(process.env.APP_PATH, ".env"),
       }),
       new webpack.DefinePlugin({
         SSR_APP: true,
       }),
-      new MiniCssExtractPlugin({}),
+      new MiniCssExtractPlugin({
+        filename: "statics/css/[name].css",
+        chunkFilename: "statics/css/[name].chunk.css",
+      }),
       new LoadablePlugin(),
     ],
     resolve: {
