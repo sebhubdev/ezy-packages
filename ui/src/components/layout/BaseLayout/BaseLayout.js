@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect, useRef } from "react";
 import BackToTop from "@ezycore/ui/src/components/molecules/BackToTop";
 import CookiesBanner from "@ezycore/ui/src/components/organisms/CookiesBanner";
 import Header from "@ezycore/ui/src/components/layout/Header/Header";
@@ -14,7 +14,6 @@ const BaseLayout = ({
   setUserData,
   globalData,
   layoutData,
-  layoutRef,
   children,
   loading,
 }) => {
@@ -23,6 +22,8 @@ const BaseLayout = ({
 
   const [layoutScroll, setLayoutScroll] = useState(0);
   const [isBackToTopVisible, setIsBackToTopVisible] = useState(false);
+
+  const layoutRef = useRef(null);
 
   const handleScroll = () => {
     const scroll = layoutRef.current.scrollTop;
