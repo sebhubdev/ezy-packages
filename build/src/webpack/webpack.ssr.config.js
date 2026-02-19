@@ -47,7 +47,7 @@ const serverConf = (mode) => {
         },
         {
           test: /\.svg$/,
-          loader: "null-loader",
+          loader: "svg-inline-loader",
         },
         {
           test: /\.(woff2?|eot|ttf|otf|txt)$/i,
@@ -61,6 +61,10 @@ const serverConf = (mode) => {
       }),
       new webpack.DefinePlugin({
         SSR_APP: true,
+        IS_SSR: JSON.stringify(true),
+        IS_BROWSER: JSON.stringify(false),
+        IS_DEV: JSON.stringify(process.env.NODE_ENV !== "production"),
+        APP_PATH: JSON.stringify(process.env.APP_PATH),
       }),
     ],
     externals: {
@@ -160,6 +164,10 @@ const clientConf = (mode) => {
       }),
       new webpack.DefinePlugin({
         SSR_APP: true,
+        IS_SSR: JSON.stringify(false),
+        IS_BROWSER: JSON.stringify(true),
+        IS_DEV: JSON.stringify(process.env.NODE_ENV !== "production"),
+        APP_PATH: JSON.stringify(process.env.APP_PATH),
       }),
       new MiniCssExtractPlugin({
         filename: "statics/css/[name].css",

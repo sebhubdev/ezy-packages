@@ -13,6 +13,7 @@ module.exports = {
       const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
       req.loggedUserId = decoded.string;
     } catch (err) {
+      console.log(error);
       return res.status(401).send({ error: "Invalid Token" });
     }
     return next();

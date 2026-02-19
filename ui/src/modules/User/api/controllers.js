@@ -13,6 +13,7 @@ module.exports = {
 
       res.json(user);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: "Error al obtener el usuario", error });
     }
   },
@@ -42,6 +43,7 @@ module.exports = {
       res.json({ message: 'Loged !!', user ,token: `${token}`,});
 
     } catch (error) {
+      console.log(error);
       res.status(500).json({ message: 'Login error', error });
     }
 

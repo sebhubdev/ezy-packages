@@ -8,17 +8,17 @@ const cache = new Map();
 
 const getLoadable = (loader) => {
   if (!cache.has(loader)) {
-    cache.set(loader, loadable(loader, { fallback: <Loading /> }));
+    cache.set(loader, loader);
   }
   return cache.get(loader);
 };
 
 const RouterCreator = ({ routes, pageResponse }) => {
-  console.log("RouterCreator", pageResponse);
   return (
     <Routes>
       {routes.map(({ path, component: loader }, key) => {
         const Component = getLoadable(loader);
+
         return (
           <Route
             key={key}
@@ -34,6 +34,14 @@ const RouterCreator = ({ routes, pageResponse }) => {
           />
         );
       })}
+      <Route
+        path={"*"}
+        element={
+          <StatusLayout status={pageResponse.status} error={pageResponse.error}>
+            one
+          </StatusLayout>
+        }
+      />
     </Routes>
   );
 };

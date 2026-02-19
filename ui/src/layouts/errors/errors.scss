@@ -1,0 +1,17 @@
+.error-layout {
+  height: 100%;
+  position: relative;
+  margin-top: 50px;
+
+  &__inner {
+  }
+
+  &__image {
+    max-width: 600px;
+  }
+
+  &__message {
+    margin-top: 2rem;
+    text-align: center;
+  }
+}

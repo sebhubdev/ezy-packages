@@ -1,11 +1,10 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import getGlobalData from "@ezycore/utils/src/getGlobalData";
 import renderSsrApp from "./renderSsrApp";
 import path from "path";
 
-const ssrServer = (App, port, routes) => {
+const ssrServer = (App, port, routes, globalLoader) => {
   dotenv.config();
   const app = express();
   app.use(cors());
@@ -20,35 +19,54 @@ const ssrServer = (App, port, routes) => {
       let isError = false;
       const params = req.params;
       const initialData = {};
-      initialData.globalData = await getGlobalData();
-      initialData.pageData = {};
+      initialData.globalResponse = await globalLoader();
+      initialData.path = req.originalUrl;
 
-      if (route.needRequest) {
-        if (route.request) {
-          await route
-            .request(params)
-            .then((data) => {
-              console.log(data);
+      let errors = false;
 
-              // initialData.pageData = data;
-            })
-            .catch((err) => {
-              console.log(err);
-
-              isError = true;
-            });
-        } else {
-          res.redirect(`/not-found/`);
-          isError = true;
-        }
+      if (!route.loader) {
+        initialData.pageResponse = {
+          data: null,
+          status: 200,
+          error: null,
+        };
       }
 
-      if (isError) {
-        return res.status(500).send("SSR error");
+      console.log("inserver',params", params);
+      console.log("inserver',params", req.originalUrl);
+
+      if (route.loader) {
+        await route
+          .loader({ params })
+          .then((data) => {
+            initialData.pageResponse = data;
+          })
+          .catch((error) => {
+            console.log("hererere");
+
+            initialData.pageResponse = {
+              data: null,
+              status: error.response.status,
+              error: error.response.data,
+            };
+          });
       }
       const app = renderSsrApp(App, initialData, req.url);
       res.send(app);
     });
+  });
+
+  app.use("*", async (req, res) => {
+    const initialData = {};
+    initialData.pageResponse = {
+      data: null,
+      status: 404,
+      error: "Page not found",
+    };
+    initialData.globalResponse = await globalLoader();
+    initialData.path = req.originalUrl;
+    const app = renderSsrApp(App, initialData, req.url);
+    res.send(app);
   });
 
   app.listen(port, () => {

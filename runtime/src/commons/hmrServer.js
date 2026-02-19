@@ -98,6 +98,10 @@ const devServer = () => {
       }),
       new webpack.DefinePlugin({
         SSR_APP: false,
+        IS_SSR: JSON.stringify(false),
+        IS_BROWSER: JSON.stringify(true),
+        IS_DEV: JSON.stringify(process.env.NODE_ENV !== "production"),
+        APP_PATH: JSON.stringify(process.env.APP_PATH),
       }),
     ],
     resolve: {

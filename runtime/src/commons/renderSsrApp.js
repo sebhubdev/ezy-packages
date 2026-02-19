@@ -4,6 +4,7 @@ import { StaticRouter } from "react-router-dom/server";
 import { ChunkExtractor } from "@loadable/server";
 import createHtmlDoc from "./createHtmlDoc";
 import path from "path";
+import prettyHtml from "@ezycore/utils/src/prettyHtml";
 
 const renderSsrApp = (App, initialData, location) => {
   const statsFile = path.resolve(
@@ -25,7 +26,10 @@ const renderSsrApp = (App, initialData, location) => {
     styleTags: extractor.getStyleTags(),
   };
 
-  const html = createHtmlDoc(initialData, appString, assets);
+  let html = createHtmlDoc(initialData, appString, assets);
+  if (IS_DEV) {
+    // html = prettyHtml(html);
+  }
   return html;
 };
 
