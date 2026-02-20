@@ -7,8 +7,30 @@
     border-left: none;
     border-right: none;
     color: var(--color-primary);
-    font-weight: 600;
     background-color: var(--color-quaternary);
+    font-weight: 600;
     font-size: 1.2rem;
+  }
+
+  .alert {
+    &-info {
+      border-color: var(--color-info);
+      background-color: var(--color-info-light);
+    }
+
+    &-warning {
+      border-color: var(--color-warning);
+      background-color: var(--color-warning-light);
+    }
+
+    &-danger {
+      border-color: var(--color-danger);
+      background-color: var(--color-danger-light);
+    }
+
+    &-success {
+      border-color: var(--color-success);
+      background-color: var(--color-success-light);
+    }
   }
 }

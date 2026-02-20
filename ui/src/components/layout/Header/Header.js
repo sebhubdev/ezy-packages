@@ -14,7 +14,7 @@ import logo from "@ezycore/ui/src/assets/img/logo-sample.png";
 import { UserContext } from "@ezycore/ui/src/modules/User/UserProvider";
 import ShortAccount from "@ezycore/ui/src/modules/User/ShortAccount";
 
-const Header = ({ nav, userData, setUserData, loginHandler }) => {
+const Header = ({ nav, userData, setUserData }) => {
   const [isNavOpen, setisNavOpen] = React.useState(false);
   const [showSearch, setShowSearch] = React.useState(false);
   const [isSmall, setIsSmall] = React.useState(false);
@@ -56,13 +56,6 @@ const Header = ({ nav, userData, setUserData, loginHandler }) => {
   const openSearch = (e) => {
     e.stopPropagation();
     setShowSearch(!showSearch);
-  };
-
-  const onLogin = (data) => {
-    setShowLoginSteps(false);
-    setTimeout(() => {
-      setUserData(data);
-    }, 300);
   };
 
   const testNav = [

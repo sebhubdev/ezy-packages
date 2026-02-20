@@ -3,7 +3,7 @@ import ReactDom from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { loadableReady } from "@loadable/component";
 
-const createRoot = (App, SSR_DISABLED) => {
+const createRoot = (App) => {
   if (SSR_DISABLED) {
     const root = ReactDom.createRoot(document.getElementById("root"));
     root.render(
@@ -12,9 +12,10 @@ const createRoot = (App, SSR_DISABLED) => {
       </BrowserRouter>,
     );
   } else {
-    const initialData = window.__INITIAL_DATA__;
-
-    delete window.__INITIAL_DATA__;
+    const dataContainer = document.getElementById("__EZY_SSR_DATA__");
+    const initialData = dataContainer
+      ? JSON.parse(dataContainer.textContent)
+      : null;
 
     loadableReady(() => {
       ReactDom.hydrateRoot(

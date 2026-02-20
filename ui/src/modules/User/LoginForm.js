@@ -11,14 +11,16 @@ import Form from "@ezycore/ui/src/components/molecules/Form/Form";
 
 const LoginForm = ({ setStep, onLogin = () => {} }) => {
   const [loading, setLoading] = React.useState(false);
-  const [error, setError] = React.useState(null);
+  const [message, setMessage] = React.useState(null);
 
   const { login } = useContext(UserContext);
 
   const form = React.useRef(null);
 
   const loginHandler = (data) => {
-    login(data, () => {
+    login(data, (res) => {
+      setMessage(res);
+
       onLogin();
     });
   };
@@ -31,15 +33,7 @@ const LoginForm = ({ setStep, onLogin = () => {} }) => {
             Log in
           </Heading>
           <div className="login-form__fields">
-            {error && error?.response?.data?.message && (
-              <>
-                <AlertMsg
-                  appareance="danger"
-                  message={error.response.data.message}
-                />
-              </>
-            )}
-            <Form onSubmit={loginHandler}>
+            <Form onSubmit={loginHandler} messages={message}>
               {({ register }) => (
                 <>
                   <div className="row gap-4">

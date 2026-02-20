@@ -5,6 +5,12 @@ const createHtmlDoc = (initialData, appString, assets) => {
   const { scriptTags = "", linkTags = "", styleTags = "" } = assets || {};
   const helmet = Helmet.renderStatic();
   const lang = "fr";
+
+  const json = JSON.stringify(initialData)
+    .replace(/</g, "\\u003c")
+    .replace(/>/g, "\\u003e")
+    .replace(/&/g, "\\u0026");
+
   return `
     <!DOCTYPE html>
     <html lang="${lang}">  
@@ -24,7 +30,9 @@ const createHtmlDoc = (initialData, appString, assets) => {
                 ${styleTags}
         </head>  
         <body>
-                <script>window.__INITIAL_DATA__ = ${serialize(initialData)}</script>
+                <script type="application/json" id="__EZY_SSR_DATA__">
+                    ${json}
+                </script>
                 <div id="root">${appString}</div>
                 ${scriptTags}
         </body>

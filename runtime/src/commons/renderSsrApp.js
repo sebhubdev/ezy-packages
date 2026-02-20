@@ -27,8 +27,8 @@ const renderSsrApp = (App, initialData, location) => {
   };
 
   let html = createHtmlDoc(initialData, appString, assets);
-  if (IS_DEV) {
-    // html = prettyHtml(html);
+  if (IS_DEV && process.env.PRETTY_HTML == "true") {
+    html = prettyHtml(html);
   }
   return html;
 };

@@ -1,7 +1,11 @@
 import React, { useRef } from "react";
+import AlertMsg from "@ezycore/ui/src/components/atoms/AlertMsg/AlertMsg";
+import toArray from "@ezycore/utils/src/toArray";
 
-const Form = ({ onSubmit, children, ...rest }) => {
+const Form = ({ onSubmit, children, messages = [], ...rest }) => {
   const validators = useRef([]);
+
+  const messagesArray = toArray(messages);
 
   const register = (validateFn) => {
     validators.current.push(validateFn);
@@ -19,11 +23,30 @@ const Form = ({ onSubmit, children, ...rest }) => {
 
     const hasErrors = results.some((r) => r === false);
 
-    onSubmit(hasErrors ? { error: "error" } : formData);
+    if (hasErrors) return;
+
+    onSubmit(formData);
   };
   const formRef = React.useRef(null);
   return (
     <div className="form" {...rest}>
+      {messagesArray.length ? (
+        <div className="form-messages mb-4">
+          {messagesArray.map((msg, key) => {
+            const variant =
+              msg?.status >= 500
+                ? "danger"
+                : msg?.status > 200
+                  ? "warning"
+                  : "success";
+
+            return (
+              <AlertMsg key={key} message={msg.message} variant={variant} />
+            );
+          })}
+        </div>
+      ) : null}
+
       <form ref={formRef} onSubmit={handleSubmit}>
         {typeof children === "function" ? children({ register }) : children}
       </form>

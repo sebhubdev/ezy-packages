@@ -17,18 +17,15 @@ const UserProvider = ({ children, authLoader, user }) => {
       const loggedUser = res.user;
       console.log("loggedUser", res.user);
       if (!loggedUser) return { ok: false, error: "NO_USER" };
+      cb({ status: 200, message: "Logged !!" });
       setUserData(loggedUser);
       setLoadingUser(false);
-      cb();
-    } catch (err) {
-      console.log("in error", err);
-      return {
-        ok: false,
-        error: err?.response?.data ?? {
-          message: err?.message ?? "Login failed",
-        },
-        status: err?.response?.status ?? 500,
-      };
+    } catch (error) {
+      console.log(error.response);
+      cb({
+        message: error.response.data.message,
+        status: error.response.status,
+      });
     }
   };
 
@@ -37,7 +34,7 @@ const UserProvider = ({ children, authLoader, user }) => {
       const res = await authLoader.logout();
       setUserData(null);
     } catch (err) {
-      console.log("in error", err);
+      console.log(err);
     }
   };
 

@@ -7,30 +7,10 @@ import {
 import { Btn } from "@ezycore/ui/src/components/atoms/Btn";
 import Form from "@ezycore/ui/src/components/molecules/Form/Form";
 
-const CreateAccountForm = ({ setStep, onLogin }) => {
+const CreateAccountForm = ({ setStep }) => {
   const [loading, setLoading] = React.useState(false);
 
-  const createAccountHandler = (e) => {
-    return;
-    e.preventDefault();
-    setLoading(true);
-    const data = new FormData(form.current);
-    usersDataService
-      .createAccount(data)
-      .then((res) => {
-        const data = res?.data.userData;
-        const token = res.data.token;
-        http.defaults.headers.common["Authorization"] = token;
-        if (typeof document != "undefined") {
-          localStorage?.setItem("token", JSON.stringify(token));
-        }
-        onLogin(data);
-      })
-      .catch((err) => {
-        console.log(err);
-        setLoading(false);
-      });
-  };
+  const createAccountHandler = (e) => {};
 
   return (
     <>

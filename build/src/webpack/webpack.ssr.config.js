@@ -64,6 +64,7 @@ const serverConf = (mode) => {
         path: path.resolve(process.env.APP_PATH, ".env"),
       }),
       new webpack.DefinePlugin({
+        SSR_DISABLED: false,
         IS_SSR: JSON.stringify(true),
         IS_BROWSER: JSON.stringify(false),
         IS_DEV: JSON.stringify(process.env.NODE_ENV !== "production"),
@@ -166,6 +167,7 @@ const clientConf = (mode) => {
         path: path.resolve(process.env.APP_PATH, ".env"),
       }),
       new webpack.DefinePlugin({
+        SSR_DISABLED: false,
         SSR_APP: true,
         IS_SSR: JSON.stringify(false),
         IS_BROWSER: JSON.stringify(true),
