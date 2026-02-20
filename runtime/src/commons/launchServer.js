@@ -81,7 +81,7 @@ const hmrWatcher = () => {
   });
 };
 
-if (process.env.DISABLE_SSR == "true") {
+if (process.env.SSR_DISABLED == "true") {
   hmrWatcher();
 } else {
   ssrWatcher();

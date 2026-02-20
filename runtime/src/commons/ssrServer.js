@@ -3,8 +3,11 @@ import cors from "cors";
 import dotenv from "dotenv";
 import renderSsrApp from "./renderSsrApp";
 import path from "path";
+import cookieParser from "cookie-parser";
 
 const ssrServer = (App, port, routes, globalLoader) => {
+  console.log("in server ssr ", process.env.API_SERVER);
+
   dotenv.config();
   const app = express();
   app.use(cors());
@@ -14,12 +17,14 @@ const ssrServer = (App, port, routes, globalLoader) => {
     express.static(path.resolve(process.env.APP_PATH, "build/client/statics")),
   );
 
+  app.use(cookieParser());
+
   routes.map((route) => {
     app.get(route.path, async (req, res) => {
       let isError = false;
       const params = req.params;
       const initialData = {};
-      initialData.globalResponse = await globalLoader();
+      initialData.globalResponse = await globalLoader({ req });
       initialData.path = req.originalUrl;
 
       let errors = false;
@@ -31,9 +36,6 @@ const ssrServer = (App, port, routes, globalLoader) => {
           error: null,
         };
       }
-
-      console.log("inserver',params", params);
-      console.log("inserver',params", req.originalUrl);
 
       if (route.loader) {
         await route
@@ -63,7 +65,7 @@ const ssrServer = (App, port, routes, globalLoader) => {
       status: 404,
       error: "Page not found",
     };
-    initialData.globalResponse = await globalLoader();
+    initialData.globalResponse = await globalLoader({ req });
     initialData.path = req.originalUrl;
     const app = renderSsrApp(App, initialData, req.url);
     res.send(app);

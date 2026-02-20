@@ -8,6 +8,7 @@ const HotModuleReplacementPlugin =
 const Dotenv = require("dotenv-webpack");
 const alias = require("@root/configs/aliases");
 const { root } = require("@root/configs/paths");
+const cookieParser = require("cookie-parser");
 const appPath = process.env.APP_PATH;
 require("dotenv").config({
   path: path.join(appPath, `.env`),
@@ -20,6 +21,8 @@ const devServer = () => {
   const app = express();
   app.use(cors());
   app.use(express.json());
+
+  app.use(cookieParser());
 
   const webpackCompiler = webpack({
     entry: ["webpack-hot-middleware/client", `${appPath}/src/client/index.js`],
@@ -97,7 +100,7 @@ const devServer = () => {
         path: path.resolve(`${appPath}/.env`),
       }),
       new webpack.DefinePlugin({
-        SSR_APP: false,
+        SSR_DISABLED: true,
         IS_SSR: JSON.stringify(false),
         IS_BROWSER: JSON.stringify(true),
         IS_DEV: JSON.stringify(process.env.NODE_ENV !== "production"),

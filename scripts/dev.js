@@ -34,7 +34,6 @@ const execute = async () => {
       }
       const appConfig = require(configPath).default;
       const appEnvPath = path.join(appPath, ".env");
-      const disableSSR = process.env.DISABLE_SSR === "true";
 
       if (!fs.existsSync(appEnvPath)) {
         highlightMessage("error", "No env file found");

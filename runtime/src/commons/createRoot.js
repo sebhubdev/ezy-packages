@@ -3,8 +3,8 @@ import ReactDom from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import { loadableReady } from "@loadable/component";
 
-const createRoot = (App, isSsr) => {
-  if (!isSsr) {
+const createRoot = (App, SSR_DISABLED) => {
+  if (SSR_DISABLED) {
     const root = ReactDom.createRoot(document.getElementById("root"));
     root.render(
       <BrowserRouter>

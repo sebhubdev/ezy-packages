@@ -9,7 +9,7 @@ import AlertMsg from "@ezycore/ui/src/components/atoms/AlertMsg/AlertMsg";
 import { UserContext } from "./UserProvider";
 import Form from "@ezycore/ui/src/components/molecules/Form/Form";
 
-const LoginForm = ({ setStep, onLogin }) => {
+const LoginForm = ({ setStep, onLogin = () => {} }) => {
   const [loading, setLoading] = React.useState(false);
   const [error, setError] = React.useState(null);
 

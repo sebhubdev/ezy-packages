@@ -10,58 +10,70 @@ const makeResponse = (data = null) => ({
   loading: false,
 });
 
-const useGetAppData = ({ initialData, routes, isSSR, globalLoader }) => {
+const useGetAppData = ({ initialData, routes, globalLoader }) => {
+  console.log("SSR_DISABLED", SSR_DISABLED);
+
   const firstHydrateSkipped = useRef(false);
   const { pathname } = useLocation();
   const [loading, setLoading] = useState(false);
   const [globalResponse, setGlobalResponse] = useState(
-    isSSR ? initialData?.globalResponse : makeResponse(),
+    !SSR_DISABLED ? initialData?.globalResponse : makeResponse(),
   );
 
   const [pageResponse, setPageResponse] = useState(
-    isSSR ? initialData?.pageResponse : makeResponse(),
+    !SSR_DISABLED ? initialData?.pageResponse : makeResponse(),
   );
 
-  const [currentPath, setCurrentPath] = useState(null);
+  const lastPathRef = useRef(null);
 
   const route = useMemo(
     () => resolveRouteMatch(pathname, routes),
-    [pathname, routes, currentPath],
+    [pathname, routes],
   );
 
   const match = useMatch(route?.path || "/__no_match__");
   const params = match?.params;
 
+  console.log("in get appdata end ");
+
   useEffect(() => {
-    if (isSSR) return;
+    console.log("in effect global 1");
+
+    if (!SSR_DISABLED || globalResponse.data) return;
 
     setGlobalResponse((prev) => ({ ...prev, loading: true, error: null }));
+    console.log("in effect global 2");
 
     (async () => {
       try {
         const data = await globalLoader();
 
         setGlobalResponse({ ...data, loading: false });
+        console.log("in effect global 3");
       } catch (error) {
         console.log(error);
         setGlobalResponse({ data: null, status: 500, error, loading: false });
+        console.log("in effect global 4");
       }
     })();
-  }, [isSSR]);
+  }, []);
 
   useEffect(() => {
-    setCurrentPath(pathname);
+    console.log("iin effect page 1");
+    if (lastPathRef.current === pathname) return;
+    lastPathRef.current = pathname;
     if (initialData?.path === pathname && !firstHydrateSkipped.current) {
       firstHydrateSkipped.current = true;
       setLoading(false);
       return;
     }
-    if (currentPath === pathname) return;
     setLoading(true);
+    console.log("iin effect page 2");
 
     if (globalResponse.loading) return;
 
     setPageResponse((prev) => ({ ...prev, loading: true, error: null }));
+    console.log("iin effect page 3");
 
     (async () => {
       if (!route) {
@@ -74,6 +86,7 @@ const useGetAppData = ({ initialData, routes, isSSR, globalLoader }) => {
         setLoading(false);
         return;
       }
+      console.log("iin effect page 4");
 
       if (!route.loader) {
         setPageResponse({
@@ -86,30 +99,33 @@ const useGetAppData = ({ initialData, routes, isSSR, globalLoader }) => {
         return;
       }
 
+      console.log("iin effect page 5");
       try {
         const result = await route.loader({
           params,
-          globalData: globalResponse.data,
         });
 
         setPageResponse({ ...result, loading: false });
         setLoading(false);
+        console.log("iin effect page 6");
       } catch (error) {
         console.log(error);
         setPageResponse({ data: null, status: 500, error, loading: false });
         setLoading(false);
+        console.log("iin effect page 7");
       }
     })();
   }, [pathname, route, params, globalResponse.data, globalResponse.loading]);
 
+  console.log("in get appdata end ");
   return {
     globalResponse,
     pageResponse,
-    currentPath,
+    lastPath: lastPathRef.current,
     pathname,
     route,
     params,
-    loading,
+    loading: loading || lastPathRef.current !== pathname,
   };
 };
 

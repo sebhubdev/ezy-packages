@@ -1,48 +1,43 @@
-import React, { createContext } from "react";
+import React, { createContext, useEffect } from "react";
 
 const UserContext = createContext();
 
-const UserProvider = ({ children, userService, http }) => {
-  const [userData, setUserData] = React.useState(null);
+const UserProvider = ({ children, authLoader, user }) => {
+  const [userData, setUserData] = React.useState(user);
   const [loadingUser, setLoadingUser] = React.useState(true);
 
-  const getCurrentUser = async () => {
-    const token = localStorage?.token && JSON.parse(localStorage?.token);
+  useEffect(() => {
+    setUserData(user);
+  }, [user]);
 
-    if (token) {
-      try {
-        const res = await userService.me();
-        setUserData(res.data);
-      } catch (err) {
-        console.log(err.response?.data?.error);
-        setUserData(null);
-      }
-    }
-
-    setLoadingUser(false);
-  };
-
-  React.useEffect(() => {
-    getCurrentUser();
-  }, []);
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    setUserData(null);
-  };
-
-  const login = async (data, cb = () => {}) => {
+  const login = async (creadentials, cb = () => {}) => {
     try {
-      const res = await userService.login(data);
-      const { user: loggedUser, token } = res.data;
-      if (!loggedUser || !token) return;
+      const res = await authLoader.login(creadentials);
 
-      http.defaults.headers.common["Authorization"] = `${token}`;
-      localStorage?.setItem("token", JSON.stringify(token));
+      const loggedUser = res.user;
+      console.log("loggedUser", res.user);
+      if (!loggedUser) return { ok: false, error: "NO_USER" };
       setUserData(loggedUser);
+      setLoadingUser(false);
       cb();
     } catch (err) {
-      console.log(err);
+      console.log("in error", err);
+      return {
+        ok: false,
+        error: err?.response?.data ?? {
+          message: err?.message ?? "Login failed",
+        },
+        status: err?.response?.status ?? 500,
+      };
+    }
+  };
+
+  const logout = async () => {
+    try {
+      const res = await authLoader.logout();
+      setUserData(null);
+    } catch (err) {
+      console.log("in error", err);
     }
   };
 

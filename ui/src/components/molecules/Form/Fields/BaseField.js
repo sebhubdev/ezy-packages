@@ -23,8 +23,6 @@ const BaseField = ({
   const ref = React.useRef(null);
 
   const runValidation = () => {
-    console.log(ref.current.value);
-
     if (!required) return true;
     if (!ref.current.value) {
       setError(requireDefaultMessage);

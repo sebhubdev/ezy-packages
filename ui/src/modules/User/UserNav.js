@@ -4,9 +4,7 @@ import { Btn } from "@ezycore/ui/src/components/atoms/Btn/";
 import { UserContext } from "./UserProvider";
 
 const UserNav = ({ setIsOpen }) => {
-  const { userData: user, logout } = useContext(UserContext);
-
-  console.log(user);
+  const { userData, logout } = useContext(UserContext);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -20,7 +18,7 @@ const UserNav = ({ setIsOpen }) => {
           ddd
         </div>
         <h3 className="user-nav__title color-primary mb-4 h1">
-          Bonjour <strong>{user.username}</strong>
+          Bonjour <strong>{userData.firstName}</strong>
         </h3>
         <nav className="user-nav__items">
           <ul>

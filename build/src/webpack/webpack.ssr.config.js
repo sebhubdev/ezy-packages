@@ -43,7 +43,11 @@ const serverConf = (mode) => {
         { test: /\.(css|s[ac]ss)$/, loader: "null-loader" },
         {
           test: /\.(png|jpe?g|gif)$/i,
-          loader: "null-loader",
+          loader: "file-loader",
+          options: {
+            name: "statics/img/[name].[ext]",
+            publicPath: "/",
+          },
         },
         {
           test: /\.svg$/,
@@ -60,7 +64,6 @@ const serverConf = (mode) => {
         path: path.resolve(process.env.APP_PATH, ".env"),
       }),
       new webpack.DefinePlugin({
-        SSR_APP: true,
         IS_SSR: JSON.stringify(true),
         IS_BROWSER: JSON.stringify(false),
         IS_DEV: JSON.stringify(process.env.NODE_ENV !== "production"),

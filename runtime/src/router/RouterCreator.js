@@ -37,9 +37,10 @@ const RouterCreator = ({ routes, pageResponse }) => {
       <Route
         path={"*"}
         element={
-          <StatusLayout status={pageResponse.status} error={pageResponse.error}>
-            one
-          </StatusLayout>
+          <StatusLayout
+            status={pageResponse.status}
+            error={pageResponse.error}
+          />
         }
       />
     </Routes>

@@ -9,8 +9,6 @@ import { Btn } from "@ezycore/ui/src/components/atoms/Btn";
 const LoginSteps = ({ onLogin }) => {
   const [step, setStep] = React.useState("LOGIN");
 
-  console.log(onLogin);
-
   return (
     <>
       {step && step === "LOGIN" ? (
