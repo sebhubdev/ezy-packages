@@ -2,6 +2,8 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useMatch } from "react-router-dom";
 import resolveRouteMatch from "@ezycore/runtime/src/router/resolveRouteMatch";
+import normalizeError from "@ezycore/runtime/src/errors/normalizeError";
+import resolveRequest from "@ezycore/runtime/src/requests/resolveRequest";
 
 const makeResponse = (data = null) => ({
   data,
@@ -91,11 +93,13 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
           params,
         });
 
+        console.log(result);
+
         setPageResponse({ ...result, loading: false });
         setLoading(false);
       } catch (error) {
-        console.log(error);
-        setPageResponse({ data: null, status: 500, error, loading: false });
+        console.log(normalizeError(error));
+        setPageResponse({ ...normalizeError(error), loading: false });
         setLoading(false);
       }
     })();

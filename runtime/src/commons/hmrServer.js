@@ -27,7 +27,7 @@ const devServer = () => {
   const webpackCompiler = webpack({
     entry: ["webpack-hot-middleware/client", `${appPath}/src/client/index.js`],
     mode: "development",
-    devtool: "source-map",
+    devtool: "cheap-module-source-map",
     module: {
       rules: [
         {
@@ -37,18 +37,20 @@ const devServer = () => {
             {
               loader: "ts-loader",
               options: {
-                transpileOnly: true, // rápido
-                compilerOptions: { noEmit: false }, // override al tsconfig
+                transpileOnly: true,
+                compilerOptions: { noEmit: false },
               },
             },
           ],
         },
         {
-          exclude: "/packages/",
-          test: /.js$/,
+          test: /\.jsx?$/,
+          exclude: /node_modules/,
           use: {
             loader: "babel-loader",
             options: {
+              sourceMaps: true,
+              inputSourceMap: true,
               plugins: ["@babel/plugin-proposal-class-properties"],
               presets: ["@babel/preset-react", "@babel/preset-env"],
             },
@@ -132,7 +134,7 @@ const devServer = () => {
   const webpackDevMiddleware = require("webpack-dev-middleware");
   const webpackHotMiddleware = require("webpack-hot-middleware");
 
-  app.use(webpackDevMiddleware(webpackCompiler));
+  app.use(webpackDevMiddleware(webpackCompiler, { publicPath: "/" }));
   app.use(webpackHotMiddleware(webpackCompiler));
 
   app.use(express.static(`${appPath}/public`));

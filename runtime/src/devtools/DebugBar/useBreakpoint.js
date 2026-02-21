@@ -45,7 +45,6 @@ const useBreakpoint = () => {
 
     window.addEventListener("resize", onResize, { passive: true });
     return () => {
-      cancelAnimationFrame(raf);
       window.removeEventListener("resize", onResize);
     };
   }, [isBrowser]);
