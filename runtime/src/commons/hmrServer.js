@@ -6,8 +6,8 @@ const cors = require("cors");
 const HotModuleReplacementPlugin =
   require("webpack").HotModuleReplacementPlugin;
 const Dotenv = require("dotenv-webpack");
-const alias = require("@root/configs/aliases");
-const { root } = require("@root/configs/paths");
+const alias = require("@ezycore/build/src/aliases");
+const { root } = require("@ezycore/build/src/paths");
 const cookieParser = require("cookie-parser");
 const appPath = process.env.APP_PATH;
 require("dotenv").config({
@@ -100,6 +100,8 @@ const devServer = () => {
         path: path.resolve(`${appPath}/.env`),
       }),
       new webpack.DefinePlugin({
+        APP_TYPE: JSON.stringify(process.env.APP_TYPE),
+        APP_NAME: JSON.stringify(process.env.APP_NAME),
         SSR_DISABLED: true,
         IS_SSR: JSON.stringify(false),
         IS_BROWSER: JSON.stringify(true),

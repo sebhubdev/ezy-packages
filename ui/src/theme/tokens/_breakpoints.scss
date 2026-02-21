@@ -16,3 +16,9 @@ $breakpoints: (
   xl: $xl,
   xxl: $xxl,
 );
+
+:root {
+  @each $name, $value in $breakpoints {
+    --bp-#{$name}: #{$value};
+  }
+}

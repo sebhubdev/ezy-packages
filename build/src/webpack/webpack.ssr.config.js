@@ -5,7 +5,7 @@ const Dotenv = require("dotenv-webpack");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const nodeExternals = require("webpack-node-externals");
-const alias = require("@root/configs/aliases");
+const alias = require("@ezycore/build/src/aliases");
 
 const isDev = process.env.NODE_ENV == "development";
 
@@ -167,8 +167,9 @@ const clientConf = (mode) => {
         path: path.resolve(process.env.APP_PATH, ".env"),
       }),
       new webpack.DefinePlugin({
+        APP_TYPE: JSON.stringify(process.env.APP_TYPE),
+        APP_NAME: JSON.stringify(process.env.APP_NAME),
         SSR_DISABLED: false,
-        SSR_APP: true,
         IS_SSR: JSON.stringify(false),
         IS_BROWSER: JSON.stringify(true),
         IS_DEV: JSON.stringify(process.env.NODE_ENV !== "production"),

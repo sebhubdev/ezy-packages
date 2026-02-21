@@ -40,6 +40,9 @@ const execute = async () => {
         return;
       }
 
+      process.env.APP_TYPE = appConfig.type;
+      process.env.APP_NAME = appConfig.name;
+
       dotenv.config({
         path: appEnvPath,
         override: true,

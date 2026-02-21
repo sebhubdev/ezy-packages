@@ -7,7 +7,7 @@ const { spawn } = require("child_process");
 const webpackSsrConfig = require("@ezycore/build/src/webpack/webpack.ssr.config");
 const configs = webpackSsrConfig("development");
 const compiler = webpack(configs);
-const { root } = require("@root/configs/paths");
+const { root } = require("@ezycore/build/src/paths");
 const serverBundle = path.resolve(
   process.env.APP_PATH,
   "build/server/server.js",
