@@ -55,7 +55,7 @@ const execute = async () => {
       const command = {
         api: `cd apps/${project} && nodemon server.js`,
         spa: `cd apps/${project} && NODE_ENV=development node server/hmr-server.js`,
-        ssr: `cross-env NODE_ENV=development node packages/runtime/src/commons/launchServer.js`,
+        ssr: `cross-env NODE_ENV=development node packages/runtime/src/commons/launchServer.cjs`,
       }[projectType];
 
       console.log(command);
