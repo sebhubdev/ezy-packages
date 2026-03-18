@@ -7,7 +7,10 @@ import LoginSteps from "./LoginSteps";
 
 const ShortAccount = ({}) => {
   const [showLoginSteps, setShowLoginSteps] = React.useState(false);
-  const { userData } = useContext(UserContext);
+  const userContext = useContext(UserContext);
+  if (!userContext) return null;
+
+  const { userData } = userContext;
 
   const handleUser = () => {
     setShowLoginSteps(true);

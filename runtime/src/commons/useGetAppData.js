@@ -93,7 +93,7 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
           params,
         });
 
-        console.log(result);
+        console.log("in getAppData", result);
 
         setPageResponse({ ...result, loading: false });
         setLoading(false);

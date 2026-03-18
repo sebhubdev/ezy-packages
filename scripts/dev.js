@@ -53,9 +53,9 @@ const execute = async () => {
       const projectColor = appConfig.color ?? "orange";
 
       const command = {
-        api: `cd apps/${project} && nodemon server.js`,
+        api: `cross-env NODE_ENV=development node packages/runtime/src/commons/launchApiServer.js`,
         spa: `cd apps/${project} && NODE_ENV=development node server/hmr-server.js`,
-        ssr: `cross-env NODE_ENV=development node packages/runtime/src/commons/launchServer.cjs`,
+        ssr: `cross-env NODE_ENV=development node packages/runtime/src/commons/launchServer.js`,
       }[projectType];
 
       console.log(command);

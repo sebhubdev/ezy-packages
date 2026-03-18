@@ -5,6 +5,8 @@ const getType = (value) => {
 };
 
 const normalizeResponse = (response, expectedType = null) => {
+  console.log("in normalize");
+
   // Si ya viene normalizado
   if (
     response &&
@@ -30,7 +32,7 @@ const normalizeResponse = (response, expectedType = null) => {
       );
       err.status = 500;
       err.code = "INVALID_RESPONSE_TYPE";
-      throw err; // 👈 aquí está la clave
+      throw err;
     }
   }
 

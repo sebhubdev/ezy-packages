@@ -74,7 +74,7 @@ const hmrWatcher = () => {
   if (nodemonProc) return;
 
   highlightMessage("info", `Launching HMR`);
-  const file = path.resolve(root, "packages/runtime/src/commons/hmrServer.cjs");
+  const file = path.resolve(root, "packages/runtime/src/commons/hmrServer.js");
   nodemonProc = spawn(process.execPath, [file], {
     stdio: "inherit",
     env: process.env,

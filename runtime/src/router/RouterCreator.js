@@ -14,6 +14,8 @@ const getLoadable = (loader) => {
 };
 
 const RouterCreator = ({ routes, pageResponse }) => {
+  console.log("pageResponse", pageResponse);
+
   return (
     <Routes>
       {routes.map(({ path, component: loader }, key) => {

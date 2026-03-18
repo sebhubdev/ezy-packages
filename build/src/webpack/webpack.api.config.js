@@ -7,9 +7,13 @@ const serverConf = (mode) => {
   return {
     mode: mode,
     target: "node",
-    entry: path.resolve(process.cwd(), "server.js"),
+    externals: {
+      puppeteer: "commonjs puppeteer",
+      "puppeteer-core": "commonjs puppeteer-core",
+    },
+    entry: path.resolve(process.env.APP_PATH, "server.js"),
     output: {
-      path: path.resolve(process.cwd(), "build"),
+      path: path.resolve(process.env.APP_PATH, "build"),
       filename: "server.js",
       clean: true,
     },
@@ -33,7 +37,7 @@ const serverConf = (mode) => {
     },
     plugins: [
       new Dotenv({
-        path: path.resolve(process.cwd(), ".env"),
+        path: path.resolve(process.env.APP_PATH, ".env"),
       }),
     ],
     resolve: {
@@ -47,6 +51,8 @@ const serverConf = (mode) => {
   };
 };
 const webpackApiConfig = (mode = "development") => {
+  console.log(mode);
+
   return serverConf(mode);
 };
 
