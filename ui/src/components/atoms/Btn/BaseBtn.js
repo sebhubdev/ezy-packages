@@ -20,7 +20,9 @@ const BaseBtn = ({
           <Icon icon={icon} />
         </span>
       )}
-      <span className="btn__label">{children}</span>
+      {children && variant != "icon" && (
+        <span className="btn__label">{children}</span>
+      )}
       {icon && iconPosition === "right" && (
         <span className="btn__icon btn__icon--right">
           <Icon icon={icon} />

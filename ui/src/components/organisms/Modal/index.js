@@ -1,4 +1,4 @@
-import "./Modal.scss";
+import "@ezycore/ui/src/components/organisms/Modal/Modal.scss";
 
 import Modal from "./Modal";
 

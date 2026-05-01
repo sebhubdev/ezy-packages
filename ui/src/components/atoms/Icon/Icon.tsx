@@ -3,6 +3,7 @@ import React from "react";
 import { ICONS, type IconName } from "./icons";
 import parse from "html-react-parser";
 
+type ExtraIcons = Record<string, string>;
 interface IconProps {
   /** Name of the icon (keys of ICONS). */
   icon: IconName;
@@ -12,6 +13,7 @@ interface IconProps {
   onClick?: () => void;
   /** Extra classes for the wrapper `.icon`. */
   classes?: string;
+  icons?: ExtraIcons;
 }
 
 /**
@@ -27,10 +29,18 @@ interface IconProps {
  * @property onClick - Click handler.
  * @property classes - Extra CSS classes for the wrapper `.icon`.
  */
-function Icon({ icon, size, onClick, classes }: IconProps) {
-  const SvgIcon = ICONS[icon] ?? ICONS.dot;
+function Icon({ icon, size = 24, onClick, classes, icons = {} }: IconProps) {
+  const allIcons = {
+    ...ICONS,
+    ...icons,
+  };
+
+  const SvgIcon = allIcons[icon] ?? ICONS.dot;
   return (
-    <div onClick={onClick} className={`icon${classes ? ` ${classes}` : ""}`}>
+    <div
+      onClick={onClick}
+      className={`icon icon-${icon}${classes ? ` ${classes}` : ""}`}
+    >
       {parse(SvgIcon)}
     </div>
   );

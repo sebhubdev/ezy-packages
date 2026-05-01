@@ -1,0 +1,21 @@
+.pagination {
+  display: flex;
+  justify-content: center;
+  &__inner {
+    display: inline-flex;
+    align-self: center;
+    gap: 1rem;
+  }
+
+  &-prev {
+    transform: rotate(180deg);
+  }
+
+  .btn {
+    &.disabled {
+      opacity: 0.5;
+      pointer-events: none;
+      cursor: not-allowed !important;
+    }
+  }
+}

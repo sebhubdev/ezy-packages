@@ -1,6 +1,6 @@
 @use "@ezycore/ui/src/theme/tokens" as *;
 .btn {
-  display: inline-flex;
+  display: flex;
   text-decoration: none;
   cursor: pointer;
   align-items: center;
@@ -20,6 +20,7 @@
       background-color 0.3s ease;
     align-items: center;
     justify-content: center;
+    height: 3rem;
 
     &:hover,
     &:focus,
@@ -45,6 +46,7 @@
     text-align: center;
     text-decoration: none;
     text-transform: uppercase;
+    height: 3rem;
     transition:
       background-color 0.5s ease,
       color 0.5s ease;
@@ -139,6 +141,25 @@
 
     .icon {
       fill: var(--color-white);
+    }
+  }
+  &--icon {
+    background-color: var(--color-primary);
+    width: 3rem;
+    height: 3rem;
+    border-radius: 10rem;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: var(--color-primary);
+    }
+
+    .icon {
+      color: var(--color-white);
     }
   }
 }

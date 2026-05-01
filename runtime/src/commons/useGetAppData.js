@@ -1,6 +1,6 @@
 // useGetAppData.js
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useLocation, useMatch } from "react-router-dom";
+import { useLocation, useMatch, useSearchParams } from "react-router-dom";
 import resolveRouteMatch from "@ezycore/runtime/src/router/resolveRouteMatch";
 import normalizeError from "@ezycore/runtime/src/errors/normalizeError";
 import resolveRequest from "@ezycore/runtime/src/requests/resolveRequest";
@@ -14,15 +14,19 @@ const makeResponse = (data = null) => ({
 
 const useGetAppData = ({ initialData, routes, globalLoader }) => {
   const firstHydrateSkipped = useRef(false);
-  const { pathname } = useLocation();
+  const { pathname, search } = useLocation();
   const [loading, setLoading] = useState(false);
   const [globalResponse, setGlobalResponse] = useState(
     !SSR_DISABLED ? initialData?.globalResponse : makeResponse(),
   );
 
+  const fullPath = pathname + search;
+
   const [pageResponse, setPageResponse] = useState(
     !SSR_DISABLED ? initialData?.pageResponse : makeResponse(),
   );
+
+  console.log("pathname", fullPath, initialData?.path);
 
   const lastPathRef = useRef(null);
 
@@ -33,6 +37,9 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
 
   const match = useMatch(route?.path || "/__no_match__");
   const params = match?.params;
+  const [searchParams] = useSearchParams();
+
+  const query = Object.fromEntries(searchParams.entries());
 
   useEffect(() => {
     if (!SSR_DISABLED || globalResponse.data) return;
@@ -52,9 +59,9 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
   }, []);
 
   useEffect(() => {
-    if (lastPathRef.current === pathname) return;
-    lastPathRef.current = pathname;
-    if (initialData?.path === pathname && !firstHydrateSkipped.current) {
+    if (lastPathRef.current === fullPath) return;
+    lastPathRef.current = fullPath;
+    if (initialData?.path === fullPath && !firstHydrateSkipped.current) {
       firstHydrateSkipped.current = true;
       setLoading(false);
       return;
@@ -91,9 +98,8 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
       try {
         const result = await route.loader({
           params,
+          query,
         });
-
-        console.log("in getAppData", result);
 
         setPageResponse({ ...result, loading: false });
         setLoading(false);
@@ -103,16 +109,24 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
         setLoading(false);
       }
     })();
-  }, [pathname, route, params, globalResponse.data, globalResponse.loading]);
+  }, [
+    fullPath,
+    route,
+    params,
+    globalResponse.data,
+    globalResponse.loading,
+    searchParams,
+  ]);
 
   return {
     globalResponse,
     pageResponse,
     lastPath: lastPathRef.current,
-    pathname,
+    pathname: fullPath,
     route,
     params,
-    loading: loading || lastPathRef.current !== pathname,
+    query,
+    loading: loading || lastPathRef.current !== fullPath,
   };
 };
 

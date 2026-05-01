@@ -64,6 +64,8 @@ const serverConf = (mode) => {
         path: path.resolve(process.env.APP_PATH, ".env"),
       }),
       new webpack.DefinePlugin({
+        APP_TYPE: JSON.stringify(process.env.APP_TYPE),
+        APP_NAME: JSON.stringify(process.env.APP_NAME),
         SSR_DISABLED: false,
         IS_SSR: JSON.stringify(true),
         IS_BROWSER: JSON.stringify(false),

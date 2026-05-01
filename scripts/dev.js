@@ -29,7 +29,7 @@ const execute = async () => {
     if (fs.existsSync(`./apps/${project}`)) {
       const configPath = path.join(appPath, "app.config.js");
       if (!fs.existsSync(configPath)) {
-        highlightMessage("error", "No config file found");
+        highlightMessage("error", `No config file found for ${project}`);
         return;
       }
       const appConfig = require(configPath).default;
@@ -43,6 +43,8 @@ const execute = async () => {
       process.env.APP_TYPE = appConfig.type;
       process.env.APP_NAME = appConfig.name;
 
+      console.log("project", appConfig);
+
       dotenv.config({
         path: appEnvPath,
         override: true,
@@ -50,7 +52,7 @@ const execute = async () => {
 
       const projectName = appConfig.name ?? "no-name-project";
       const projectType = appConfig.type ?? "spa";
-      const projectColor = appConfig.color ?? "orange";
+      const prefixColor = appConfig.prefixColor ?? "greenBright";
 
       const command = {
         api: `cross-env NODE_ENV=development node packages/runtime/src/commons/launchApiServer.js`,
@@ -58,25 +60,21 @@ const execute = async () => {
         ssr: `cross-env NODE_ENV=development node packages/runtime/src/commons/launchServer.js`,
       }[projectType];
 
-      console.log(command);
+      console.log("Comand", command);
 
-      projectsToLaunch.push({
-        command: command,
-        name: projectName,
-        prefixColor: projectColor,
-      });
+      highlightMessage("success", `Launching project ${projectName}`);
+
+      concurrently([
+        {
+          command: command,
+          name: projectName,
+          prefixColor: prefixColor,
+        },
+      ]);
     } else {
       highlightMessage("error", `No project found for ${project}`);
     }
   });
-
-  if (projectsToLaunch.length) {
-    highlightMessage(
-      "success",
-      `Launching project${projects.length > 1 ? "s" : ""} ${projects}`,
-    );
-    concurrently(projectsToLaunch);
-  }
 };
 
 execute();
