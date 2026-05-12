@@ -6,8 +6,8 @@ const cors = require("cors");
 const HotModuleReplacementPlugin =
   require("webpack").HotModuleReplacementPlugin;
 const Dotenv = require("dotenv-webpack");
-const alias = require("@ezycore/build/src/aliases");
-const { root } = require("@ezycore/build/src/paths");
+const alias = require("@ezycore/engine/build/src/aliases");
+const { root } = require("@ezycore/engine/build/src/paths");
 const cookieParser = require("cookie-parser");
 const appPath = process.env.APP_PATH;
 require("dotenv").config({
@@ -141,7 +141,7 @@ const devServer = () => {
 
   app.get("*", (req, res) => {
     res.sendFile(
-      path.resolve(`${root}/packages/runtime/src/commons/index.html`),
+      path.resolve(`${root}/packages/engine/runtime/src/commons/index.html`),
     );
   });
 

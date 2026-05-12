@@ -4,7 +4,7 @@ import CookiesBanner from "@ezycore/ui/src/components/organisms/CookiesBanner";
 import Header from "@ezycore/ui/src/components/layout/Header/Header";
 import Footer from "@ezycore/ui/src/components/layout/Footer/Footer";
 import Loading from "@ezycore/ui/src/components/molecules/Loading";
-import DebugBar from "@ezycore/runtime/src/devtools/DebugBar";
+import DebugBar from "@ezycore/engine/runtime/src/devtools/DebugBar";
 
 const LayoutContext = createContext();
 

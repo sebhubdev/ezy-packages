@@ -1,9 +1,9 @@
 import React from "react";
 import Icon from "@ezycore/ui/src/components/atoms/Icon";
-import langs from "@ezycore/i18n/src/langs.json";
+import langs from "@ezycore/modules/i18n/src/langs.json";
 import classNames from "classnames";
 import { Link } from "react-router-dom";
-import { t } from "@ezycore/i18n/src";
+import { t } from "@ezycore/modules/i18n/src";
 
 const LangSelector = ({ currentLang }) => {
   const [showSelector, setShowSelector] = React.useState(false);

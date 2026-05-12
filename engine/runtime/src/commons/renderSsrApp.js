@@ -4,7 +4,7 @@ import { StaticRouter } from "react-router-dom/server";
 import { ChunkExtractor } from "@loadable/server";
 import createHtmlDoc from "./createHtmlDoc";
 import path from "path";
-import prettyHtml from "@ezycore/utils/src/prettyHtml";
+import prettyHtml from "@ezycore/shared/utils/src/prettyHtml";
 
 const renderSsrApp = (App, initialData, location) => {
   const statsFile = path.resolve(

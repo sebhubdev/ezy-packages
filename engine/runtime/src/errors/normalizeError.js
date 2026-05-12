@@ -1,4 +1,4 @@
-import cleanErrorMessage from "@ezycore/runtime/src/errors/cleanErrorMessage";
+import cleanErrorMessage from "@ezycore/engine/runtime/src/errors/cleanErrorMessage";
 
 const normalizeError = (err) => {
   const rawMessage =

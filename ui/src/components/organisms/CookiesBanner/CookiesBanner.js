@@ -1,6 +1,6 @@
 import React from "react";
 import Heading from "@ezycore/ui/src/components/atoms/Typo/Heading";
-import { t } from "@ezycore/i18n/src";
+import { t } from "@ezycore/modules/i18n/src";
 import { Btn } from "@ezycore/ui/src/components/atoms/Btn";
 import classNames from "classnames";
 

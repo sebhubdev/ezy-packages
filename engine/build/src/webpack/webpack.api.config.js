@@ -1,7 +1,7 @@
 require("module-alias/register");
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
-const alias = require("@ezycore/build/src/aliases");
+const alias = require("@ezycore/engine/build/src/aliases");
 
 const serverConf = (mode) => {
   return {

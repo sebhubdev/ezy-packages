@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import AlertMsg from "@ezycore/ui/src/components/atoms/AlertMsg/AlertMsg";
-import toArray from "@ezycore/utils/src/toArray";
+import toArray from "@ezycore/shared/utils/src/toArray";
 
 const Form = ({ onSubmit, children, messages = [], ...rest }) => {
   const validators = useRef([]);

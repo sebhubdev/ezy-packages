@@ -1,9 +1,9 @@
 // useGetAppData.js
 import { useEffect, useMemo, useRef, useState } from "react";
 import { useLocation, useMatch, useSearchParams } from "react-router-dom";
-import resolveRouteMatch from "@ezycore/runtime/src/router/resolveRouteMatch";
-import normalizeError from "@ezycore/runtime/src/errors/normalizeError";
-import resolveRequest from "@ezycore/runtime/src/requests/resolveRequest";
+import resolveRouteMatch from "@ezycore/engine/runtime/src/router/resolveRouteMatch";
+import normalizeError from "@ezycore/engine/runtime/src/errors/normalizeError";
+import resolveRequest from "@ezycore/engine/runtime/src/requests/resolveRequest";
 
 const makeResponse = (data = null) => ({
   data,
