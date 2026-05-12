@@ -52,7 +52,7 @@ const BaseLayout = ({
           </div>
           <Footer />
           <CookiesBanner />
-          <DebugBar />
+          {process.env.HIDE_DEBUG_BAR !== "true" && [<DebugBar />]}
         </div>
       </LayoutProvider>
     </>

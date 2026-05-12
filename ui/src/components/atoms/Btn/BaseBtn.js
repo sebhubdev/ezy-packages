@@ -4,7 +4,7 @@ import Icon from "@ezycore/ui/src/components/atoms/Icon";
 const BaseBtn = ({
   children,
   className,
-  variant = "primary",
+  variant,
   size = "md",
   icon,
   iconPosition = "right",
@@ -12,7 +12,7 @@ const BaseBtn = ({
 }) => {
   return (
     <span
-      className={`btn btn--${variant} btn--${size} ${className || ""}`}
+      className={`variant && ${`btn btn--${variant}`} btn--${size} ${className || ""}`}
       {...rest}
     >
       {icon && iconPosition === "left" && (

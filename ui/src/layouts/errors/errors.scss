@@ -1,9 +1,14 @@
 .error-layout {
-  height: 100%;
+  height: calc(100%);
   position: relative;
   margin-top: 50px;
 
   &__inner {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
   }
 
   &__image {

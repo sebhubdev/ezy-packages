@@ -74,6 +74,8 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
 
     (async () => {
       if (!route) {
+        console.log("No route found");
+
         setPageResponse({
           data: null,
           status: 404,
@@ -104,7 +106,7 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
         setPageResponse({ ...result, loading: false });
         setLoading(false);
       } catch (error) {
-        console.log(normalizeError(error));
+        console.log("Loader Error in useGetAppData", normalizeError(error));
         setPageResponse({ ...normalizeError(error), loading: false });
         setLoading(false);
       }

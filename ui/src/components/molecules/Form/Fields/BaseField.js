@@ -17,7 +17,8 @@ const BaseField = ({
   validateOnChange,
   autoComplete = "off",
   spellCheck = false,
-  requireDefaultMessage = "This field is required",
+  requireDefaultMessage = "Ce champ est obligatoire",
+  ...rest
 }) => {
   const [error, setError] = useState(null);
   const ref = React.useRef(null);

@@ -16,7 +16,8 @@
   }
   &--text,
   &--password,
-  &--date {
+  &--date,
+  &--number {
     .input {
       &__inner {
         color: var(--color-primary);
@@ -155,6 +156,21 @@
             &:after {
               left: calc(100% - 1.8rem);
             }
+          }
+        }
+      }
+    }
+  }
+
+  &--number {
+    .input {
+      &__field {
+        input {
+          -moz-appearance: textfield;
+          &::-webkit-outer-spin-button,
+          &::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
           }
         }
       }
