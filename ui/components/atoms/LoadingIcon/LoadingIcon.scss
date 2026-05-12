@@ -1,0 +1,7 @@
+@use "@ezycore/ui/theme/tokens" as *;
+.loading-icon {
+  width: 8rem;
+  path {
+    fill: var(--color-primary);
+  }
+}
