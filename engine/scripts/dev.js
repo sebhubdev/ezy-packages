@@ -5,7 +5,7 @@ const fs = require("fs");
 const fsPromises = require("fs/promises");
 const dotenv = require("dotenv");
 const path = require("path");
-const highlightMessage = require("@ezycore/shared/utils/src/highlightMessage");
+const highlightMessage = require("@ezycore/shared/utils/highlightMessage");
 
 const appsDir = path.resolve(process.cwd(), "apps");
 const args = process.argv.slice(3);
@@ -55,9 +55,9 @@ const execute = async () => {
       const prefixColor = appConfig.prefixColor ?? "greenBright";
 
       const command = {
-        api: `cross-env NODE_ENV=development node packages/engine/runtime/src/commons/launchApiServer.js`,
+        api: `cross-env NODE_ENV=development node packages/engine/runtime/commons/launchApiServer.js`,
         spa: `cd apps/${project} && NODE_ENV=development node server/hmr-server.js`,
-        ssr: `cross-env NODE_ENV=development node packages/engine/runtime/src/commons/launchServer.js`,
+        ssr: `cross-env NODE_ENV=development node packages/engine/runtime/commons/launchServer.js`,
       }[projectType];
 
       console.log("Comand", command);

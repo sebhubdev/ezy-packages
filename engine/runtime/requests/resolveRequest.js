@@ -1,5 +1,5 @@
-import normalizeResponse from "@ezycore/engine/runtime/src/requests/normalizeResponse";
-import normalizeError from "@ezycore/engine/runtime/src/errors/normalizeError";
+import normalizeResponse from "@ezycore/engine/runtime/requests/normalizeResponse";
+import normalizeError from "@ezycore/engine/runtime/errors/normalizeError";
 
 const resolveRequest = async (request, expectedType) => {
   try {

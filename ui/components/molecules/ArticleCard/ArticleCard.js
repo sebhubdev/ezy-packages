@@ -3,7 +3,7 @@ import RichText from "@ezycore/ui/components/atoms/RichText/RichText";
 import Heading from "@ezycore/ui/components/atoms/Typo/Heading";
 import { Btn } from "@ezycore/ui/components/atoms/Btn";
 import { Link } from "react-router-dom";
-import { useLinkResolver } from "@ezycore/shared/hooks/src";
+import { useLinkResolver } from "@ezycore/shared/hooks";
 import { t } from "@ezycore/i18n";
 
 const ArticleCard = ({ data }) => {

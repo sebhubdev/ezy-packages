@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import useBreakpoint from "@ezycore/engine/runtime/src/devtools/DebugBar/useBreakpoint";
+import useBreakpoint from "@ezycore/engine/runtime/devtools/DebugBar/useBreakpoint";
 
 const DebugBar = ({}) => {
   const ref = useRef(null);

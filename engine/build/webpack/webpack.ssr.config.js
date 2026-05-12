@@ -5,7 +5,7 @@ const Dotenv = require("dotenv-webpack");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const nodeExternals = require("webpack-node-externals");
-const alias = require("@ezycore/engine/build/src/aliases");
+const alias = require("@ezycore/engine/build/aliases");
 
 const isDev = process.env.NODE_ENV == "development";
 

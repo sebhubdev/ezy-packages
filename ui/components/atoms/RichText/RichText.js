@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import * as prismicH from "@prismicio/helpers";
 import parse from "html-react-parser";
-import { useLinkResolver } from "@ezycore/shared/hooks/src";
+import { useLinkResolver } from "@ezycore/shared/hooks";
 
 const RichText = ({ content, type = "html" }) => {
   return (

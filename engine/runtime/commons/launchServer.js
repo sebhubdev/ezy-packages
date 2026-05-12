@@ -1,15 +1,19 @@
+// dev-ssr.js
 require("module-alias/register");
-const highlightMessage = require("@ezycore/shared/utils/src/highlightMessage");
+const highlightMessage = require("@ezycore/shared/utils/highlightMessage");
 const path = require("path");
 const webpack = require("webpack");
 const { spawn } = require("child_process");
-const webpackApiConfig = require("@ezycore/engine/build/src/webpack/webpack.api.config");
-const configs = webpackApiConfig("development");
+const webpackSsrConfig = require("@ezycore/engine/build/webpack/webpack.ssr.config");
+const configs = webpackSsrConfig("development");
 const compiler = webpack(configs);
-const { root } = require("@ezycore/engine/build/src/paths");
-const serverBundle = path.resolve(process.env.APP_PATH, "build/server.js");
+const { root } = require("@ezycore/engine/build/paths");
+const serverBundle = path.resolve(
+  process.env.APP_PATH,
+  "build/server/server.js",
+);
 
-const appPath = process.env.APP_PATH;
+const port = process.env.PORT ?? 3000;
 
 let nodemonProc = null;
 let started = false;
@@ -31,9 +35,13 @@ function startNodemon() {
     ],
     { stdio: "inherit", env: process.env },
   );
+  import("open").then((res) => {
+    const open = res.default;
+    open(`http://localhost:${port}/`);
+  });
 }
 
-const apiWatcher = () => {
+const ssrWatcher = () => {
   highlightMessage("info", `Launching Webpack`);
   compiler.watch({ aggregateTimeout: 200 }, (err, stats) => {
     if (err) {
@@ -62,4 +70,22 @@ const apiWatcher = () => {
   });
 };
 
-apiWatcher();
+const hmrWatcher = () => {
+  if (nodemonProc) return;
+
+  highlightMessage("info", `Launching HMR`);
+  const file = path.resolve(
+    root,
+    "packages/engine/runtime/commons/hmrServer.js",
+  );
+  nodemonProc = spawn(process.execPath, [file], {
+    stdio: "inherit",
+    env: process.env,
+  });
+};
+
+if (process.env.SSR_DISABLED == "true") {
+  hmrWatcher();
+} else {
+  ssrWatcher();
+}

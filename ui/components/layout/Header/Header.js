@@ -5,7 +5,7 @@ import Modal from "@ezycore/ui/components/organisms/Modal";
 import { Link } from "react-router-dom";
 import Navigator from "@ezycore/ui/components/organisms/Navigator";
 import LangSelector from "@ezycore/ui/components/molecules/LangSelector";
-import langs from "@ezycore/modules/i18n/src/langs.json";
+import langs from "@ezycore/modules/i18n/langs.json";
 import SearchBar from "@ezycore/ui/components/molecules/SearchBar";
 import LoginSteps from "@ezycore/ui/modules/User/LoginSteps";
 import { UserNav } from "@ezycore/ui/modules/User";
