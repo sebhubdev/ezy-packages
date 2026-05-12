@@ -1,8 +1,8 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import loadable from "@loadable/component";
-import Loading from "@ezycore/ui/src/components/molecules/Loading";
-import StatusLayout from "@ezycore/ui/src/layouts/errors/StatusLayout";
+import Loading from "@ezycore/ui/components/molecules/Loading";
+import StatusLayout from "@ezycore/ui/layouts/errors/StatusLayout";
 
 const cache = new Map();
 

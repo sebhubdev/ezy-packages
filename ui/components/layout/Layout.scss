@@ -1,0 +1,5 @@
+@use "@ezycore/ui/theme/tokens" as *;
+@forward "@ezycore/ui/components/layout/Header/Header.scss";
+@forward "@ezycore/ui/components/layout/Footer/Footer.scss";
+@forward "./BaseLayout/BaseLayout.scss";
+@forward "./Page/Page.scss";
