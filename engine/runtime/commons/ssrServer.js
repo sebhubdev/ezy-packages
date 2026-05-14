@@ -17,10 +17,16 @@ const ssrServer = (App, routes, globalLoader) => {
 
   const staticsPath =
     process.env.REMOTE == "true"
-      ? "client/statics"
+      ? path.resolve(process.cwd(), "client/statics")
       : path.resolve(APP_PATH, "build/client/statics");
 
   app.use("/statics", express.static(staticsPath));
+
+  console.log("REMOTE:", process.env.REMOTE);
+  console.log("cwd:", process.cwd());
+  console.log("APP_PATH:", APP_PATH);
+  console.log("staticsPath:", staticsPath);
+  console.log("statics exists:", fs.existsSync(staticsPath));
 
   routes.map((route) => {
     app.get(route.path, async (req, res) => {
