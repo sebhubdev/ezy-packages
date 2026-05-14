@@ -1,9 +1,11 @@
+require("module-alias/register");
 const concurrently = require("concurrently");
 const chalk = require("chalk");
 const fs = require("fs");
 const fsPromises = require("fs/promises");
 const dotenv = require("dotenv");
 const path = require("path");
+const highlightMessage = require("@ezycore/shared/utils/highlightMessage");
 
 const appsDir = path.resolve(process.cwd(), "apps");
 const args = process.argv.slice(3);
@@ -21,64 +23,52 @@ const execute = async () => {
   const projectsToLaunch = [];
 
   projects.map(async (project) => {
+    const appPath = path.resolve(process.cwd(), `apps/${project}`);
+    process.env.APP_PATH = appPath;
+
     if (fs.existsSync(`./apps/${project}`)) {
+      const configPath = path.join(appPath, "app.config.js");
+      if (!fs.existsSync(configPath)) {
+        highlightMessage("error", `No config file found for ${project}`);
+        return;
+      }
+      const appConfig = require(configPath).default;
+      const appEnvPath = path.join(appPath, ".env");
+
+      if (!fs.existsSync(appEnvPath)) {
+        highlightMessage("error", "No env file found");
+        return;
+      }
+
+      process.env.APP_TYPE = appConfig.type;
+      process.env.APP_NAME = appConfig.name;
+
       dotenv.config({
-        path: path.resolve(process.cwd(), `apps/${project}/.env`),
+        path: appEnvPath,
         override: true,
       });
 
-      const projectName = process.env.PROJECT_NAME ?? "no-name-project";
-      const projectType = process.env.PROJECT_TYPE ?? "spa";
-      const projectColor = process.env.PROJECT_COLOR ?? "orange";
+      const projectName = appConfig.name ?? "no-name-project";
+      const projectType = appConfig.type ?? "spa";
+      const prefixColor = appConfig.prefixColor ?? "greenBright";
 
-      projectsToLaunch.push({
-        command: `cd apps/${project} && webpack --config webpack.config.js --env production`,
-        name: projectName,
-        prefixColor: projectColor,
-      });
+      const command = {
+        api: `cross-env NODE_ENV=production node packages/engine/build/buildApi.js`,
+        spa: `cd apps/${project} && NODE_ENV=production node server/hmr-server.js`,
+        ssr: `cross-env NODE_ENV=production node packages/engine/build/buildSsr.js`,
+      }[projectType];
+
+      concurrently([
+        {
+          command: command,
+          name: projectName,
+          prefixColor: prefixColor,
+        },
+      ]);
     } else {
-      await import("boxen").then((res) => {
-        const boxen = res.default;
-        const msg = `
-      ${chalk.bold.red(`No project found for ${project}`)}
-    `;
-
-        console.log(
-          boxen(msg, {
-            padding: 1,
-            margin: 1,
-            borderStyle: "double",
-            borderColor: "red",
-            title: "Ezy Core [ERROR]",
-            textAlign: "left",
-            textAlignment: "left",
-          }),
-        );
-      });
+      highlightMessage("error", `No project found for ${project}`);
     }
   });
-
-  if (projectsToLaunch.length) {
-    await import("boxen").then((res) => {
-      const boxen = res.default;
-      const msg = `
-      ${chalk.bold.green(`Building project${projects.length > 1 ? "s" : ""} ${projects}`)}
-    `;
-
-      console.log(
-        boxen(msg, {
-          padding: 1,
-          margin: 1,
-          borderStyle: "double",
-          borderColor: "greenBright",
-          title: "Ezy Core",
-          textAlign: "left",
-          textAlignment: "left",
-        }),
-      );
-    });
-    concurrently(projectsToLaunch);
-  }
 };
 
 execute();
