@@ -26,7 +26,6 @@ const ssrServer = (App, routes, globalLoader) => {
   console.log("cwd:", process.cwd());
   console.log("APP_PATH:", APP_PATH);
   console.log("staticsPath:", staticsPath);
-  console.log("statics exists:", fs.existsSync(staticsPath));
 
   routes.map((route) => {
     app.get(route.path, async (req, res) => {
