@@ -3,6 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import renderSsrApp from "./renderSsrApp";
 import path from "path";
+import fs from "fs";
 import cookieParser from "cookie-parser";
 
 const ssrServer = (App, routes, globalLoader) => {
@@ -15,10 +16,14 @@ const ssrServer = (App, routes, globalLoader) => {
   app.use(express.json());
   app.use(cookieParser());
 
-  const staticsPath =
-    REMOTE == "true"
-      ? path.resolve(process.cwd(), "client/statics")
-      : path.resolve(APP_PATH, "build/client/statics");
+  // const staticsPath =
+  //   REMOTE == "true"
+  //     ? path.resolve(process.cwd(), "client/statics")
+  //     : path.resolve(APP_PATH, "build/client/statics");
+
+  // app.use("/statics", express.static(staticsPath));
+
+  const staticsPath = path.resolve(process.cwd(), "client/statics");
 
   app.use("/statics", express.static(staticsPath));
 
@@ -26,6 +31,7 @@ const ssrServer = (App, routes, globalLoader) => {
   console.log("cwd:", process.cwd());
   console.log("APP_PATH:", APP_PATH);
   console.log("staticsPath:", staticsPath);
+  console.log("exists:", fs.existsSync(staticsPath));
 
   routes.map((route) => {
     app.get(route.path, async (req, res) => {
