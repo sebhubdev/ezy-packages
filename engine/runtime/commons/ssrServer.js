@@ -16,13 +16,13 @@ const ssrServer = (App, routes, globalLoader) => {
   app.use(cookieParser());
 
   const staticsPath =
-    process.env.REMOTE == "true"
+    REMOTE == "true"
       ? path.resolve(process.cwd(), "client/statics")
       : path.resolve(APP_PATH, "build/client/statics");
 
   app.use("/statics", express.static(staticsPath));
 
-  console.log("REMOTE:", process.env.REMOTE);
+  console.log("REMOTE:", REMOTE);
   console.log("cwd:", process.cwd());
   console.log("APP_PATH:", APP_PATH);
   console.log("staticsPath:", staticsPath);

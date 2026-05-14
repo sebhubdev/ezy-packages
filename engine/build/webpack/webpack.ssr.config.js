@@ -72,6 +72,7 @@ const serverConf = (mode) => {
         IS_BROWSER: JSON.stringify(false),
         IS_DEV: JSON.stringify(process.env.NODE_ENV !== "production"),
         APP_PATH: JSON.stringify(process.env.APP_PATH),
+        REMOTE: JSON.stringify(process.env.REMOTE || "false"),
       }),
     ],
     externals: {
@@ -177,6 +178,7 @@ const clientConf = (mode) => {
         IS_BROWSER: JSON.stringify(true),
         IS_DEV: JSON.stringify(process.env.NODE_ENV !== "production"),
         APP_PATH: JSON.stringify(process.env.APP_PATH),
+        REMOTE: JSON.stringify(process.env.REMOTE || "false"),
       }),
       new MiniCssExtractPlugin({
         filename: "statics/css/[name].css",
