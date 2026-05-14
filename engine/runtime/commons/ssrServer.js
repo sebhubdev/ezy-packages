@@ -23,7 +23,7 @@ const ssrServer = (App, routes, globalLoader) => {
 
   // app.use("/statics", express.static(staticsPath));
 
-  const staticsPath = "client/statics";
+  const staticsPath = "./client/statics";
 
   app.use("/statics", express.static(staticsPath));
 
