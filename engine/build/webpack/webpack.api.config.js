@@ -40,6 +40,9 @@ const serverConf = (mode) => {
       new Dotenv({
         path: path.resolve(process.env.APP_PATH, ".env"),
       }),
+      new webpack.DefinePlugin({
+        REMOTE: JSON.stringify(process.env.REMOTE || "false"),
+      }),
     ],
     resolve: {
       alias: {
