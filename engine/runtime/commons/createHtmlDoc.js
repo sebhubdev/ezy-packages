@@ -25,7 +25,6 @@ const createHtmlDoc = (initialData, appString, assets) => {
                 ${helmet?.meta.toString() || ""}  
                 ${helmet?.link.toString() || ""}
                 ${helmet?.script.toString() || ""}
-                ${linkTags}
                 ${styleTags}
         </head>  
         <body>
