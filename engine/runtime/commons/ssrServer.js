@@ -23,7 +23,7 @@ const ssrServer = (App, routes, globalLoader) => {
 
   // app.use("/statics", express.static(staticsPath));
 
-  const staticsPath = path.resolve(process.cwd(), "client/statics");
+  const staticsPath = "client/";
 
   app.use("/statics", express.static(staticsPath));
 
