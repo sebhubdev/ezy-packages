@@ -3,6 +3,7 @@ const path = require("path");
 const Dotenv = require("dotenv-webpack");
 const alias = require("@ezycore/engine/config/aliases");
 const appsAliases = require("@ezycore/engine/config/appsAliases");
+const webpack = require("webpack");
 
 const serverConf = (mode) => {
   return {
