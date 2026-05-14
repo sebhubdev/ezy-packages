@@ -23,6 +23,9 @@ switch (script) {
   case "create-component":
     require("../component-creator");
     break;
+  case "generate":
+    require("../generate");
+    break;
 
   default:
     console.log("the script doesn't exists");

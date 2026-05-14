@@ -5,7 +5,8 @@ const Dotenv = require("dotenv-webpack");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const nodeExternals = require("webpack-node-externals");
-const alias = require("@ezycore/engine/build/aliases");
+const alias = require("@ezycore/engine/config/aliases");
+const appsAliases = require("@ezycore/engine/config/appsAliases");
 
 const isDev = process.env.NODE_ENV == "development";
 
@@ -77,7 +78,7 @@ const serverConf = (mode) => {
       Swiper: "swiper",
     },
     resolve: {
-      alias: alias,
+      alias: { ...appsAliases, ...alias },
       extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
     stats: {
@@ -184,7 +185,7 @@ const clientConf = (mode) => {
       new LoadablePlugin(),
     ],
     resolve: {
-      alias: alias,
+      alias: { ...appsAliases, ...alias },
       extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
     stats: {

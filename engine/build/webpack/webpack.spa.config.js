@@ -4,7 +4,8 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-const alias = require("@ezycore/engine/build/aliases");
+const alias = require("@ezycore/engine/config/aliases");
+const appsAliases = require("@ezycore/engine/config/appsAliases");
 const webpack = require("webpack");
 
 const clientConf = (mode) => {
@@ -93,7 +94,7 @@ const clientConf = (mode) => {
       }),
     ],
     resolve: {
-      alias: alias,
+      alias: { ...appsAliases, ...alias },
       extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
   };

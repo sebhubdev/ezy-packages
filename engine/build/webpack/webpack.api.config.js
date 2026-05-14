@@ -1,7 +1,8 @@
 require("module-alias/register");
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
-const alias = require("@ezycore/engine/build/aliases");
+const alias = require("@ezycore/engine/config/aliases");
+const appsAliases = require("@ezycore/engine/config/appsAliases");
 
 const serverConf = (mode) => {
   return {
@@ -41,7 +42,12 @@ const serverConf = (mode) => {
       }),
     ],
     resolve: {
-      alias: { ...alias, "utf-8-validate": false, bufferutil: false },
+      alias: {
+        ...appsAliases,
+        ...alias,
+        "utf-8-validate": false,
+        bufferutil: false,
+      },
       extensions: [".ts", ".tsx", ".js", ".jsx"],
     },
     node: {
@@ -51,8 +57,6 @@ const serverConf = (mode) => {
   };
 };
 const webpackApiConfig = (mode = "development") => {
-  console.log(mode);
-
   return serverConf(mode);
 };
 
