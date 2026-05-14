@@ -7,7 +7,10 @@ import path from "path";
 import prettyHtml from "@ezycore/shared/utils/prettyHtml";
 
 const renderSsrApp = (App, initialData, location) => {
-  const statsFile = path.resolve(APP_PATH, "build/client/loadable-stats.json");
+  const statsFile =
+    process.env.REMOTE == "true"
+      ? "./client/loadable-stats.json"
+      : path.resolve(APP_PATH, "build/client/loadable-stats.json");
   const extractor = new ChunkExtractor({ statsFile });
   const appString = renderToString(
     extractor.collectChunks(

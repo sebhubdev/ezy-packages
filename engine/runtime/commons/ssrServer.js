@@ -13,10 +13,15 @@ const ssrServer = (App, routes, globalLoader) => {
   const app = express();
   app.use(cors());
   app.use(express.json());
-  app.use(
-    "/statics",
-    express.static(path.resolve(APP_PATH, "build/client/statics")),
-  );
+
+  if (process.env.REMOTE == "true") {
+    app.use("/", express.static("client/statics"));
+  } else {
+    app.use(
+      "/statics",
+      express.static(path.resolve(APP_PATH, "build/client/statics")),
+    );
+  }
 
   app.use(cookieParser());
 

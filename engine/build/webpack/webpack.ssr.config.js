@@ -10,8 +10,6 @@ const appsAliases = require("@ezycore/engine/config/appsAliases");
 
 const isDev = process.env.NODE_ENV == "development";
 
-console.log("in webpack !!!!!!!!!!!!!", process.env.APP_TYPE);
-
 const serverConf = (mode) => {
   return {
     mode: isDev ? "development" : "production",
