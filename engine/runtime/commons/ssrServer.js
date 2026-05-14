@@ -17,7 +17,7 @@ const ssrServer = (App, routes, globalLoader) => {
 
   const staticsPath =
     REMOTE == "true"
-      ? path.resolve(process.cwd(), "client/statics")
+      ? "./client/statics"
       : path.resolve(APP_PATH, "build/client/statics");
 
   app.use("/statics", express.static(staticsPath));
