@@ -6,11 +6,17 @@ import path from "path";
 import cookieParser from "cookie-parser";
 
 const ssrServer = (App, routes, globalLoader) => {
+  console.log("APP_PATH", APP_PATH);
+  console.log("pdw", process.cwd());
+
   dotenv.config();
   const app = express();
   app.use(cors());
   app.use(express.json());
-  app.use("/statics", express.static("client/statics"));
+  app.use(
+    "/statics",
+    express.static(path.resolve(APP_PATH, "build/client/statics")),
+  );
 
   app.use(cookieParser());
 
