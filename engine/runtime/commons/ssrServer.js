@@ -5,7 +5,7 @@ import renderSsrApp from "./renderSsrApp";
 import path from "path";
 import cookieParser from "cookie-parser";
 
-const ssrServer = (App, port, routes, globalLoader) => {
+const ssrServer = (App, routes, globalLoader) => {
   dotenv.config();
   const app = express();
   app.use(cors());
@@ -42,8 +42,6 @@ const ssrServer = (App, port, routes, globalLoader) => {
             initialData.pageResponse = data;
           })
           .catch((error) => {
-            console.log("hererere");
-
             initialData.pageResponse = {
               data: null,
               status: error.response.status,
@@ -68,6 +66,8 @@ const ssrServer = (App, port, routes, globalLoader) => {
     const app = renderSsrApp(App, initialData, req.url);
     res.send(app);
   });
+
+  const port = process.env.PORT || 3000;
 
   app.listen(port, () => {
     console.log(`Server is listening on port ${port}`);
