@@ -67,7 +67,7 @@ const ssrServer = (App, routes, globalLoader) => {
     res.send(app);
   });
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3002;
 
   app.listen(port, () => {
     console.log(`Server is listening on port in ssrServer ${port}`);
