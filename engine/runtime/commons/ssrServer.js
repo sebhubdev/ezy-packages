@@ -23,12 +23,6 @@ const ssrServer = (App, routes, globalLoader) => {
 
   app.use("/statics", express.static(staticsPath));
 
-  console.log("REMOTE:", REMOTE);
-  console.log("cwd:", process.cwd());
-  console.log("APP_PATH:", APP_PATH);
-  console.log("staticsPath:", staticsPath);
-  console.log("exists:", fs.existsSync(staticsPath));
-
   routes.map((route) => {
     app.get(route.path, async (req, res) => {
       let isError = false;
@@ -48,16 +42,19 @@ const ssrServer = (App, routes, globalLoader) => {
       }
 
       if (route.loader) {
+        console.log("launching loader", route.loader);
+
         await route
-          .loader({ params })
+          .loader({ req, params })
           .then((data) => {
             initialData.pageResponse = data;
           })
           .catch((error) => {
+            console.log("launching loader ERROR");
             initialData.pageResponse = {
               data: null,
-              status: error.response.status,
-              error: error.response.data,
+              status: error.response?.status,
+              error: error.response?.data,
             };
           });
       }

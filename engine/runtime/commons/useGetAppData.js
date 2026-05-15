@@ -26,8 +26,6 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
     !SSR_DISABLED ? initialData?.pageResponse : makeResponse(),
   );
 
-  console.log("pathname", fullPath, initialData?.path);
-
   const lastPathRef = useRef(null);
 
   const route = useMemo(
@@ -96,6 +94,8 @@ const useGetAppData = ({ initialData, routes, globalLoader }) => {
         setLoading(false);
         return;
       }
+
+      console.log("here");
 
       try {
         const result = await route.loader({

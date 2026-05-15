@@ -7,8 +7,6 @@ import {
 } from "@ezycore/ui/layouts/errors";
 
 const StatusLayout = ({ status, error, children }) => {
-  console.log("in status layout", error);
-
   if (!status || status < 400) return children ?? null;
 
   if (status === 401) return <UnauthorizedLayout error={error.message} />;
