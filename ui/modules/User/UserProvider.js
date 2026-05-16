@@ -17,7 +17,7 @@ const UserProvider = ({ children, authLoader, user }) => {
       const loggedUser = res.user;
       if (!loggedUser) return { ok: false, error: "NO_USER" };
       cb({ status: 200, message: "Logged !!" });
-      setUserData(loggedUser);
+      window.location.reload();
       setLoadingUser(false);
     } catch (error) {
       console.log(error.response);
