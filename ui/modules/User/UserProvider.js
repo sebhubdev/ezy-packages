@@ -10,12 +10,11 @@ const UserProvider = ({ children, authLoader, user }) => {
     setUserData(user);
   }, [user]);
 
-  const login = async (creadentials, cb = () => {}) => {
+  const login = async (credentials, cb = () => {}) => {
     try {
-      const res = await authLoader.login(creadentials);
+      const res = await authLoader.login({ credentials });
 
       const loggedUser = res.user;
-      console.log("loggedUser", res.user);
       if (!loggedUser) return { ok: false, error: "NO_USER" };
       cb({ status: 200, message: "Logged !!" });
       setUserData(loggedUser);
@@ -31,10 +30,10 @@ const UserProvider = ({ children, authLoader, user }) => {
 
   const logout = async () => {
     try {
-      const res = await authLoader.logout();
+      await authLoader.logout({});
       setUserData(null);
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      console.log(error);
     }
   };
 
