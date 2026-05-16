@@ -2,7 +2,7 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 import BaseBtn from "./BaseBtn";
 
-const Link = ({ to, className, ...rest }) => {
+const Link = ({ to, className, variant = "link", ...rest }) => {
   const isExternal = /^https?:\/\//.test(to);
 
   if (isExternal) {
@@ -13,14 +13,14 @@ const Link = ({ to, className, ...rest }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        <BaseBtn {...rest} />
+        <BaseBtn {...rest} variant={variant} />
       </a>
     );
   }
 
   return (
     <RouterLink to={to} className={className}>
-      <BaseBtn {...rest} />
+      <BaseBtn {...rest} variant={variant} />
     </RouterLink>
   );
 };
