@@ -3,10 +3,27 @@ import HolderPage from "./HolderPage";
 import { UserContext } from "./UserProvider";
 import Loading from "../../components/molecules/Loading";
 
-const PrivateComponent = ({ children, acceptedRoles = [], ...rest }) => {
+const PrivateComponent = ({ children, acceptedRoles = "", ...rest }) => {
   const { userData } = useContext(UserContext);
+  const acceptedRolesArr = acceptedRoles
+    .split(",")
+    .map((role) => role.trim())
+    .filter(Boolean);
+  const rolesArr = userData.type
+    .split(",")
+    .map((role) => role.trim())
+    .filter(Boolean);
 
-  return <>{userData ? children : null}</>;
+  const roleMatch = acceptedRolesArr.some((item) => rolesArr.includes(item));
+
+  console.log(
+    "userData",
+    acceptedRoles.includes(userData.type),
+    acceptedRoles,
+    userData.type,
+  );
+
+  return <>{acceptedRolesArr.includes(userData.type) ? children : null}</>;
 };
 
 export default PrivateComponent;

@@ -10,7 +10,7 @@ const generateAliases = async () => {
   highlightMessage("info", "Generating aliases");
   const projects = await getAppsNames();
 
-  const destFile = path.resolve(root, "packages/engine/config/appsAliases.js");
+  const destFile = path.resolve(root, ".ezycore/appsAliases.js");
 
   const aliases = projects
     .map((project) => {
@@ -25,6 +25,10 @@ module.exports = {
     ${aliases}        
 };
   `;
+
+  await fsPromises.mkdir(path.dirname(destFile), {
+    recursive: true,
+  });
 
   await fsPromises.writeFile(destFile, appsAliasesContent);
 
