@@ -16,13 +16,6 @@ const PrivateComponent = ({ children, acceptedRoles = "", ...rest }) => {
 
   const roleMatch = acceptedRolesArr.some((item) => rolesArr.includes(item));
 
-  console.log(
-    "userData",
-    acceptedRoles.includes(userData.type),
-    acceptedRoles,
-    userData.type,
-  );
-
   return <>{acceptedRolesArr.includes(userData.type) ? children : null}</>;
 };
 
