@@ -7,7 +7,7 @@ const HotModuleReplacementPlugin =
   require("webpack").HotModuleReplacementPlugin;
 const Dotenv = require("dotenv-webpack");
 const alias = require("@ezycore/engine/config/aliases");
-const appsAliases = require("@ezycore/engine/config/appsAliases");
+const appsAliases = require("@root/.ezycore/appsAliases");
 const { root } = require("@ezycore/engine/config/paths");
 const cookieParser = require("cookie-parser");
 const appPath = process.env.APP_PATH;

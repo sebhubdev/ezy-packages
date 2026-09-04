@@ -22,7 +22,7 @@ const UserProvider = ({ children, authLoader, user }) => {
     } catch (error) {
       console.log(error.response);
       cb({
-        message: error.response.data.message,
+        message: error.response.statusText,
         status: error.response.status,
       });
     }

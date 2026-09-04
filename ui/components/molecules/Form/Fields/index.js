@@ -12,6 +12,7 @@ import SwitchField from "./SwitchField";
 import ColorField from "./ColorField";
 import DateField from "./DateField";
 import NumberField from "@ezycore/ui/components/molecules/Form/Fields/NumberField";
+import SelectField from "@ezycore/ui/components/molecules/Form/Fields/SelectField";
 
 export {
   TextField,
@@ -26,4 +27,5 @@ export {
   ColorField,
   DateField,
   NumberField,
+  SelectField,
 };

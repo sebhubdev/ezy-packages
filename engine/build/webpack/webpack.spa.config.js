@@ -5,7 +5,7 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const Dotenv = require("dotenv-webpack");
 const alias = require("@ezycore/engine/config/aliases");
-const appsAliases = require("@ezycore/engine/config/appsAliases");
+const appsAliases = require("@root/.ezycore/appsAliases");
 const webpack = require("webpack");
 
 const clientConf = (mode) => {

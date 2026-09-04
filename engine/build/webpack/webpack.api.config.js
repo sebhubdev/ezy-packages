@@ -2,7 +2,7 @@ require("module-alias/register");
 const path = require("path");
 const Dotenv = require("dotenv-webpack");
 const alias = require("@ezycore/engine/config/aliases");
-const appsAliases = require("@ezycore/engine/config/appsAliases");
+const appsAliases = require("@root/.ezycore/appsAliases");
 const webpack = require("webpack");
 
 const serverConf = (mode) => {
@@ -12,6 +12,7 @@ const serverConf = (mode) => {
     externals: {
       puppeteer: "commonjs puppeteer",
       "puppeteer-core": "commonjs puppeteer-core",
+      sharp: "commonjs sharp",
     },
     entry: path.resolve(process.env.APP_PATH, "server.js"),
     output: {
