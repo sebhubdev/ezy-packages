@@ -8,11 +8,6 @@
 .slider {
   position: relative;
   .swiper {
-    height: 150vw;
-
-    @media (min-width: $sm) {
-      height: 30vw;
-    }
     &-slide {
       img {
         display: flex;

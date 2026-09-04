@@ -31,6 +31,7 @@ const UserProvider = ({ children, authLoader, user }) => {
   const logout = async () => {
     try {
       await authLoader.logout({});
+      window.location.reload();
       setUserData(null);
     } catch (error) {
       console.log(error);

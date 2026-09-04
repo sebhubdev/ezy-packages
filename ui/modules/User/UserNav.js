@@ -15,7 +15,6 @@ const UserNav = ({ setIsOpen }) => {
       <div className="user-nav__inner">
         <div className="user-nav__logo">
           <Icon icon="user" />
-          ddd
         </div>
         <h3 className="user-nav__title color-primary mb-4 h1">
           Bonjour <strong>{userData.firstName}</strong>
