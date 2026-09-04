@@ -19,7 +19,7 @@ const generateAliases = async () => {
     .join(",\n\t\t");
 
   let appsAliasesContent = `const path = require("path");
-const { root } = require("./paths");
+const { root } = require("../packages/engine/config/paths");
 
 module.exports = {
     ${aliases}        
