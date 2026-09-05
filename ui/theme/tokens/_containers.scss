@@ -1,10 +1,15 @@
 @use "./breakpoints" as *;
+@use "@ezycore/ui/theme/mixins/media" as *;
 
 .ctn {
   width: 100%;
   margin: auto;
   max-width: $lg;
-  padding: 0 2rem;
+  padding: 0 1rem;
+
+  @include up(sm) {
+    padding: 0 2rem;
+  }
   &--full {
     max-width: 100%;
     padding: 0;
