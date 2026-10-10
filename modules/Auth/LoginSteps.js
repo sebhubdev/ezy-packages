@@ -3,7 +3,7 @@ import {
   LoginForm,
   PasswordRecover,
   CreateAccountForm,
-} from "@ezycore/ui/modules/User";
+} from "@ezycore/modules/Auth";
 import { Btn } from "@ezycore/ui/components/atoms/Btn";
 
 const LoginSteps = ({ onLogin }) => {

@@ -7,12 +7,12 @@ import Navigator from "@ezycore/ui/components/organisms/Navigator";
 import LangSelector from "@ezycore/ui/components/molecules/LangSelector";
 import langs from "@ezycore/modules/i18n/langs.json";
 import SearchBar from "@ezycore/ui/components/molecules/SearchBar";
-import LoginSteps from "@ezycore/ui/modules/User/LoginSteps";
-import { UserNav } from "@ezycore/ui/modules/User";
+import LoginSteps from "@ezycore/modules/Auth/LoginSteps";
+import { UserNav } from "@ezycore/modules/Auth";
 import Image from "@ezycore/ui/components/atoms/Image";
 import logo from "@ezycore/ui/assets/img/logo-sample.png";
-import { UserContext } from "@ezycore/ui/modules/User/UserProvider";
-import ShortAccount from "@ezycore/ui/modules/User/ShortAccount";
+import { UserContext } from "@ezycore/modules/Auth/UserProvider";
+import ShortAccount from "@ezycore/modules/Auth/ShortAccount";
 
 const Header = ({ nav, userData, setUserData }) => {
   const [isNavOpen, setisNavOpen] = React.useState(false);

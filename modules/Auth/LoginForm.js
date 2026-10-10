@@ -3,7 +3,7 @@ import Heading from "@ezycore/ui/components/atoms/Typo/Heading";
 import {
   TextField,
   PasswordField,
-} from "../../components/molecules/Form/Fields";
+} from "@ezycore/ui/components/molecules/Form/Fields";
 import { Btn } from "@ezycore/ui/components/atoms/Btn";
 import AlertMsg from "@ezycore/ui/components/atoms/AlertMsg/AlertMsg";
 import { UserContext } from "./UserProvider";

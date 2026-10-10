@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import HolderPage from "./HolderPage";
 import { UserContext } from "./UserProvider";
-import Loading from "../../components/molecules/Loading";
+import Loading from "@ezycore/ui/components/molecules/Loading";
 
 const PrivateContainer = ({ children, EscapeComponent, ...rest }) => {
   const { userData } = useContext(UserContext);

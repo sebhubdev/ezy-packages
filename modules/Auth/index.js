@@ -1,4 +1,4 @@
-import "./User.scss";
+import "./Auth.scss";
 
 import LoginForm from "./LoginForm";
 import PasswordRecover from "./PasswordRecover";

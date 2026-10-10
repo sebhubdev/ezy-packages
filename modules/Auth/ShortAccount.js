@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
-import Icon from "../../components/atoms/Icon";
+import Icon from "@ezycore/ui/components/atoms/Icon";
 import { UserContext } from "./UserProvider";
-import Modal from "../../components/organisms/Modal";
+import Modal from "@ezycore/ui/components/organisms/Modal";
 import UserNav from "./UserNav";
 import LoginSteps from "./LoginSteps";
 

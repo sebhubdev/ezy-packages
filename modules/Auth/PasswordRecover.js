@@ -1,6 +1,6 @@
 import React from "react";
 import Heading from "@ezycore/ui/components/atoms/Typo/Heading";
-import { TextField } from "../../components/molecules/Form/Fields";
+import { TextField } from "@ezycore/ui/components/molecules/Form/Fields";
 import Form from "@ezycore/ui/components/molecules/Form/Form";
 import { Btn } from "@ezycore/ui/components/atoms/Btn";
 
