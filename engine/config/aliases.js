@@ -1,21 +1,25 @@
+const fs = require("fs");
 const path = require("path");
 const { root } = require("./paths");
-module.exports = {
-  "@root": path.resolve(root),
-  "@ezycore": [
-    path.resolve(root, `${process.env.APP_PATH}/src/overrides`),
-    path.resolve(root, `packages/`),
-  ],
-  "@ui": [
-    path.resolve(root, `${process.env.APP_PATH}/src/overrides/ui`),
-    path.resolve(root, `packages/ui`),
-  ],
-  "@modules": [
-    path.resolve(root, `${process.env.APP_PATH}/src/overrides/modules`),
-    path.resolve(root, `packages/modules/`),
-  ],
-  "@shared": [
-    path.resolve(root, `${process.env.APP_PATH}/src/overrides/shared`),
-    path.resolve(root, `packages/shared/`),
-  ],
+
+const createAliases = (appPath) => {
+  if (typeof appPath !== "string" || !appPath.trim()) {
+    throw new Error("Cannot create aliases: provide a non-empty appPath (APP_PATH).");
+  }
+
+  const resolvedAppPath = path.resolve(root, appPath);
+  if (!fs.existsSync(resolvedAppPath) || !fs.statSync(resolvedAppPath).isDirectory()) {
+    throw new Error(`Cannot create aliases: app directory does not exist: ${resolvedAppPath}`);
+  }
+
+  const overrides = path.join(resolvedAppPath, "src/overrides");
+  return {
+    "@root": root,
+    "@ezycore": [overrides, path.join(root, "packages")],
+    "@ui": [path.join(overrides, "ui"), path.join(root, "packages/ui")],
+    "@modules": [path.join(overrides, "modules"), path.join(root, "packages/modules")],
+    "@shared": [path.join(overrides, "shared"), path.join(root, "packages/shared")],
+  };
 };
+
+module.exports = createAliases;

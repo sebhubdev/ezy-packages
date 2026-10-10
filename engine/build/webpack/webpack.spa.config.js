@@ -4,11 +4,12 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const Dotenv = require("dotenv-webpack");
-const alias = require("@ezycore/engine/config/aliases");
+const createAliases = require("@ezycore/engine/config/aliases");
 const appsAliases = require("@root/.ezycore/appsAliases");
 const webpack = require("webpack");
 
 const clientConf = (mode) => {
+  const alias = createAliases(process.env.APP_PATH);
   return {
     mode: mode,
     target: "web",

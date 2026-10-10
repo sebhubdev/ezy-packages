@@ -9,8 +9,10 @@ const highlightMessage = require("@ezycore/shared/utils/highlightMessage");
 
 const appsDir = path.resolve(process.cwd(), "apps");
 const args = process.argv.slice(3);
+const { generateAliases } = require("@ezycore/engine/generators");
 
 const execute = async () => {
+  await generateAliases();
   let projects = args.length
     ? args
     : await fsPromises.readdir(appsDir, { withFileTypes: false });
@@ -22,7 +24,7 @@ const execute = async () => {
 
   const projectsToLaunch = [];
 
-  projects.map(async (project) => {
+  projects.map((project) => {
     const appPath = path.resolve(process.cwd(), `apps/${project}`);
     process.env.APP_PATH = appPath;
 
@@ -71,4 +73,7 @@ const execute = async () => {
   });
 };
 
-execute();
+execute().catch((error) => {
+  highlightMessage("error", error.message);
+  process.exitCode = 1;
+});

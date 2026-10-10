@@ -5,12 +5,13 @@ const Dotenv = require("dotenv-webpack");
 const LoadablePlugin = require("@loadable/webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const nodeExternals = require("webpack-node-externals");
-const alias = require("@ezycore/engine/config/aliases");
+const createAliases = require("@ezycore/engine/config/aliases");
 const appsAliases = require("@root/.ezycore/appsAliases");
 
 const isDev = process.env.NODE_ENV == "development";
 
 const serverConf = (mode) => {
+  const alias = createAliases(process.env.APP_PATH);
   return {
     mode: isDev ? "development" : "production",
     target: "node",
@@ -99,6 +100,7 @@ const serverConf = (mode) => {
 };
 
 const clientConf = (mode) => {
+  const alias = createAliases(process.env.APP_PATH);
   return {
     mode: isDev ? "development" : "production",
     target: "web",
