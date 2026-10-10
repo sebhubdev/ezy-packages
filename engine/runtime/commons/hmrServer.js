@@ -32,19 +32,6 @@ const devServer = () => {
     module: {
       rules: [
         {
-          test: /\.(ts|tsx)$/,
-          exclude: /node_modules/,
-          use: [
-            {
-              loader: "ts-loader",
-              options: {
-                transpileOnly: true,
-                compilerOptions: { noEmit: false },
-              },
-            },
-          ],
-        },
-        {
           test: /\.jsx?$/,
           exclude: /node_modules/,
           use: {
@@ -114,7 +101,7 @@ const devServer = () => {
     ],
     resolve: {
       alias: { ...appsAliases, ...alias },
-      extensions: [".tsx", ".ts", ".js", ".jsx"],
+      extensions: [".js", ".jsx"],
     },
     stats: {
       preset: "errors-warnings",

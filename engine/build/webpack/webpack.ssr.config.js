@@ -27,7 +27,7 @@ const serverConf = (mode) => {
     module: {
       rules: [
         {
-          test: /\.[jt]sx?$/,
+          test: /\.jsx?$/,
           exclude: /node_modules/,
           use: {
             loader: "babel-loader",
@@ -35,7 +35,6 @@ const serverConf = (mode) => {
               presets: [
                 "@babel/preset-env",
                 "@babel/preset-react",
-                "@babel/preset-typescript",
               ],
               plugins: ["@loadable/babel-plugin"],
             },
@@ -80,7 +79,7 @@ const serverConf = (mode) => {
     },
     resolve: {
       alias: { ...appsAliases, ...alias },
-      extensions: [".ts", ".tsx", ".js", ".jsx"],
+      extensions: [".js", ".jsx"],
     },
     stats: {
       preset: "errors-warnings",
@@ -119,7 +118,7 @@ const clientConf = (mode) => {
     module: {
       rules: [
         {
-          test: /\.[jt]sx?$/,
+          test: /\.jsx?$/,
           exclude: /node_modules/,
           use: {
             loader: "babel-loader",
@@ -127,7 +126,6 @@ const clientConf = (mode) => {
               presets: [
                 ["@babel/preset-env", { targets: { node: "current" } }],
                 "@babel/preset-react",
-                "@babel/preset-typescript",
               ],
               plugins: ["@loadable/babel-plugin"],
             },
@@ -188,7 +186,7 @@ const clientConf = (mode) => {
     ],
     resolve: {
       alias: { ...appsAliases, ...alias },
-      extensions: [".ts", ".tsx", ".js", ".jsx"],
+      extensions: [".js", ".jsx"],
     },
     stats: {
       preset: "errors-warnings",

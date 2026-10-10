@@ -1,5 +1,0 @@
-import "./Icon.scss";
-import Icon, { type IconProps } from "./Icon";
-
-export default Icon;
-export type { IconProps };

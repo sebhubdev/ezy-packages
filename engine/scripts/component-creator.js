@@ -20,22 +20,6 @@ const ${componentName} = ({}) => {
   
 export default ${componentName};`;
 
-const storiesTitle = path.charAt(0).toUpperCase() + path.slice(1);
-const storiesContent = `import ${componentName} from "./${componentName}";
-
-export default {
-  title: "${storiesTitle}/${componentName}",
-  component: ${componentName},
-  tags: ["autodocs"],
-  parameters: {
-    layout: "centered",
-  },
-};
-
-export const Default = {
-  args: {},
-};`;
-
 const sassContent = `
     .${spinalName} {}
 `;
@@ -60,10 +44,6 @@ async function createFiles() {
     console.log(chalk.green.bold("Folder created!"));
     await fsPromises.writeFile(`${dest}/index.js`, indexContent);
     await fsPromises.writeFile(`${dest}/${componentName}.js`, componentContent);
-    // await fsPromises.writeFile(
-    //   `${dest}/${componentName}.stories.js`,
-    //   storiesContent,
-    // );
     await fsPromises.writeFile(`${dest}/${componentName}.scss`, sassContent);
   } catch (err) {
     console.log(err);
@@ -80,7 +60,6 @@ createFiles().then(() => {
     
       ${chalk.green(`index.js`)}
       ${chalk.green(`${componentName}.js`)}
-      ${chalk.green(`${componentName}.stories.js`)}
       ${chalk.green(`${componentName.toLowerCase()}.scss`)}
     `;
 

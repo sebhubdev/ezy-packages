@@ -24,14 +24,13 @@ const serverConf = (mode) => {
     module: {
       rules: [
         {
-          test: /\.[jt]sx?$/,
+          test: /\.jsx?$/,
           exclude: /node_modules/,
           use: {
             loader: "babel-loader",
             options: {
               presets: [
                 ["@babel/preset-env", { targets: { node: "18" } }],
-                "@babel/preset-typescript",
               ],
             },
           },
@@ -53,7 +52,7 @@ const serverConf = (mode) => {
         "utf-8-validate": false,
         bufferutil: false,
       },
-      extensions: [".ts", ".tsx", ".js", ".jsx"],
+      extensions: [".js", ".jsx"],
     },
     node: {
       __dirname: false,
