@@ -3,11 +3,13 @@ import { BaseLayout } from "@ezycore/ui/components/layout";
 import useGetAppData from "@ezycore/engine/runtime/commons/useGetAppData";
 import RouterCreator from "@ezycore/engine/runtime/router/RouterCreator";
 import routes from "../routes/routes";
+import Header from "../components/layout/Header/Header";
+import Footer from "../components/layout/Footer/Footer";
 
 const App = ({ initialData }) => {
   const { pageResponse, loading } = useGetAppData({ initialData, routes });
   return (
-    <BaseLayout loading={loading}>
+    <BaseLayout header={<Header />} footer={<Footer />} loading={loading}>
       <RouterCreator routes={routes} pageResponse={pageResponse} />
     </BaseLayout>
   );

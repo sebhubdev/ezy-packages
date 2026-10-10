@@ -1,2 +1,8 @@
 @use "./tokens";
 @use "@ezycore/ui/theme";
+@use "../../components/components";
+
+.sample-page {
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}

@@ -1,2 +1,7 @@
-// Add routes when the app gets its first pages. An empty app returns 404.
-export default [];
+import Home from "../pages/Home";
+import About from "../pages/About";
+
+export default [
+  { id: "home", path: "/", component: Home },
+  { id: "about", path: "/about", component: About },
+];
