@@ -73,7 +73,7 @@ const ssrWatcher = () => {
 const hmrWatcher = () => {
   if (nodemonProc) return;
 
-  highlightMessage("info", `Launching HMR`);
+  highlightMessage("info", `Launching HMR for ${process.env.APP_NAME}`);
   const file = path.resolve(
     root,
     "packages/engine/runtime/commons/hmrServer.js",

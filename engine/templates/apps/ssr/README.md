@@ -1,17 +1,21 @@
 # SSR skeleton
 
-This is the source template, not an installed workspace app. Copy its contents
-into `apps/<name>`, set `name` in package.json and app.config.js, and optionally
-copy `.env.sample` to `.env`. There is no create-app command yet.
-
-From the repository root:
+Create a new SSR app from the repository root:
 
 ```sh
+npm run ezy:create-app -- my-app --type ssr
 npm install
-npm run dev -- <name>
-npm run build -- <name>
-npm run start -- <name>
+npm run dev -- my-app
+npm run build -- my-app
+npm run start -- my-app
 ```
+
+The command sets the app name, document title and workspace identity, copies
+`.env.sample` to `.env`, and generates aliases and editor configs. The default
+port skips ports declared by existing apps. Use `--port 3010` for an explicit
+port; the command does not inspect running processes.
+
+Only SSR is available for now. Existing destinations are never overwritten.
 
 Home and About are sample pages in `src/pages`, with routes in `src/routes`.
 The app owns its Header, Footer and public navigation. Unknown routes return

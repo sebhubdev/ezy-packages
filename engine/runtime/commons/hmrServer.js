@@ -136,7 +136,7 @@ const devServer = () => {
   });
 
   app.listen(port, async () => {
-    console.log(`Started server on port "${port}".`);
+    console.log(`Started ${process.env.APP_NAME} on port "${port}".`);
     if (launchProjectInNavigator) {
       import("open").then((res) => {
         const open = res.default;
