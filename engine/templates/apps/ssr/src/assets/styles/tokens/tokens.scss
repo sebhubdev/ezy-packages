@@ -1,2 +1,9 @@
 // Configure the core tokens here before the theme is loaded.
-@use "@ezycore/ui/theme/tokens";
+@use "@ezycore/ui/theme/tokens" with (
+  $font-family-primary: ("Inter", "Helvetica Neue", Arial, sans-serif),
+  $color-primary: #ff751f,
+  $color-tertiary: #ff751f,
+  $color-text: #f3f3ef,
+  $bg-body: #1c2329,
+  $bg-muted: #2f363d
+);

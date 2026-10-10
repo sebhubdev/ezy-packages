@@ -1,5 +1,20 @@
 .app-footer {
-  padding: 2rem 0;
-  background: var(--color-primary);
-  color: var(--color-white);
+  padding: 2.4rem 0;
+  background: transparent;
+  color: var(--app-muted);
+  font-size: 1.2rem;
+  border-top: 1px solid var(--app-border);
+  &__inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    .app-brand__wordmark { font-size: 1.8rem; }
+  }
 }

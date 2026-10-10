@@ -1,0 +1,10 @@
+.app-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.2rem;
+  color: var(--color-text);
+
+  &__mascot { display: block; width: 4.2rem; height: 5.2rem; object-fit: contain; }
+  &__wordmark { font-size: 2.6rem; font-weight: 500; letter-spacing: -0.08rem; white-space: nowrap; }
+  &__wordmark > span { color: var(--app-accent); }
+}

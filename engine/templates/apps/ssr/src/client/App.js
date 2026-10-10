@@ -9,7 +9,7 @@ import Footer from "../components/layout/Footer/Footer";
 const App = ({ initialData }) => {
   const { pageResponse, loading } = useGetAppData({ initialData, routes });
   return (
-    <BaseLayout header={<Header />} footer={<Footer />} loading={loading}>
+    <BaseLayout className="ezy-layout" header={<Header />} footer={<Footer />} loading={loading}>
       <RouterCreator routes={routes} pageResponse={pageResponse} />
     </BaseLayout>
   );

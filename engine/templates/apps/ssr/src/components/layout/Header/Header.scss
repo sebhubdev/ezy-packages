@@ -1,7 +1,8 @@
 .app-header {
-  background: var(--color-primary);
-  color: var(--color-white);
-  padding: 2rem 0;
+  background: transparent;
+  color: var(--color-text);
+  padding: 1.6rem 0;
+  border-bottom: 1px solid var(--app-border);
 
   &__inner, &__nav {
     display: flex;
@@ -15,10 +16,19 @@
     text-decoration: none;
     &:focus-visible { outline: 2px solid currentColor; outline-offset: 4px; }
   }
-  &__brand { font-weight: bold; }
+  &__brand {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 1.7rem;
+    font-weight: 500;
+  }
   &__nav a {
-    padding: 0.5rem 0;
+    padding: 0.8rem 0;
+    color: var(--app-muted);
+    font-size: 1.3rem;
     border-bottom: 2px solid transparent;
-    &.active { border-bottom-color: currentColor; }
+    &:hover, &.active { color: var(--color-text); }
+    &.active { border-bottom-color: var(--app-accent); }
   }
 }

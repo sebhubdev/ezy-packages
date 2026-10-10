@@ -18,7 +18,32 @@ port; the command does not inspect running processes.
 Only SSR is available for now. Existing destinations are never overwritten.
 
 Home and About are sample pages in `src/pages`, with routes in `src/routes`.
-The app owns its Header, Footer and public navigation. Unknown routes return
+The default presentation is dark charcoal with orange accents, inspired by Ezy.
+Home shows the waving mascot, "Welcome to EzyCore", a short subtitle and an About
+link. About briefly introduces EzyCore and links back home. The default content and document language are English.
+Replace this sample content with your app's own pages; no tools or domain features
+are installed. The layout is responsive, with visible keyboard focus states.
+
+App-specific Sass defaults live in `src/assets/styles/tokens/tokens.scss`.
+Accent, border and muted-text variables live on `.ezy-layout` in the style entrypoint;
+page styles live in `src/pages/Pages.scss`. These defaults do not change the core
+theme or existing apps.
+The app owns its Header, Footer and public navigation. EzyCore branding is included
+as local files in `src/assets/img`: color, dark-background and monochrome PNGs,
+plus `ezycore-mascot-dark.png` (standing) and `ezycore-mascot-wave.png` (waving),
+both without the wordmark.
+`src/components/Logo/Logo.js` accepts `variant="color"`, `"dark"` or `"mono"`.
+`src/components/Brand/Brand.js` combines a standalone mascot with a horizontal
+EzyCore wordmark for the header; the footer uses its text-only variant after
+"Powered by". Customize Brand to give the app its own identity. The Logo component
+and PNG variants remain available for other uses. The original branding and preview live in the core at
+`packages/ui/assets/branding/ezycore`.
+
+`public` includes the SVG favicon, an ICO fallback and PNGs at 16, 32, 48, 180 and
+256 px. `app.config.js` selects `/favicon.ico`; you can select `/favicon.svg`
+instead. The 180 px PNG is available for an Apple touch icon if you add its link.
+
+Unknown routes return
 the core 404 page. No features, API service or authentication provider is required.
 
 `BaseLayout` accepts `header`, `footer` and `extras` React nodes. With no header
@@ -33,3 +58,7 @@ Environment priority: shell, app .env, app.config.js defaults. Server variables
 are read at runtime. `document` options are compiled into the HTML; rebuild after
 changing them. Public files keep their URLs (public/favicon.svg → /favicon.svg).
 Set SSR_DISABLED=false to test SSR in development; true selects client HMR.
+
+The future EzyCore website direction is recorded in
+`packages/docs/design/ezycore-website.md`. Its planned Tools, Docs and getting-started
+sections are not installed by this base template.

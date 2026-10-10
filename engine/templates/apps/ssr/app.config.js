@@ -4,8 +4,9 @@ export default {
   port: 3000,
   document: {
     lang: "en",
-    theme: "light",
+    theme: "dark",
+    themeColor: "#1c2329",
     title: "New app",
-    favicon: "/favicon.svg",
+    favicon: "/favicon.ico",
   },
 };

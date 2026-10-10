@@ -2,27 +2,18 @@ import React from "react";
 import LoginSteps from "./LoginSteps";
 import Modal from "@ezycore/ui/components/organisms/Modal";
 import { Btn } from "@ezycore/ui/components/atoms/Btn";
-import Image from "@ezycore/ui/components/atoms/Image";
-import logo from "@ezycore/ui/assets/img/logo-sample.png";
 
-const HolderPage = ({ setUserData }) => {
+const HolderPage = ({ logo }) => {
   const [showLogin, setShowLogin] = React.useState(false);
 
   const handleLogin = () => {
     setShowLogin(true);
   };
 
-  const image = {
-    url: logo,
-    alt: "Logo",
-  };
-
   return (
     <div className="holder-page">
       <div className="holder-page__inner">
-        <div className="holder-page__image">
-          <Image image={image} />
-        </div>
+        {logo && <div className="holder-page__image">{logo}</div>}
         <div className="holder-page__info">Nous travaillons pour vous :)</div>
         <div className="holder-page__actions">
           <Btn appearance="link" onClick={handleLogin}>

@@ -1,8 +1,28 @@
 @use "./tokens";
 @use "@ezycore/ui/theme";
 @use "../../components/components";
+@use "../../pages/Pages";
 
-.sample-page {
-  padding-top: 4rem;
-  padding-bottom: 4rem;
+.ezy-layout {
+  --app-accent: var(--color-tertiary);
+  --app-muted: #a8b7c4;
+  --app-border: #343e47;
+  --color-primary: var(--app-accent);
+  background: radial-gradient(ellipse at 50% 32%, #242e35, var(--bg-body) 70%);
+  color: var(--color-text);
+  font-size: 1.4rem;
+  font-family: var(--font-family-primary);
+
+  .ctn--lg { padding-inline: 3rem; }
+  button, input { font: inherit; }
+  button { cursor: pointer; }
+  a { text-decoration: none; }
+  a:focus-visible, button:focus-visible, input:focus-visible {
+    outline: 2px solid var(--app-accent);
+    outline-offset: 5px;
+  }
+
+  @media (max-width: 600px) {
+    .ctn--lg { padding-inline: 2rem; }
+  }
 }
