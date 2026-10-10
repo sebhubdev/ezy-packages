@@ -15,10 +15,12 @@ $breakpoints: (
   lg: $lg,
   xl: $xl,
   xxl: $xxl,
-);
+) !default;
 
-:root {
-  @each $name, $value in $breakpoints {
-    --bp-#{$name}: #{$value};
+@mixin emit-breakpoints {
+  :root {
+    @each $name, $value in $breakpoints {
+      --bp-#{$name}: #{$value};
+    }
   }
 }

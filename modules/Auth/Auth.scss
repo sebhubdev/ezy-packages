@@ -55,7 +55,7 @@
   }
 
   &__title {
-    font-family: $font-family-secondary;
+    font-family: var(--font-family-secondary);
     color: var(--color-primary);
 
     strong {
@@ -84,7 +84,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $color-quaternary;
+  background-color: var(--color-quaternary);
   &__inner {
     text-align: center;
     display: flex;

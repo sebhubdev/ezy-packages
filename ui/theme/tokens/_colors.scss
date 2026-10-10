@@ -3,8 +3,8 @@
 // =============================
 $color-white: #ffffff !default;
 $color-black: #000000 !default;
-$white: #ffffff !default;
-$black: #000000 !default;
+$white: $color-white !default;
+$black: $color-black !default;
 
 // =============================
 // Neutral scale (grayscale)
@@ -55,13 +55,13 @@ $color-info: #3498db !default;
 $color-info-dark: #2c80b4 !default;
 $color-info-light: #6ab0e571 !default;
 
-$color-text: #111827;
+$color-text: #111827 !default;
 
 // =============================
 // Background
 // =============================
 
-$bg-primary: "red" !default;
+$bg-primary: $color-primary !default;
 $bg-grey: grey !default;
 $bg-body: $color-white !default;
 $bg-muted: $color-gray-50 !default;
@@ -70,60 +70,63 @@ $bg-inverse: $color-black !default;
 // =============================
 // CSS Vars export
 // =============================
-:root {
-  // Base
-  --color-white: #{$color-white};
-  --color-black: #{$color-black};
+@mixin emit-colors {
+  :root {
+    // Base
+    --color-white: #{$color-white};
+    --color-black: #{$color-black};
+    --color-text: #{$color-text};
 
-  // Grayscale
-  --color-gray-50: #{$color-gray-50};
-  --color-gray-100: #{$color-gray-100};
-  --color-gray-200: #{$color-gray-200};
-  --color-gray-300: #{$color-gray-300};
-  --color-gray-400: #{$color-gray-400};
-  --color-gray-500: #{$color-gray-500};
-  --color-gray-600: #{$color-gray-600};
-  --color-gray-700: #{$color-gray-700};
-  --color-gray-800: #{$color-gray-800};
-  --color-gray-900: #{$color-gray-900};
+    // Grayscale
+    --color-gray-50: #{$color-gray-50};
+    --color-gray-100: #{$color-gray-100};
+    --color-gray-200: #{$color-gray-200};
+    --color-gray-300: #{$color-gray-300};
+    --color-gray-400: #{$color-gray-400};
+    --color-gray-500: #{$color-gray-500};
+    --color-gray-600: #{$color-gray-600};
+    --color-gray-700: #{$color-gray-700};
+    --color-gray-800: #{$color-gray-800};
+    --color-gray-900: #{$color-gray-900};
 
-  // Brand / Semantic
-  --color-primary: #{$color-primary};
-  --color-primary-dark: #{$color-primary-dark};
-  --color-primary-light: #{$color-primary-light};
+    // Brand / Semantic
+    --color-primary: #{$color-primary};
+    --color-primary-dark: #{$color-primary-dark};
+    --color-primary-light: #{$color-primary-light};
 
-  --color-secondary: #{$color-secondary};
-  --color-secondary-dark: #{$color-secondary-dark};
-  --color-secondary-light: #{$color-secondary-light};
+    --color-secondary: #{$color-secondary};
+    --color-secondary-dark: #{$color-secondary-dark};
+    --color-secondary-light: #{$color-secondary-light};
 
-  --color-tertiary: #{$color-tertiary};
-  --color-tertiary-dark: #{$color-tertiary-dark};
-  --color-tertiary-light: #{$color-tertiary-light};
+    --color-tertiary: #{$color-tertiary};
+    --color-tertiary-dark: #{$color-tertiary-dark};
+    --color-tertiary-light: #{$color-tertiary-light};
 
-  --color-quaternary: #{$color-quaternary};
-  --color-quaternary-dark: #{$color-quaternary-dark};
-  --color-quaternary-light: #{$color-quaternary-light};
+    --color-quaternary: #{$color-quaternary};
+    --color-quaternary-dark: #{$color-quaternary-dark};
+    --color-quaternary-light: #{$color-quaternary-light};
 
-  --color-success: #{$color-success};
-  --color-success-dark: #{$color-success-dark};
-  --color-success-light: #{$color-success-light};
+    --color-success: #{$color-success};
+    --color-success-dark: #{$color-success-dark};
+    --color-success-light: #{$color-success-light};
 
-  --color-danger: #{$color-danger};
-  --color-danger-dark: #{$color-danger-dark};
-  --color-danger-light: #{$color-danger-light};
+    --color-danger: #{$color-danger};
+    --color-danger-dark: #{$color-danger-dark};
+    --color-danger-light: #{$color-danger-light};
 
-  --color-warning: #{$color-warning};
-  --color-warning-dark: #{$color-warning-dark};
-  --color-warning-light: #{$color-warning-light};
+    --color-warning: #{$color-warning};
+    --color-warning-dark: #{$color-warning-dark};
+    --color-warning-light: #{$color-warning-light};
 
-  --color-info: #{$color-info};
-  --color-info-dark: #{$color-info-dark};
-  --color-info-light: #{$color-info-light};
+    --color-info: #{$color-info};
+    --color-info-dark: #{$color-info-dark};
+    --color-info-light: #{$color-info-light};
 
-  // Backgrounds
-  --bg-body: #{$bg-body};
-  --bg-muted: #{$bg-muted};
-  --bg-inverse: #{$bg-inverse};
+    // Backgrounds
+    --bg-body: #{$bg-body};
+    --bg-muted: #{$bg-muted};
+    --bg-inverse: #{$bg-inverse};
+  }
 }
 
 $colors: (

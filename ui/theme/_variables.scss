@@ -1,0 +1,7 @@
+@use "./tokens/colors" as colors;
+@use "./tokens/typography" as typography;
+@use "./tokens/breakpoints" as breakpoints;
+
+@include colors.emit-colors;
+@include typography.emit-typography;
+@include breakpoints.emit-breakpoints;

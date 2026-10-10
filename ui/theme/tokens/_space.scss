@@ -33,7 +33,7 @@ $spaces: (
   12: $space-12,
   16: $space-16,
   20: $space-20,
-);
+) !default;
 
 // ===============================
 // space() helper

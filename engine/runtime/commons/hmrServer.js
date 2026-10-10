@@ -1,3 +1,4 @@
+const createSassOptions = require("../../build/commons/createSassOptions");
 require("module-alias/register");
 const path = require("path");
 const express = require("express");
@@ -55,12 +56,7 @@ const devServer = () => {
             },
             {
               loader: "sass-loader",
-              options: {
-                sourceMap: true,
-                api: "modern",
-                implementation: require("sass"),
-                webpackImporter: true,
-              },
+              options: createSassOptions(appPath),
             },
           ],
         },

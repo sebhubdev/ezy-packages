@@ -1,3 +1,4 @@
+const createSassOptions = require("../commons/createSassOptions");
 require("module-alias/register");
 const path = require("path");
 const webpack = require("webpack");
@@ -143,7 +144,10 @@ const clientConf = (mode) => {
               },
             },
             "css-loader",
-            "sass-loader",
+            {
+              loader: "sass-loader",
+              options: createSassOptions(process.env.APP_PATH),
+            },
           ],
         },
         {

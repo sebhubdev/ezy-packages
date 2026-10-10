@@ -2,7 +2,7 @@
 @use "@ezycore/ui/theme/tokens" as *;
 .h1,
 h1 {
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
   font-size: 3.2rem;
   font-weight: 900;
   color: var(--color-primary);
@@ -19,7 +19,7 @@ h1 {
 
 .h2,
 h2 {
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
   font-size: 2.2rem;
 
   @media (min-width: $sm) {
@@ -34,7 +34,7 @@ h2 {
 .h3,
 h3 {
   font-size: 2rem;
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
   @media (min-width: $md) {
     font-size: 2rem;
   }
@@ -42,19 +42,19 @@ h3 {
 
 .h4,
 h4 {
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
   font-size: 2rem;
 }
 
 .h5,
 h5 {
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
   font-size: 1.2rem;
 }
 
 .h6,
 h6 {
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
   font-size: 1.2rem;
 }
 
@@ -65,7 +65,7 @@ h6 {
 }
 
 .text {
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
   font-size: 1.4rem;
   line-height: 2.4rem;
 
@@ -125,7 +125,7 @@ a {
 
 .fancy-title {
   color: var(--color-primary);
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
   font-size: 5rem;
   line-height: normal;
   padding: 0;
@@ -142,19 +142,19 @@ a {
 }
 
 .font-primary {
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
 }
 
 .font-primary-medium {
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
 }
 
 .font-secondary {
-  font-family: $font-family-secondary;
+  font-family: var(--font-family-secondary);
 }
 
 .font-secondary-light {
-  font-family: $font-family-primary;
+  font-family: var(--font-family-primary);
 }
 
 .style-title {

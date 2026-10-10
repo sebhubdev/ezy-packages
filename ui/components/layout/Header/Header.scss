@@ -169,7 +169,7 @@
 
             &__label {
               color: var(--color-white);
-              font-family: $font-family-primary;
+              font-family: var(--font-family-primary);
               transition: all 0.3s ease;
               position: relative;
 
