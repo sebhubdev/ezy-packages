@@ -3,19 +3,23 @@ const path = require("path");
 const JSON5 = require("json5");
 const { root } = require("../config/paths");
 const createAliases = require("../config/aliases");
+const writeGeneratedFile = require("../helpers/writeGeneratedFile");
 
 const toPaths = (aliases, basePath) =>
   Object.fromEntries(
     Object.entries(aliases).map(([name, targets]) => [
       `${name}/*`,
       (Array.isArray(targets) ? targets : [targets]).map((target) => {
-        const relative = path.relative(basePath, target).split(path.sep).join("/");
+        const relative = path
+          .relative(basePath, target)
+          .split(path.sep)
+          .join("/");
         return relative ? `${relative}/*` : "*";
       }),
     ]),
   );
 
-const writeConfig = async (directory, aliases, defaults) => {
+const prepareConfig = async (directory, aliases, defaults) => {
   const filename = path.join(directory, "jsconfig.json");
   let config = {};
   let previous;
@@ -44,7 +48,7 @@ const writeConfig = async (directory, aliases, defaults) => {
     },
   };
   const content = `${JSON.stringify(result, null, 2)}\n`;
-  if (content !== previous) await fs.writeFile(filename, content);
+  return { filename, content };
 };
 
 const generateJsConfigs = async (projects, appsAliases) => {
@@ -54,17 +58,32 @@ const generateJsConfigs = async (projects, appsAliases) => {
       Array.isArray(targets) ? targets[targets.length - 1] : targets,
     ]),
   );
-  await writeConfig(root, { ...appsAliases, ...coreAliases }, {
-    include: ["packages"],
-    exclude: ["node_modules", "**/build", "**/dist"],
-  });
+  const configs = [
+    await prepareConfig(
+      root,
+      { ...appsAliases, ...coreAliases },
+      {
+        include: ["packages"],
+        exclude: ["node_modules", "**/build", "**/dist"],
+      },
+    ),
+  ];
 
   for (const project of projects) {
     const appPath = path.join(root, "apps", project);
-    await writeConfig(appPath, { ...appsAliases, ...createAliases(appPath) }, {
-      include: ["src", "server", "*.js"],
-      exclude: ["node_modules", "build", "dist"],
-    });
+    configs.push(
+      await prepareConfig(
+        appPath,
+        { ...appsAliases, ...createAliases(appPath) },
+        {
+          include: ["src", "server", "*.js"],
+          exclude: ["node_modules", "build", "dist"],
+        },
+      ),
+    );
+  }
+  for (const { filename, content } of configs) {
+    await writeGeneratedFile(filename, content);
   }
 };
 

@@ -2,20 +2,17 @@ require("module-alias/register");
 const concurrently = require("concurrently");
 const chalk = require("chalk");
 const fs = require("fs");
-const fsPromises = require("fs/promises");
+const { getAppsNames } = require("../helpers");
 const dotenv = require("dotenv");
 const path = require("path");
 const highlightMessage = require("@ezycore/shared/utils/highlightMessage");
 
-const appsDir = path.resolve(process.cwd(), "apps");
 const args = process.argv.slice(3);
 const { generateAliases } = require("@ezycore/engine/generators");
 
 const execute = async () => {
   await generateAliases();
-  let projects = args.length
-    ? args
-    : await fsPromises.readdir(appsDir, { withFileTypes: false });
+  let projects = args.length ? args : await getAppsNames();
 
   if (!projects.length) {
     console.log(chalk.bold.red("No project to start"));

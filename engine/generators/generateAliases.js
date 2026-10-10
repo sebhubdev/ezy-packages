@@ -1,7 +1,7 @@
 require("module-alias/register");
 const highlightMessage = require("@ezycore/shared/utils/highlightMessage");
 const { root } = require("@ezycore/engine/config/paths");
-const fsPromises = require("fs/promises");
+const writeGeneratedFile = require("../helpers/writeGeneratedFile");
 const { getAppsNames } = require("@ezycore/engine/helpers");
 
 const path = require("path");
@@ -13,7 +13,10 @@ const generateAliases = async () => {
   const projects = (await getAppsNames()).sort();
   validateAppNames(projects);
   const appsAliases = Object.fromEntries(
-    projects.map((project) => [`@${project}`, path.join(root, "apps", project, "src")]),
+    projects.map((project) => [
+      `@${project}`,
+      path.join(root, "apps", project, "src"),
+    ]),
   );
 
   const destFile = path.resolve(root, ".ezycore/appsAliases.js");
@@ -28,17 +31,11 @@ const generateAliases = async () => {
 const { root } = require("../packages/engine/config/paths");
 
 module.exports = {
-  ${aliases},
-};
+${aliases ? `  ${aliases},\n` : ""}};
 `;
 
-  await fsPromises.mkdir(path.dirname(destFile), {
-    recursive: true,
-  });
-
-  await fsPromises.writeFile(destFile, appsAliasesContent);
-
   await generateJsConfigs(projects, appsAliases);
+  await writeGeneratedFile(destFile, appsAliasesContent);
 
   highlightMessage("success", "Aliases and jsconfig files generated !");
 };
