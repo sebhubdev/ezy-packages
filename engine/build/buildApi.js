@@ -7,13 +7,9 @@ const compiler = webpack(config);
 
 highlightMessage("info", `Compiling project ${process.env.APP_NAME}`);
 
-compiler.run((err, stats) => {
-  if (err) {
-    console.error(err);
-    return;
-  }
-
-  highlightMessage("success", `Project ${process.env.APP_NAME} compiled !`);
-
-  compiler.close(() => {});
-});
+require("./commons/runCompiler")(compiler)
+  .then(() => highlightMessage("success", `Project ${process.env.APP_NAME} compiled !`))
+  .catch((error) => {
+    console.error(error.message || error);
+    process.exitCode = 1;
+  });

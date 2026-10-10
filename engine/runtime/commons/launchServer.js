@@ -35,7 +35,7 @@ function startNodemon() {
     ],
     { stdio: "inherit", env: process.env },
   );
-  import("open").then((res) => {
+  if (process.env.LAUNCH_PROJECT_IN_NAVIGATOR === "true") import("open").then((res) => {
     const open = res.default;
     open(`http://localhost:${port}/`);
   });

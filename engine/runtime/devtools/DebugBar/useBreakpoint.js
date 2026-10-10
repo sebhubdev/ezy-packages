@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import { useState, useEffect } from "react";
 const getCssBreakpoints = () => {
   if (IS_SSR) return {};
 
@@ -16,42 +16,22 @@ const getCssBreakpoints = () => {
 };
 
 const useBreakpoint = () => {
-  const isBrowser = typeof window !== "undefined";
-
-  const breakpoints = getCssBreakpoints();
-
-  const [size, setSize] = useState(() => ({
-    w: isBrowser ? window.innerWidth : 0,
-    h: isBrowser ? window.innerHeight : 0,
-  }));
-
-  const getBp = (w) => {
-    let current = "xs";
-    for (const [name, min] of Object.entries(breakpoints)) {
-      if (w >= min) current = name;
-    }
-    return current;
-  };
-
+  // The first client render must match the server before reading the viewport.
+  const [size, setSize] = useState({ w: 0, h: 0, bp: "xs" });
   useEffect(() => {
-    if (IS_SSR) return;
-
     const onResize = () => {
-      setSize({
-        w: window.innerWidth,
-        h: window.innerHeight,
-      });
+      const w = window.innerWidth;
+      let bp = "xs";
+      for (const [name, min] of Object.entries(getCssBreakpoints())) {
+        if (w >= min) bp = name;
+      }
+      setSize({ w, h: window.innerHeight, bp });
     };
-
+    onResize();
     window.addEventListener("resize", onResize, { passive: true });
-    return () => {
-      window.removeEventListener("resize", onResize);
-    };
-  }, [isBrowser]);
-
-  const bp = useMemo(() => getBp(size.w), [size.w]);
-
-  return { ...size, bp };
+    return () => window.removeEventListener("resize", onResize);
+  }, []);
+  return size;
 };
 
 export default useBreakpoint;

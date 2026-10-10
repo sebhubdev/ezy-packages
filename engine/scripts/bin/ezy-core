@@ -1,11 +1,21 @@
 #!/usr/bin/env node
 
+const path = require("path");
+const fs = require("fs");
+const { root, apps } = require("../../config/paths");
+const invocationDirectory = process.cwd();
+// Workspace scripts target their app without hardcoding its name.
+if (["dev", "build", "start"].includes(process.argv[2]) && process.argv.length === 3 &&
+    path.dirname(invocationDirectory) === apps &&
+    fs.existsSync(path.join(invocationDirectory, "app.config.js"))) {
+  process.argv.push(path.basename(invocationDirectory));
+}
+process.chdir(root);
 require("dotenv").config({ silent: true });
 
 const script = process.argv.length > 2 ? process.argv[2] : null;
 const args = process.argv.slice(3);
 
-console.log(__dirname);
 
 switch (script) {
   case "start":

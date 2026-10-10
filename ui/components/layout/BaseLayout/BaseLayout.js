@@ -13,13 +13,13 @@ const LayoutProvider = LayoutContext.Provider;
 const BaseLayout = ({
   userData,
   setUserData,
-  globalData,
-  layoutData,
+  globalData = {},
+  layoutData = {},
   children,
   loading,
 }) => {
   const headerHeight = 135;
-  layoutData.headerHeight = headerHeight;
+  const contextData = { ...layoutData, headerHeight };
 
   const [layoutScroll, setLayoutScroll] = useState(0);
   const [isBackToTopVisible, setIsBackToTopVisible] = useState(false);
@@ -35,11 +35,10 @@ const BaseLayout = ({
     setIsBackToTopVisible(layoutScroll > 200 ? true : false);
   }, [layoutScroll]);
 
-  if (!globalData) return;
 
   return (
     <>
-      <LayoutProvider value={layoutData}>
+      <LayoutProvider value={contextData}>
         <div className="base-layout" ref={layoutRef} onScroll={handleScroll}>
           <Header
             userData={userData}
@@ -63,7 +62,7 @@ const BaseLayout = ({
           </div>
           <Footer />
           <CookiesBanner />
-          {process.env.HIDE_DEBUG_BAR !== "true" && [<DebugBar />]}
+          {process.env.HIDE_DEBUG_BAR !== "true" && <DebugBar />}
         </div>
       </LayoutProvider>
     </>

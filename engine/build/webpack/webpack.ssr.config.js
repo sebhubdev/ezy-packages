@@ -1,3 +1,5 @@
+const CopyPlugin = require("copy-webpack-plugin");
+const getDocumentOptions = require("../commons/getDocumentOptions");
 const createSassOptions = require("../commons/createSassOptions");
 require("module-alias/register");
 const path = require("path");
@@ -9,12 +11,11 @@ const nodeExternals = require("webpack-node-externals");
 const createAliases = require("@ezycore/engine/config/aliases");
 const appsAliases = require("@root/.ezycore/appsAliases");
 
-const isDev = process.env.NODE_ENV == "development";
 
 const serverConf = (mode) => {
   const alias = createAliases(process.env.APP_PATH);
   return {
-    mode: isDev ? "development" : "production",
+    mode,
     target: "node",
     devtool: "source-map",
     entry: path.resolve(process.env.APP_PATH, "server", "server.js"),
@@ -62,10 +63,8 @@ const serverConf = (mode) => {
       ],
     },
     plugins: [
-      new Dotenv({
-        path: path.resolve(process.env.APP_PATH, ".env"),
-      }),
       new webpack.DefinePlugin({
+        APP_DOCUMENT: JSON.stringify(getDocumentOptions(process.env.APP_PATH)),
         APP_TYPE: JSON.stringify(process.env.APP_TYPE),
         APP_NAME: JSON.stringify(process.env.APP_NAME),
         SSR_DISABLED: false,
@@ -103,7 +102,7 @@ const serverConf = (mode) => {
 const clientConf = (mode) => {
   const alias = createAliases(process.env.APP_PATH);
   return {
-    mode: isDev ? "development" : "production",
+    mode,
     target: "web",
     devtool: "cheap-module-source-map",
     entry: path.resolve(process.env.APP_PATH, "src/client", "index.js"),
@@ -127,7 +126,7 @@ const clientConf = (mode) => {
             loader: "babel-loader",
             options: {
               presets: [
-                ["@babel/preset-env", { targets: { node: "current" } }],
+                "@babel/preset-env",
                 "@babel/preset-react",
               ],
               plugins: ["@loadable/babel-plugin"],
@@ -173,8 +172,10 @@ const clientConf = (mode) => {
     plugins: [
       new Dotenv({
         path: path.resolve(process.env.APP_PATH, ".env"),
+        systemvars: true,
       }),
       new webpack.DefinePlugin({
+        APP_DOCUMENT: JSON.stringify(getDocumentOptions(process.env.APP_PATH)),
         APP_TYPE: JSON.stringify(process.env.APP_TYPE),
         APP_NAME: JSON.stringify(process.env.APP_NAME),
         SSR_DISABLED: false,
@@ -189,6 +190,7 @@ const clientConf = (mode) => {
         chunkFilename: "statics/css/[name].chunk.css",
       }),
       new LoadablePlugin(),
+      new CopyPlugin({ patterns: [{ from: path.join(process.env.APP_PATH, "public"), to: "public", noErrorOnMissing: true }] }),
     ],
     resolve: {
       alias: { ...appsAliases, ...alias },

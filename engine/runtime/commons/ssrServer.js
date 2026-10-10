@@ -21,6 +21,10 @@ const ssrServer = (App, routes, globalLoader) => {
       ? "client/statics"
       : path.resolve(APP_PATH, "build/client/statics");
   app.use("/statics", express.static(staticsPath));
+  const publicPath = REMOTE == "true"
+    ? "client/public"
+    : path.resolve(APP_PATH, "build/client/public");
+  app.use(express.static(publicPath));
 
   app.get("*", async (req, res, next) => {
     try {

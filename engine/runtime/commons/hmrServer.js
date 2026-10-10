@@ -1,3 +1,4 @@
+const getDocumentOptions = require("../../build/commons/getDocumentOptions");
 const createSassOptions = require("../../build/commons/createSassOptions");
 require("module-alias/register");
 const path = require("path");
@@ -9,7 +10,6 @@ const HotModuleReplacementPlugin =
 const Dotenv = require("dotenv-webpack");
 const createAliases = require("@ezycore/engine/config/aliases");
 const appsAliases = require("@root/.ezycore/appsAliases");
-const { root } = require("@ezycore/engine/config/paths");
 const cookieParser = require("cookie-parser");
 const appPath = process.env.APP_PATH;
 const alias = createAliases(appPath);
@@ -17,8 +17,13 @@ require("dotenv").config({
   path: path.join(appPath, `.env`),
 });
 const launchProjectInNavigator =
-  process.env.LAUNCH_PROJECT_IN_NAVIGATOR === "true" ?? false;
+  process.env.LAUNCH_PROJECT_IN_NAVIGATOR === "true";
 const port = process.env.PORT ?? 3000;
+
+const renderHtmlDocument = require("./renderHtmlDocument");
+const devHtml = renderHtmlDocument(null, "", {
+  scriptTags: '<script src="/main.js"></script>',
+}, getDocumentOptions(appPath));
 
 const devServer = () => {
   const app = express();
@@ -85,8 +90,10 @@ const devServer = () => {
       new HotModuleReplacementPlugin(),
       new Dotenv({
         path: path.resolve(`${appPath}/.env`),
+        systemvars: true,
       }),
       new webpack.DefinePlugin({
+        APP_DOCUMENT: JSON.stringify(getDocumentOptions(appPath)),
         APP_TYPE: JSON.stringify(process.env.APP_TYPE),
         APP_NAME: JSON.stringify(process.env.APP_NAME),
         SSR_DISABLED: true,
@@ -125,9 +132,7 @@ const devServer = () => {
   app.use(express.static(`${appPath}/public`));
 
   app.get("*", (req, res) => {
-    res.sendFile(
-      path.resolve(`${root}/packages/engine/runtime/commons/index.html`),
-    );
+    res.send(devHtml);
   });
 
   app.listen(port, async () => {
