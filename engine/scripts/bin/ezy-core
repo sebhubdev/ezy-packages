@@ -23,6 +23,9 @@ switch (script) {
   case "create-component":
     require("../component-creator");
     break;
+  case "rename-app":
+    require("../rename-app");
+    break;
   case "generate":
     require("../generate");
     break;
