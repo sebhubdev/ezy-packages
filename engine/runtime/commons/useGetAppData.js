@@ -1,9 +1,7 @@
-// useGetAppData.js
 import { useEffect, useMemo, useRef, useState } from "react";
-import { useLocation, useMatch, useSearchParams } from "react-router-dom";
-import resolveRouteMatch from "@ezycore/engine/runtime/router/resolveRouteMatch";
-import normalizeError from "@ezycore/engine/runtime/errors/normalizeError";
-import resolveRequest from "@ezycore/engine/runtime/requests/resolveRequest";
+import { matchPath, useLocation } from "react-router-dom";
+import resolveRouteMatch from "../router/resolveRouteMatch";
+import resolveLoader from "../requests/resolveLoader";
 
 const makeResponse = (data = null) => ({
   data,
@@ -13,122 +11,110 @@ const makeResponse = (data = null) => ({
 });
 
 const useGetAppData = ({ initialData, routes, globalLoader }) => {
-  const firstHydrateSkipped = useRef(false);
   const { pathname, search } = useLocation();
-  const [loading, setLoading] = useState(false);
-  const [globalResponse, setGlobalResponse] = useState(
-    !SSR_DISABLED ? initialData?.globalResponse : makeResponse(),
-  );
-
   const fullPath = pathname + search;
-
-  const [pageResponse, setPageResponse] = useState(
-    !SSR_DISABLED ? initialData?.pageResponse : makeResponse(),
+  const hydratedPath = useRef(!SSR_DISABLED ? initialData?.path : null);
+  const [globalResponse, setGlobalResponse] = useState(() =>
+    !SSR_DISABLED && initialData?.globalResponse
+      ? { ...initialData.globalResponse, loading: false }
+      : { ...makeResponse(), loading: Boolean(globalLoader) },
   );
-
-  const lastPathRef = useRef(null);
-
+  const [pageResponse, setPageResponse] = useState(() =>
+    !SSR_DISABLED && initialData?.pageResponse
+      ? { ...initialData.pageResponse, loading: false }
+      : makeResponse(),
+  );
+  const [loadedPath, setLoadedPath] = useState(hydratedPath.current);
+  const lastPathRef = useRef(hydratedPath.current);
   const route = useMemo(
     () => resolveRouteMatch(pathname, routes),
     [pathname, routes],
   );
-
-  const match = useMatch(route?.path || "/__no_match__");
-  const params = match?.params;
-  const [searchParams] = useSearchParams();
-
-  const query = Object.fromEntries(searchParams.entries());
-
-  useEffect(() => {
-    if (!SSR_DISABLED || globalResponse.data) return;
-
-    setGlobalResponse((prev) => ({ ...prev, loading: true, error: null }));
-
-    (async () => {
-      try {
-        const data = await globalLoader();
-
-        setGlobalResponse({ ...data, loading: false });
-      } catch (error) {
-        console.log(error);
-        setGlobalResponse({ data: null, status: 500, error, loading: false });
-      }
-    })();
-  }, []);
+  const params = useMemo(
+    () =>
+      route
+        ? matchPath(
+            { path: route.path, caseSensitive: route.caseSensitive },
+            pathname,
+          )?.params || {}
+        : {},
+    [route, pathname],
+  );
+  const query = useMemo(
+    () => Object.fromEntries(new URLSearchParams(search)),
+    [search],
+  );
 
   useEffect(() => {
-    if (lastPathRef.current === fullPath) return;
-    lastPathRef.current = fullPath;
-    if (initialData?.path === fullPath && !firstHydrateSkipped.current) {
-      firstHydrateSkipped.current = true;
-      setLoading(false);
-      return;
-    }
-    setLoading(true);
+    if (!SSR_DISABLED && initialData?.globalResponse) return;
+    const controller = new AbortController();
+    let active = true;
+    setGlobalResponse((previous) => ({ ...previous, loading: true }));
+    resolveLoader(globalLoader, {
+      params: {},
+      query,
+      signal: controller.signal,
+    }).then((response) => {
+      if (active) setGlobalResponse({ ...response, loading: false });
+    });
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [globalLoader, initialData]);
 
+  useEffect(() => {
     if (globalResponse.loading) return;
-
-    setPageResponse((prev) => ({ ...prev, loading: true, error: null }));
-
-    (async () => {
-      if (!route) {
-        console.log("No route found");
-
-        setPageResponse({
-          data: null,
-          status: 404,
-          error: "Page not found",
-          loading: false,
-        });
-        setLoading(false);
-        return;
+    // Keep skipping the hydrated path when StrictMode replays this effect.
+    if (hydratedPath.current === fullPath) return;
+    hydratedPath.current = null;
+    const controller = new AbortController();
+    let active = true;
+    lastPathRef.current = fullPath;
+    setPageResponse((previous) => ({
+      ...previous,
+      loading: true,
+      error: null,
+    }));
+    const load = async () => {
+      const response =
+        globalResponse.status >= 400
+          ? { ...globalResponse, loading: false }
+          : !route
+            ? { data: null, status: 404, error: { message: "Page not found" } }
+            : await resolveLoader(route.loader, {
+                params,
+                query,
+                signal: controller.signal,
+              });
+      if (active) {
+        setPageResponse({ ...response, loading: false });
+        setLoadedPath(fullPath);
       }
-
-      if (!route.loader) {
-        setPageResponse({
-          data: null,
-          status: 200,
-          error: null,
-          loading: false,
-        });
-        setLoading(false);
-        return;
-      }
-
-      console.log("here");
-
-      try {
-        const result = await route.loader({
-          params,
-          query,
-        });
-
-        setPageResponse({ ...result, loading: false });
-        setLoading(false);
-      } catch (error) {
-        console.log("Loader Error in useGetAppData", normalizeError(error));
-        setPageResponse({ ...normalizeError(error), loading: false });
-        setLoading(false);
-      }
-    })();
-  }, [
-    fullPath,
-    route,
-    params,
-    globalResponse.data,
-    globalResponse.loading,
-    searchParams,
-  ]);
+    };
+    load();
+    return () => {
+      active = false;
+      controller.abort();
+    };
+  }, [fullPath, route, params, query, globalResponse]);
 
   return {
     globalResponse,
-    pageResponse,
+    pageResponse: {
+      ...pageResponse,
+      loading:
+        globalResponse.loading ||
+        pageResponse.loading ||
+        loadedPath !== fullPath,
+    },
     lastPath: lastPathRef.current,
     pathname: fullPath,
     route,
     params,
     query,
-    loading: loading || lastPathRef.current !== fullPath,
+    loading:
+      globalResponse.loading || pageResponse.loading || loadedPath !== fullPath,
   };
 };
 

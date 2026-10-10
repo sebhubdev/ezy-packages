@@ -1,30 +1,21 @@
-import React from "react";
-import { Routes, Route } from "react-router-dom";
-import loadable from "@loadable/component";
-import Loading from "@ezycore/ui/components/molecules/Loading";
+import React, { useRef } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
 import StatusLayout from "@ezycore/ui/layouts/errors/StatusLayout";
 
-const cache = new Map();
-
-const getLoadable = (loader) => {
-  if (!cache.has(loader)) {
-    cache.set(loader, loader);
-  }
-  return cache.get(loader);
-};
-
 const RouterCreator = ({ routes, pageResponse }) => {
-  console.log("pageResponse", pageResponse);
-
+  const location = useLocation();
+  const renderedLocation = useRef(null);
+  // Keep the previous page mounted until the new route's data is ready.
+  if (!pageResponse.loading) renderedLocation.current = location;
+  if (!renderedLocation.current) return null;
   return (
-    <Routes>
-      {routes.map(({ path, component: loader }, key) => {
-        const Component = getLoadable(loader);
-
+    <Routes location={renderedLocation.current}>
+      {routes.map(({ id, path, caseSensitive, component: Component }) => {
         return (
           <Route
-            key={key}
+            key={id || path}
             path={path}
+            caseSensitive={caseSensitive}
             element={
               <StatusLayout
                 status={pageResponse.status}

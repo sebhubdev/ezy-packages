@@ -1,13 +1,15 @@
-import { matchPath } from "react-router-dom";
+import { matchRoutes } from "react-router-dom";
 
-export default (pathname, routes) => {
-  const route = routes.find((route) => {
-    if (matchPath({ path: route.path }, pathname)) {
-      return route;
-    }
-
-    return null;
-  });
-
-  return route;
+const resolveRouteMatch = (pathname, routes) => {
+  const matches = matchRoutes(
+    routes.map((route) => ({
+      path: route.path,
+      caseSensitive: route.caseSensitive,
+      route,
+    })),
+    pathname,
+  );
+  return matches?.[matches.length - 1].route.route;
 };
+
+export default resolveRouteMatch;

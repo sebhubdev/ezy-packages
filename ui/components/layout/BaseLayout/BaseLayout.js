@@ -46,8 +46,19 @@ const BaseLayout = ({
             setUserData={setUserData}
             nav={globalData?.menu?.main}
           />
-          <div className={`base-layout__content`}>
-            {loading ? <Loading /> : children}
+          <div className="base-layout__content" aria-busy={Boolean(loading)}>
+            <div className="base-layout__page" inert={loading ? "" : undefined}>
+              {children}
+            </div>
+            {loading && (
+              <div
+                className="base-layout__loading"
+                role="status"
+                aria-live="polite"
+              >
+                <Loading />
+              </div>
+            )}
             <BackToTop container={layoutRef} isVisible={isBackToTopVisible} />
           </div>
           <Footer />
