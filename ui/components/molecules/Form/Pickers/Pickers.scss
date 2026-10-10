@@ -1,4 +1,5 @@
 @use "@ezycore/ui/theme/tokens" as *;
+@use "../Fields/field-input" as *;
 
 .color-picker {
   position: relative;
@@ -28,180 +29,64 @@
 }
 
 .date-picker {
-  .react-datepicker-wrapper {
-    width: 100%;
+  position: relative;
+  width: 100%;
+  color: var(--color-primary);
+
+  input[type="date"] {
+    @include field-input;
+    min-width: 0;
+
+    &::-webkit-datetime-edit {
+      padding: 0;
+      color: inherit;
+      font: inherit;
+    }
   }
-  .react-datepicker {
-    border: 2px solid var(--color-quaternary);
-    border-radius: 1rem;
 
-    * {
-      font-family: $font-family-primary !important;
-      color: var(--color-primary);
-    }
+  &__icon {
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 2rem;
+    height: 2rem;
+    pointer-events: none;
+  }
 
-    &__triangle {
-      stroke: var(--color-quaternary);
-      fill: var(--color-quaternary);
+  // Keep the browser's clickable indicator beneath the themed icon.
+  @supports selector(input::-webkit-calendar-picker-indicator) {
+    input[type="date"] {
+      padding-right: 5rem;
 
-      path {
-        fill: var(--color-quaternary);
+      &::-webkit-calendar-picker-indicator {
+        position: absolute;
+        right: 2rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 2rem;
+        height: 2rem;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        cursor: pointer;
       }
     }
 
-    &__header {
-      background-color: var(--color-quaternary);
-      border-bottom: 2px solid var(--color-primary);
-    }
-
-    &__year-dropdown {
-      background-color: var(--color-quaternary);
-      border: 2px solid var(--color-quaternary);
-      box-shadow: 1px 1px 5px var(--color-primary);
-    }
-    &__year-read-view {
-      &--selected-year {
-        font-weight: 600;
-      }
-
-      &--down-arrow {
-        border: none;
-        transform: none;
-        &::before {
-          content: ">";
-          position: relative;
-          display: block;
-          margin: auto;
-          color: var(--color-primary);
-          font-size: 2rem;
-          line-height: 1.6rem;
-          font-weight: 600;
-          transform: rotate(90deg);
-        }
-      }
-    }
-
-    &__year-option {
-      font-size: 1rem;
-      font-weight: 600;
-      height: 3rem;
-      transition: 0.3s ease;
-      position: relative;
+    &__icon {
       display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &--selected {
-        height: 100%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 1.4rem;
-        color: $white;
-
-        &_year {
-          background-color: var(--color-primary);
-          color: $white;
-        }
-      }
-
-      &:hover {
-        background-color: var(--color-primary);
-        color: $white;
-
-        span {
-          color: $white;
-        }
-
-        .react-datepicker__navigation {
-          &--years {
-            &::before {
-              color: $white;
-            }
-          }
-        }
-      }
-
-      .react-datepicker__navigation {
-        &--years {
-          text-indent: 0;
-          width: 100%;
-          height: 100%;
-          display: block;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          top: 0;
-
-          &:hover {
-            &::before {
-              color: $white;
-            }
-          }
-
-          &::before {
-            content: ">";
-            position: relative;
-            display: block;
-            margin: auto;
-            color: var(--color-primary);
-            font-size: 2rem;
-            line-height: 1.6rem;
-            font-weight: 600;
-          }
-
-          &-upcoming {
-            &::before {
-              transform: rotate(-90deg);
-            }
-          }
-          &-previous {
-            &::before {
-              transform: rotate(90deg);
-            }
-          }
-        }
-      }
     }
+  }
 
-    &__navigation {
-      &-icon {
-        &::before {
-          border-color: var(--color-primary);
-        }
-      }
-    }
+  &--disabled {
+    opacity: 0.6;
 
-    &__current-month {
-      line-height: 1.4rem;
-      font-size: 1rem;
-      margin-bottom: 1rem;
-      font-family: $font-family-primary;
-      color: var(--color-primary);
-    }
+    input[type="date"] {
+      cursor: not-allowed;
 
-    &__day-names {
-      background-color: var(--color-quaternary);
-    }
-
-    &__day-name {
-    }
-
-    &__day-name,
-    &__day {
-      padding: 0.5rem;
-      font-size: 1.2rem;
-      font-weight: 700 !important;
-      span {
-        font-size: 1.2rem;
-        font-weight: 700 !important;
-      }
-    }
-
-    &__day {
-      &--selected,
-      &--selected:hover {
-        background-color: var(--color-quaternary);
+      &::-webkit-calendar-picker-indicator {
+        cursor: not-allowed;
       }
     }
   }

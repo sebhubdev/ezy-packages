@@ -1,0 +1,19 @@
+@use "@ezycore/ui/theme/tokens" as *;
+
+@mixin field-input {
+  display: block;
+  width: 100%;
+  height: 4rem;
+  padding: 0 2rem;
+  border: 2px solid var(--color-quaternary);
+  border-radius: 10rem;
+  outline: none;
+  background-color: var(--color-white);
+  color: var(--color-primary);
+  font: inherit;
+
+  &:focus {
+    outline: none;
+    box-shadow: $shadow-sm;
+  }
+}

@@ -1,4 +1,5 @@
 @use "@ezycore/ui/theme/tokens" as *;
+@use "./field-input" as *;
 .input {
   position: relative;
 
@@ -42,18 +43,7 @@
         z-index: 1;
 
         input {
-          border: 2px solid var(--color-quaternary);
-          display: block;
-          width: 100%;
-          border-radius: 10rem;
-          outline: none;
-          height: 4rem;
-          padding: 0 2rem;
-
-          &:focus {
-            outline: none;
-            box-shadow: $shadow-sm;
-          }
+          @include field-input;
         }
       }
       &__icon {

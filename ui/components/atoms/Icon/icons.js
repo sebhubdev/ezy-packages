@@ -1,3 +1,4 @@
+import calendar from "@ezycore/ui/assets/icons/calendar.svg";
 import facebook from "@ezycore/ui/assets/icons/facebook.svg";
 import instagram from "@ezycore/ui/assets/icons/instagram.svg";
 import star from "@ezycore/ui/assets/icons/star.svg";
@@ -22,6 +23,7 @@ import eyeclose from "@ezycore/ui/assets/icons/eye-close.svg";
 import leftArrow from "@ezycore/ui/assets/icons/leftArrow.svg";
 
 const ICONS = {
+  calendar,
   facebook,
   instagram,
   star,

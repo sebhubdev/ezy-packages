@@ -71,6 +71,10 @@ const BaseField = ({
               />
             ) : type == "date" ? (
               <DatePicker
+                {...rest}
+                required={required}
+                placeholder={placeholder}
+                autoComplete={autoComplete}
                 defaultValue={defaultValue}
                 name={name}
                 onChange={handleChange}
