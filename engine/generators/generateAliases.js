@@ -5,26 +5,32 @@ const fsPromises = require("fs/promises");
 const { getAppsNames } = require("@ezycore/engine/helpers");
 
 const path = require("path");
+const generateJsConfigs = require("./generateJsConfigs");
+const validateAppNames = require("./validateAppNames");
 
 const generateAliases = async () => {
   highlightMessage("info", "Generating aliases");
-  const projects = await getAppsNames();
+  const projects = (await getAppsNames()).sort();
+  validateAppNames(projects);
+  const appsAliases = Object.fromEntries(
+    projects.map((project) => [`@${project}`, path.join(root, "apps", project, "src")]),
+  );
 
   const destFile = path.resolve(root, ".ezycore/appsAliases.js");
 
   const aliases = projects
     .map((project) => {
-      return `"@${project}": path.resolve(root, 'apps/${project}/src/')`;
+      return `${JSON.stringify(`@${project}`)}: path.resolve(root, ${JSON.stringify(`apps/${project}/src/`)})`;
     })
-    .join(",\n\t\t");
+    .join(",\n  ");
 
-  let appsAliasesContent = `const path = require("path");
+  const appsAliasesContent = `const path = require("path");
 const { root } = require("../packages/engine/config/paths");
 
 module.exports = {
-    ${aliases}        
+  ${aliases},
 };
-  `;
+`;
 
   await fsPromises.mkdir(path.dirname(destFile), {
     recursive: true,
@@ -32,7 +38,9 @@ module.exports = {
 
   await fsPromises.writeFile(destFile, appsAliasesContent);
 
-  highlightMessage("success", "Aliases generated !");
+  await generateJsConfigs(projects, appsAliases);
+
+  highlightMessage("success", "Aliases and jsconfig files generated !");
 };
 
 module.exports = generateAliases;

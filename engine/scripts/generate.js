@@ -8,4 +8,7 @@ const generate = async () => {
   highlightMessage("success", "Generetion complete !");
 };
 
-generate();
+generate().catch((error) => {
+  highlightMessage("error", error.message);
+  process.exitCode = 1;
+});
