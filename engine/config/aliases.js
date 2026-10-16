@@ -15,10 +15,10 @@ const createAliases = (appPath) => {
   const overrides = path.join(resolvedAppPath, "src/overrides");
   return {
     "@root": root,
-    "@ezycore": [overrides, path.join(root, "packages")],
-    "@ui": [path.join(overrides, "ui"), path.join(root, "packages/ui")],
-    "@modules": [path.join(overrides, "modules"), path.join(root, "packages/modules")],
-    "@shared": [path.join(overrides, "shared"), path.join(root, "packages/shared")],
+    "@ezycore": [overrides, path.join(root, "core")],
+    "@ui": [path.join(overrides, "ui"), path.join(root, "core/ui")],
+    "@modules": [path.join(overrides, "modules"), path.join(root, "core/modules")],
+    "@shared": [path.join(overrides, "shared"), path.join(root, "core/shared")],
   };
 };
 

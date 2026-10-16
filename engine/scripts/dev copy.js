@@ -43,7 +43,7 @@ const execute = async () => {
       const command = {
         api: `cd apps/${project} && nodemon server.js`,
         spa: `cd apps/${project} && node server/dev-server.js --env production`,
-        ssr: `PROJECT=${project} node packages/runtime/src/ssr/createDevServer.js --env production`,
+        ssr: `PROJECT=${project} node core/runtime/src/ssr/createDevServer.js --env production`,
       }[projectType];
 
       projectsToLaunch.push({

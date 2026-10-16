@@ -37,7 +37,7 @@ both without the wordmark.
 EzyCore wordmark for the header; the footer uses its text-only variant after
 "Powered by". Customize Brand to give the app its own identity. The Logo component
 and PNG variants remain available for other uses. The original branding and preview live in the core at
-`packages/ui/assets/branding/ezycore`.
+`core/ui/assets/branding/ezycore`.
 
 `public` includes the SVG favicon, an ICO fallback and PNGs at 16, 32, 48, 180 and
 256 px. `app.config.js` selects `/favicon.ico`; you can select `/favicon.svg`
@@ -60,5 +60,5 @@ changing them. Public files keep their URLs (public/favicon.svg → /favicon.svg
 Set SSR_DISABLED=false to test SSR in development; true selects client HMR.
 
 The future EzyCore website direction is recorded in
-`packages/docs/design/ezycore-website.md`. Its planned Tools, Docs and getting-started
+`core/docs/design/ezycore-website.md`. Its planned Tools, Docs and getting-started
 sections are not installed by this base template.

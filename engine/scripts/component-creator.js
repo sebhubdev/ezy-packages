@@ -3,7 +3,7 @@ const chalk = require("chalk");
 
 const path = process.argv[3];
 const componentName = process.argv[4];
-const dest = `packages/ui/src/components/${path}/${componentName}`;
+const dest = `core/ui/src/components/${path}/${componentName}`;
 const spinalName = componentName
   .replace(/([a-z])([A-Z])/g, "$1-$2") // separa antes de mayúscula
   .toLowerCase();

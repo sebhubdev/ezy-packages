@@ -28,7 +28,7 @@ const generateAliases = async () => {
     .join(",\n  ");
 
   const appsAliasesContent = `const path = require("path");
-const { root } = require("../packages/engine/config/paths");
+const { root } = require("../core/engine/config/paths");
 
 module.exports = {
 ${aliases ? `  ${aliases},\n` : ""}};

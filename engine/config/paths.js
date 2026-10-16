@@ -4,5 +4,5 @@ const root = path.resolve(__dirname, "../../..");
 module.exports = {
   root,
   apps: path.join(root, "apps"),
-  packages: path.join(root, "packages"),
+  core: path.join(root, "core"),
 };

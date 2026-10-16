@@ -8,7 +8,7 @@ const root = path.resolve(tool, "../../..");
 // Reuse Ezy's alias factory and generated application aliases without loading
 // its build configuration, environment files, or any application overrides.
 const createAliases = require(
-  path.join(root, "packages/engine/config/aliases.js"),
+  path.join(root, "core/engine/config/aliases.js"),
 );
 const appAliases = require(path.join(root, ".ezycore/appsAliases.js"));
 const aliases = { ...appAliases, ...createAliases(tool) };

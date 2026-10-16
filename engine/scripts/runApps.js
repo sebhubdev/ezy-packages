@@ -45,7 +45,7 @@ module.exports = async (action) => {
         );
       }
       entry = type === "spa"
-        ? path.join(root, "packages/engine/runtime/commons/launchSpaServer.js")
+        ? path.join(root, "core/engine/runtime/commons/launchSpaServer.js")
         : buildFile;
       cwd = type === "ssr" ? path.join(appPath, "build") : appPath;
     } else {
@@ -54,7 +54,7 @@ module.exports = async (action) => {
         build: { ssr: "build/buildSsr.js", api: "build/buildApi.js" },
       }[action][type];
       if (!script) throw new Error(`Unsupported app type ${type} for ${action}.`);
-      entry = path.join(root, "packages/engine", script);
+      entry = path.join(root, "core/engine", script);
     }
     commands.push({
       command: `exec ${shellQuote(process.execPath)} ${shellQuote(entry)}`,

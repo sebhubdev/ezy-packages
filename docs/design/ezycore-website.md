@@ -34,13 +34,13 @@ website as the framework develops.
 
 ## Assets and implementation references
 
-- Branding: `packages/ui/assets/branding/ezycore`.
+- Branding: `core/ui/assets/branding/ezycore`.
 - Standalone waving mascot: `ezycore-mascot-wave.png`, adapted from the shared
   reference using the built-in image tool; transparent, with no wordmark.
 - Existing standing mascot: `ezycore-mascot-dark.png`.
 - Full-character favicon: SVG, PNG and ICO exports in the same branding directory.
-- App template: `packages/engine/templates/apps/ssr`.
-- Rendered template previews: `packages/engine/templates/previews`.
+- App template: `core/engine/templates/apps/ssr`.
+- Rendered template previews: `core/engine/templates/previews`.
 
 The original mockup was shared in the conversation. This document records its
 layout, palette and planned content; the rendered template previews show the

@@ -5,9 +5,9 @@ Storybook **10.6.2**, React **18.3.1**, Webpack 5 y Babel. Catálogo inicial de
 
 | Catálogo    | Archivo del Core                                              | Historias |
 | ----------- | ------------------------------------------------------------- | --------- |
-| Button      | `packages/ui/components/atoms/Btn/Btn.js`                     | 8         |
-| Input       | `packages/ui/components/atoms/Form/Input-new/Input.js`        | 8         |
-| SelectField | `packages/ui/components/molecules/Form/Fields/SelectField.js` | 5         |
+| Button      | `core/ui/components/atoms/Btn/Btn.js`                     | 8         |
+| Input       | `core/ui/components/atoms/Form/Input-new/Input.js`        | 8         |
+| SelectField | `core/ui/components/molecules/Form/Fields/SelectField.js` | 5         |
 
 Las historias importan el código del Core. No hay copias, parches, overrides
 de aplicaciones ni cambios de comportamiento. Los ejemplos controlados añaden
@@ -15,12 +15,12 @@ el estado que necesita un consumidor de la API original.
 
 ## Preparación
 
-Desde la raíz del repositorio, con el submódulo `packages` y las dependencias
+Desde la raíz del repositorio, con el submódulo `core` y las dependencias
 habituales de Ezy instalados:
 
 ```sh
-npm ci --prefix packages/tools/storybook --workspaces=false
-npm --prefix packages/tools/storybook run browsers
+npm ci --prefix core/tools/storybook --workspaces=false
+npm --prefix core/tools/storybook run browsers
 npm run storybook
 ```
 
@@ -34,11 +34,11 @@ defectos existentes; **que pasen no significa que esos defectos estén resueltos
 ## Build y pruebas
 
 ```sh
-npm --prefix packages/tools/storybook run build
-npm --prefix packages/tools/storybook run test:ci
+npm --prefix core/tools/storybook run build
+npm --prefix core/tools/storybook run test:ci
 ```
 
-El build se escribe en `packages/tools/storybook/storybook-static`. `test:ci` sirve ese
+El build se escribe en `core/tools/storybook/storybook-static`. `test:ci` sirve ese
 directorio en `127.0.0.1:6006`, ejecuta las 21 historias en Chromium y detiene
 el servidor al terminar. El puerto debe estar libre. Recompilar después de
 cambiar historias antes de ejecutar las pruebas del sitio estático.
@@ -46,7 +46,7 @@ cambiar historias antes de ejecutar las pruebas del sitio estático.
 Con el servidor de desarrollo ya arrancado:
 
 ```sh
-npm --prefix packages/tools/storybook test
+npm --prefix core/tools/storybook test
 ```
 
 Las pruebas verifican renderizado, clics, escritura, valores controlados,
@@ -56,8 +56,8 @@ componentes existentes: está configurado como `todo` y no certifica accesibilid
 
 ## Aislamiento
 
-- Herramienta propia del submódulo Core en `packages/tools/storybook`, con
-  instalación independiente del paquete de runtime `packages`. No se añade
+- Herramienta propia del submódulo Core en `core/tools/storybook`, con
+  instalación independiente del paquete de runtime `@ezy/core`. No se añade
   como workspace ni como dependencia de ese paquete.
 - Todas sus dependencias son de desarrollo y se instalan en su propio
   `node_modules`, con su propio `package-lock.json`.
@@ -66,7 +66,7 @@ componentes existentes: está configurado como `todo` y no certifica accesibilid
 - `.storybook/main.mjs` configura únicamente el Webpack de Storybook. No importa
   configuraciones de build ni ejecuta el runtime SSR de Ezy.
 - Reutiliza `.ezycore/appsAliases.js` y la fábrica
-  `packages/engine/config/aliases.js`. No regenera ni modifica esos archivos.
+  `core/engine/config/aliases.js`. No regenera ni modifica esos archivos.
 - Los aliases del Core se crean con el directorio de esta herramienta, evitando
   los overrides de `site` e `intranet`. El preview resuelve React y ReactDOM a
   una única copia dentro de la herramienta.

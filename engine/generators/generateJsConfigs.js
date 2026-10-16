@@ -63,7 +63,7 @@ const generateJsConfigs = async (projects, appsAliases) => {
       root,
       { ...appsAliases, ...coreAliases },
       {
-        include: ["packages"],
+        include: ["core"],
         exclude: ["node_modules", "**/build", "**/dist"],
       },
     ),
