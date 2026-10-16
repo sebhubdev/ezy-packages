@@ -1,0 +1,12 @@
+@use "@ezycore/ui/theme";
+@use "@ezycore/ui/components/atoms/Btn/Btn";
+@use "@ezycore/ui/components/atoms/Icon/Icon";
+@use "@ezycore/ui/components/atoms/Form/Input-new/input";
+@use "@ezycore/ui/components/molecules/Form/Fields/Fields";
+
+// Only the documentation canvas has a width constraint; component styles are
+// imported directly from the Core, without fixes or application overrides.
+.ezy-story {
+  max-width: 640px;
+  padding: 24px;
+}
