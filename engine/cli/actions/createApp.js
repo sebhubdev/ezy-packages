@@ -2,10 +2,10 @@ const fs = require("fs/promises");
 const path = require("path");
 const babel = require("@babel/core");
 const dotenv = require("dotenv");
-const { root } = require("../config/paths");
-const validateAppNames = require("../generators/validateAppNames");
-const generateAliases = require("../generators/generateAliases");
-const writeGeneratedFile = require("../helpers/writeGeneratedFile");
+const { root } = require("../../config/paths");
+const validateAppNames = require("../../generators/validateAppNames");
+const generateAliases = require("../../generators/generateAliases");
+const writeGeneratedFile = require("../../generators/utils/writeGeneratedFile");
 
 const parseConfig = (source) => {
   const ast = babel.parseSync(source, { sourceType: "module", configFile: false, babelrc: false });
@@ -46,7 +46,7 @@ const createApp = async (name, { type, port, projectRoot = root, generate = gene
   if (entries.some((entry) => entry.toLowerCase() === name.toLowerCase())) {
     throw new Error(`Destination for app ${JSON.stringify(name)} already exists.`);
   }
-  const template = path.join(__dirname, "../templates/apps", type);
+  const template = path.join(__dirname, "../../templates/apps", type);
   const configSource = await fs.readFile(path.join(template, "app.config.js"), "utf8");
   const usedPorts = new Set();
   const snapshotPaths = [path.join(projectRoot, "jsconfig.json"), path.join(projectRoot, ".ezycore/appsAliases.js")];

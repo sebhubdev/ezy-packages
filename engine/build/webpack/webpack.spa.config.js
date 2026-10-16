@@ -1,4 +1,4 @@
-const createSassOptions = require("../commons/createSassOptions");
+const createSassOptions = require("../utils/createSassOptions");
 require("module-alias/register");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");

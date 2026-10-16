@@ -1,6 +1,6 @@
 const fs = require("fs/promises");
 const path = require("path");
-const { apps: appsDir } = require("../config/paths");
+const { apps: appsDir } = require("../../config/paths");
 
 const getAppsNames = async (directory = appsDir) => {
   let entries;

@@ -1,8 +1,8 @@
 require("module-alias/register");
 const highlightMessage = require("@ezycore/shared/utils/highlightMessage");
 const { root } = require("@ezycore/engine/config/paths");
-const writeGeneratedFile = require("../helpers/writeGeneratedFile");
-const { getAppsNames } = require("@ezycore/engine/helpers");
+const writeGeneratedFile = require("./utils/writeGeneratedFile");
+const { getAppsNames } = require("@ezycore/engine/cli/utils");
 
 const path = require("path");
 const generateJsConfigs = require("./generateJsConfigs");

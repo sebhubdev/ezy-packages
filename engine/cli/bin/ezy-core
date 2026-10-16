@@ -19,28 +19,28 @@ const args = process.argv.slice(3);
 
 switch (script) {
   case "start":
-    require("../start");
+    require("../commands/start");
     break;
   case "dev":
-    require("../dev");
+    require("../commands/dev");
     break;
   case "build":
-    require("../build");
+    require("../commands/build");
     break;
   case "update":
-    require("../update");
+    require("../commands/update");
     break;
   case "create-component":
-    require("../component-creator");
+    require("../commands/createComponent");
     break;
   case "create-app":
-    require("../create-app");
+    require("../commands/createApp");
     break;
   case "rename-app":
-    require("../rename-app");
+    require("../commands/renameApp");
     break;
   case "generate":
-    require("../generate");
+    require("../commands/generate");
     break;
 
   default:

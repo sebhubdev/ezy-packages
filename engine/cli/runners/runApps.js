@@ -2,11 +2,11 @@ require("module-alias/register");
 const path = require("path");
 const fs = require("fs/promises");
 const concurrently = require("concurrently");
-const { root, apps } = require("../config/paths");
-const getAppsNames = require("../helpers/getAppsNames");
-const getAppEnvironment = require("../helpers/getAppEnvironment");
-const validateAppNames = require("../generators/validateAppNames");
-const { generateAliases } = require("../generators");
+const { root, apps } = require("../../config/paths");
+const getAppsNames = require("../utils/getAppsNames");
+const getAppEnvironment = require("../../config/getAppEnvironment");
+const validateAppNames = require("../../generators/validateAppNames");
+const { generateAliases } = require("../../generators");
 const shellQuote = (value) => `'${value.replace(/'/g, "'\\''")}'`;
 
 module.exports = async (action) => {
@@ -45,13 +45,13 @@ module.exports = async (action) => {
         );
       }
       entry = type === "spa"
-        ? path.join(root, "core/engine/runtime/commons/launchSpaServer.js")
+        ? path.join(root, "core/engine/runtime/server/launchSpaServer.js")
         : buildFile;
       cwd = type === "ssr" ? path.join(appPath, "build") : appPath;
     } else {
       const script = {
-        dev: { ssr: "runtime/commons/launchServer.js", api: "runtime/commons/launchApiServer.js" },
-        build: { ssr: "build/buildSsr.js", api: "build/buildApi.js" },
+        dev: { ssr: "runtime/server/launchServer.js", api: "runtime/server/launchApiServer.js" },
+        build: { ssr: "build/targets/buildSsr.js", api: "build/targets/buildApi.js" },
       }[action][type];
       if (!script) throw new Error(`Unsupported app type ${type} for ${action}.`);
       entry = path.join(root, "core/engine", script);

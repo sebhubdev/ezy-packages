@@ -1,6 +1,6 @@
 const CopyPlugin = require("copy-webpack-plugin");
-const getDocumentOptions = require("../commons/getDocumentOptions");
-const createSassOptions = require("../commons/createSassOptions");
+const getDocumentOptions = require("../utils/getDocumentOptions");
+const createSassOptions = require("../utils/createSassOptions");
 require("module-alias/register");
 const path = require("path");
 const webpack = require("webpack");

@@ -1,7 +1,7 @@
 import express from "express";
 import cors from "cors";
 import dotenv from "dotenv";
-import renderSsrApp from "./renderSsrApp";
+import renderSsrApp from "../rendering/renderSsrApp";
 import path from "path";
 import cookieParser from "cookie-parser";
 import { matchPath } from "react-router-dom";

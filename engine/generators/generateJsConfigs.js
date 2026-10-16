@@ -3,7 +3,7 @@ const path = require("path");
 const JSON5 = require("json5");
 const { root } = require("../config/paths");
 const createAliases = require("../config/aliases");
-const writeGeneratedFile = require("../helpers/writeGeneratedFile");
+const writeGeneratedFile = require("./utils/writeGeneratedFile");
 
 const toPaths = (aliases, basePath) =>
   Object.fromEntries(

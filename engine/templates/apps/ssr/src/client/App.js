@@ -1,6 +1,6 @@
 import React from "react";
 import { BaseLayout } from "@ezycore/ui/components/layout";
-import useGetAppData from "@ezycore/engine/runtime/commons/useGetAppData";
+import useGetAppData from "@ezycore/engine/runtime/data/useGetAppData";
 import RouterCreator from "@ezycore/engine/runtime/router/RouterCreator";
 import routes from "../routes/routes";
 import Header from "../components/layout/Header/Header";

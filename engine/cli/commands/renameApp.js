@@ -1,5 +1,5 @@
 require("module-alias/register");
-const renameApp = require("../cli/renameApp");
+const renameApp = require("../actions/renameApp");
 const highlightMessage = require("@ezycore/shared/utils/highlightMessage");
 const args = process.argv.slice(3);
 

@@ -1,4 +1,4 @@
-require("./runApps")("dev").catch((error) => {
+require("../runners/runApps")("build").catch((error) => {
   console.error(error.message || "An app failed.");
   process.exitCode = 1;
 });

@@ -1,11 +1,11 @@
 const fs = require("fs/promises");
 const path = require("path");
 const babel = require("@babel/core");
-const { root } = require("../config/paths");
-const getAppsNames = require("../helpers/getAppsNames");
-const validateAppNames = require("../generators/validateAppNames");
-const writeGeneratedFile = require("../helpers/writeGeneratedFile");
-const generateAliases = require("../generators/generateAliases");
+const { root } = require("../../config/paths");
+const getAppsNames = require("../utils/getAppsNames");
+const validateAppNames = require("../../generators/validateAppNames");
+const writeGeneratedFile = require("../../generators/utils/writeGeneratedFile");
+const generateAliases = require("../../generators/generateAliases");
 
 const ignored = new Set([
   "node_modules",

@@ -32,7 +32,7 @@ test('creates an SSR app, reserves an unused configured port and generates confi
   assert.equal(await fs.readFile(path.join(app, '.env'), 'utf8'), await fs.readFile(path.join(app, '.env.sample'), 'utf8'));
   assert.ok(config.includes('favicon: "/favicon.ico"'));
   // New apps receive their own usable branding, including the dark variant.
-  const branding = path.join(__dirname, '../../ui/assets/branding/ezycore');
+  const branding = path.join(__dirname, '../../../ui/assets/branding/ezycore');
   for (const file of ['ezycore-color.png', 'ezycore-dark.png', 'ezycore-mono.png']) {
     assert.deepEqual(await fs.readFile(path.join(app, 'src/assets/img', file)), await fs.readFile(path.join(branding, file)));
   }

@@ -1,5 +1,5 @@
 require("module-alias/register");
-const createApp = require("../cli/createApp");
+const createApp = require("../actions/createApp");
 const highlightMessage = require("@ezycore/shared/utils/highlightMessage");
 const args = process.argv.slice(3);
 

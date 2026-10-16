@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "node ../../core/engine/scripts/bin/ezy-core dev",
-    "build": "node ../../core/engine/scripts/bin/ezy-core build",
-    "start": "node ../../core/engine/scripts/bin/ezy-core start"
+    "dev": "node ../../core/engine/cli/bin/ezy-core dev",
+    "build": "node ../../core/engine/cli/bin/ezy-core build",
+    "start": "node ../../core/engine/cli/bin/ezy-core start"
   }
 }

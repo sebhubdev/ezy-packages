@@ -1,5 +1,5 @@
-const getDocumentOptions = require("../../build/commons/getDocumentOptions");
-const createSassOptions = require("../../build/commons/createSassOptions");
+const getDocumentOptions = require("../../build/utils/getDocumentOptions");
+const createSassOptions = require("../../build/utils/createSassOptions");
 require("module-alias/register");
 const path = require("path");
 const express = require("express");
@@ -20,7 +20,7 @@ const launchProjectInNavigator =
   process.env.LAUNCH_PROJECT_IN_NAVIGATOR === "true";
 const port = process.env.PORT ?? 3000;
 
-const renderHtmlDocument = require("./renderHtmlDocument");
+const renderHtmlDocument = require("../rendering/renderHtmlDocument");
 const devHtml = renderHtmlDocument(null, "", {
   scriptTags: '<script src="/main.js"></script>',
 }, getDocumentOptions(appPath));
